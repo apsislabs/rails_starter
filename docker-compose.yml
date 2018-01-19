@@ -12,6 +12,7 @@ services:
       - stripe
     volumes:
       - bundle_cache:/bundle
+      - .:/app
     command: sh ./docker/start.sh
   worker:
     <<: *app_base
