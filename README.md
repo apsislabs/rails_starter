@@ -22,3 +22,22 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+## Data Model
+
+- Logins
+    - belongs_to :user
+- Users
+    - has_many :logins
+    - has_many :memberships
+    - has_many :companies, through: :memberships
+    - has_many :roles, through: :memberships
+- Memberships
+    - belongs_to :user
+    - belongs_to :company
+    - has_one :role
+- Companies
+    - has_many :memberships
+    - has_many :users, through: :memberships
+- Subscriptions
