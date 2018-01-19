@@ -1,43 +1,36 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+### Renaming your app
 
-* Ruby version
+We install the [`rename`](https://github.com/morshedalam/rename) gem in the dev environment by default. To rename your rails application, run:
 
-* System dependencies
+```sh
+$ rails g rename:into {new name}
+```
 
-* Configuration
+### Upgrading Rails
 
-* Database creation
+We try to keep the base repository up to date, but when you pull it's worth looking into whether you need to upgrade rails. A [guide can be found on the rails website](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html).
 
-* Database initialization
+As of Rails 5.1, the upgrade process should be as simple as:
 
-* How to run the test suite
+1. Update the `rails` gem in `Gemfile`
+2. Run `bundle install`
+3. Run `rails app:update` for an interactive upgrade
 
-* Services (job queues, cache servers, search engines, etc.)
+### Configuring Gems
 
-* Deployment instructions
+There are a number of gems that need configuration to work:
 
-* ...
+- Configure [`simple_form`](https://github.com/plataformatec/simple_form)
+- Ensure columns for [`paranoia`](https://github.com/rubysherpas/paranoia)
+- Mount & configure [`letteropener_web`](https://github.com/fgrehm/letter_opener_web)
 
+### Recommended Reading
 
-## Data Model
-
-- Logins
-    - belongs_to :user
-- Users
-    - has_many :logins
-    - has_many :memberships
-    - has_many :companies, through: :memberships
-    - has_many :roles, through: :memberships
-- Memberships
-    - belongs_to :user
-    - belongs_to :company
-    - has_one :role
-- Companies
-    - has_many :memberships
-    - has_many :users, through: :memberships
-- Subscriptions
+- http://www.betterspecs.org/
+- https://github.com/ankane/production_rails
+- https://github.com/ankane/secure_rails
+- https://robots.thoughtbot.com/its-about-time-zones

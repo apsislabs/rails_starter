@@ -1,22 +1,32 @@
 version: '3'
 
 services:
-  web:
+  web: &app_base
     build: .
     ports:
       - "3000:3000"
     depends_on:
       - postgres
       - redis
+      - localstack
+      - stripe
     volumes:
       - bundle_cache:/bundle
     command: sh ./docker/start.sh
+  worker:
+    <<: *app_base
+    command: bundle exec sidekiq
+    ports: []
+    depends_on:
+      - web
   redis:
     image: redis
+  localstack:
+    image: localstack/localstack
   postgres:
     image: postgres
-    ports:
-      - "5432:5432"
+  stripe:
+    image: jheth/stripe-mock
 
 volumes:
   bundle_cache:

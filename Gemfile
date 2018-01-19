@@ -5,48 +5,115 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
-gem 'pg', '~> 0.18'
-# Use Puma as the app server
-gem 'puma', '~> 3.7'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# Defaults
+# -------------------------------------
+
+gem 'bootsnap', require: false
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
+gem 'pg', '~> 0.18'
+gem 'puma', '~> 3.7'
+gem 'redis', '~> 4.0'
+gem 'sass-rails', '~> 5.0'
+gem 'turbolinks', '~> 5'
 gem 'tzinfo-data'
 
+# Extended Functionality
+# -------------------------------------
+
+gem 'aasm'                        # => state machine management
+gem 'active_model_serializers'    # => serialized models
+gem 'activejob-traffic_control'   # => better active_jobs
+gem 'aws-sdk-s3'                  # => aws
+gem 'carrierwave'                 # => file uploads
+gem 'groupdate'                   # => group queries by date
+gem 'kaminari'                    # => active model pagination
+gem 'lograge'                     # => better logging
+gem 'paranoia'                    # => soft delete support
+gem 'rack-attack'                 # => request throttler
+gem 'retryable'                   # => safely retry blocks
+gem 'roadie-rails'                # => inline css for emails
+gem 'sidekiq'                     # => active_job processor
+gem 'simple_form'                 # => form markup generator
+gem 'slayer'                      # => a killer service layer
+gem 'slayer_rails'                # => rails bindings for slayer
+gem 'stringex'                    # => string extensions
+gem 'title'                       # => i18n title elements
+gem 'validates'                   # => extended model validations
+
+# Auth & Authorization
+# -------------------------------------
+
+gem 'pundit'
+gem 'sorcery'
+
+# Optional
+# -------------------------------------
+# Many of these gems require some level of configuration
+# that doesn't happen automatically. If you are enabling
+# one of these gems, please be sure to read its
+# documentation to ensure proper setup.
+
+# gem 'action-store'          # => simple actions for models
+# gem 'acts-as-taggable-on'   # => tagging for models
+# gem 'acts_as_tenant'        # => simple tenanting
+# gem 'administrate'          # => admin panels
+# gem 'audited'               # => audit logging
+# gem 'blazer'                # => reporting dashboard
+# gem 'chewy'                 # => elastic-search indexing
+# gem 'country_select'        # => translated country dropdown
+# gem 'field_test'            # => a/b testing
+# gem 'friendly_id'           # => friendly permalinks
+# gem 'globalize'             # => activerecord translations
+# gem 'mainstreet'            # => a standard address model
+# gem 'mini_magick'           # => image manipulation
+# gem 'money-rails', '~>1'    # => money manipulation
+# gem 'pg_search'             # => pg-based search
+# gem 'pretender'             # => user impersonation
+# gem 'ranked-model'          # => sorting for models
+# gem 'ransack'               # => ruby-based search
+# gem 'responders'            # => automated responders
+# gem 'rollbar'               # => rollbar reporting
+# gem 'safely_block'          # => safely execute blocks
+# gem 'stripe'                # => interaction with Stripe
+# gem 'wicked_pdf'            # => PDF generation
+
+# Environment Groups
+# -------------------------------------
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'rename'
+  gem 'rspec-rails'
+  gem 'rubocop', require: false
   gem 'selenium-webdriver'
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'brakeman', require: false
+  gem 'i18n-tasks'
+  gem 'letter_opener_web'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'rack-mini-profiler'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'strong_migrations'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'mocha'
+  gem 'response_code_matchers'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'timecop'
+  gem 'vcr'
 end
