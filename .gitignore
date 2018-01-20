@@ -22,6 +22,10 @@
 
 .byebug_history
 
+# Ignore Docker Volumes
+.postgres
+.redis
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

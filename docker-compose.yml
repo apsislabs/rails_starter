@@ -22,12 +22,22 @@ services:
       - web
   redis:
     image: redis
+    command: redis-server --appendonly yes
+    volumes:
+    - ./.redis:/data
   localstack:
     image: localstack/localstack
   postgres:
     image: postgres
+    volumes:
+      - ./.postgres:/var/lib/postgresql/data
   stripe:
     image: jheth/stripe-mock
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+        - 1025:1025
+        - 1080:1080
 
 volumes:
   bundle_cache:

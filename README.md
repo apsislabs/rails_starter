@@ -26,7 +26,6 @@ There are a number of gems that need configuration to work:
 
 - Configure [`simple_form`](https://github.com/plataformatec/simple_form)
 - Ensure columns for [`paranoia`](https://github.com/rubysherpas/paranoia)
-- Mount & configure [`letteropener_web`](https://github.com/fgrehm/letter_opener_web)
 
 ### Recommended Reading
 

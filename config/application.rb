@@ -18,6 +18,6 @@ module Letterhead
     config.middleware.use Rack::Attack
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
 
-    config.active_job.queue_adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

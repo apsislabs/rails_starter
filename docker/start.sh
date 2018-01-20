@@ -13,4 +13,6 @@ bundle check || bundle install
 # If database exists, migrate. Otherweise create and seed
 bin/rails db:migrate 2>/dev/null || bundle exec rake db:setup db:seed
 
+# Delete the pidfile and start rails
+rm -f tmp/pids/server.pid 2>/dev/null
 bin/rails s -b 0.0.0.0

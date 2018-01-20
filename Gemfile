@@ -35,6 +35,7 @@ gem 'paranoia'                    # => soft delete support
 gem 'rack-attack'                 # => request throttler
 gem 'retryable'                   # => safely retry blocks
 gem 'roadie-rails'                # => inline css for emails
+gem 'secure_headers'              # => send secure headers
 gem 'sidekiq'                     # => active_job processor
 gem 'simple_form'                 # => form markup generator
 gem 'slayer'                      # => a killer service layer
@@ -100,7 +101,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'brakeman', require: false
   gem 'i18n-tasks'
-  gem 'letter_opener_web'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rack-mini-profiler'
   gem 'spring'
