@@ -1,4 +1,4 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.5.1-alpine
 MAINTAINER wyatt@apsis.io
 
 RUN apk add --no-cache --update \
