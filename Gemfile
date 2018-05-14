@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2.0'
 
 # Defaults
 # -------------------------------------
@@ -87,7 +87,7 @@ gem 'sorcery'
 group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.1.0'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'rename'
