@@ -11,7 +11,7 @@ gem 'rails', '~> 5.2.0'
 # Defaults
 # -------------------------------------
 
-gem 'bootsnap', require: false
+gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
