@@ -65,6 +65,7 @@ gem 'rack-cors'           # => CORs header manipulation for js access
 # gem 'administrate'          # => admin panels
 # gem 'audited'               # => audit logging
 # gem 'blazer'                # => reporting dashboard
+# gem 'boring_presenters'     # => simple presentation
 # gem 'chewy'                 # => elastic-search indexing
 # gem 'country_select'        # => translated country dropdown
 # gem 'field_test'            # => a/b testing
