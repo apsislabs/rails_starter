@@ -125,4 +125,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'timecop'
   gem 'vcr'
+  gem 'webmock'
 end

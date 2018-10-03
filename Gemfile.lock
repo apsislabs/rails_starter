@@ -111,6 +111,8 @@ GEM
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     crass (1.0.4)
     css_parser (1.6.0)
       addressable
@@ -174,6 +176,7 @@ GEM
       activesupport (>= 4.2.0)
     groupdate (4.0.1)
       activesupport (>= 4.2)
+    hashdiff (0.3.7)
     highline (2.0.0)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
@@ -349,6 +352,7 @@ GEM
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
+    safe_yaml (1.0.4)
     sass (3.6.0)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -432,6 +436,10 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    webmock (3.4.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -502,6 +510,7 @@ DEPENDENCIES
   tzinfo-data
   validates
   vcr
+  webmock
 
 BUNDLED WITH
    1.16.2
