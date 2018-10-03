@@ -161,6 +161,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    faker (1.9.1)
+      i18n (>= 0.7)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
@@ -453,6 +455,7 @@ DEPENDENCIES
   discard
   dotenv-rails
   factory_bot_rails
+  faker
   flutie
   groupdate
   i18n-tasks
