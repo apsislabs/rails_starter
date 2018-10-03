@@ -13,9 +13,18 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'simplecov'
+require 'capybara/rspec'
+require 'factory_bot_rails'
+require 'faker'
 require 'webmock/rspec'
+require 'active_support/testing/time_helpers'
 
 WebMock.disable_net_connect!(allow_localhost: true)
+
+# Sample SimpleCov settings:
+# SimpleCov.minimum_coverage 90
+# SimpleCov.maximum_coverage_drop 15
 
 
 RSpec.configure do |config|
