@@ -72,6 +72,7 @@ gem 'sorcery'
 # gem 'mini_magick'           # => image manipulation
 # gem 'money-rails', '~>1'    # => money manipulation
 # gem 'pg_search'             # => pg-based search
+# gem 'phi_attrs'             # => phi logging and access control
 # gem 'pretender'             # => user impersonation
 # gem 'ranked-model'          # => sorting for models
 # gem 'ransack'               # => ruby-based search
