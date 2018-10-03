@@ -30,3 +30,24 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Ignore Test Coverage
+/coverage
+
+# Ignore local config overrides
+.env.development.local
+
+# Ignore local activestorage files
+storage/
+
+# General Ignores
+.vscode/
+.username_pw
+
+# Mac OSX
+.DS_Store
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
