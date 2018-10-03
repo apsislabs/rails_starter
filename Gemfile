@@ -50,6 +50,8 @@ gem 'validates'                   # => extended model validations
 gem 'pundit'
 gem 'sorcery'
 
+gem 'rack-cors'           # => CORs header manipulation for js access
+
 # Optional
 # -------------------------------------
 # Many of these gems require some level of configuration
