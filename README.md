@@ -44,7 +44,7 @@ As of Rails 5.1, the upgrade process should be as simple as:
 There are a number of gems that need configuration to work:
 
 - Configure [`simple_form`](https://github.com/plataformatec/simple_form)
-- Ensure columns for [`paranoia`](https://github.com/rubysherpas/paranoia)
+- Ensure columns for [`discard`](https://github.com/jhawthorn/discard)
 
 ### Recommended Reading
 
