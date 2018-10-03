@@ -483,7 +483,7 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rack-mini-profiler
-  rails (~> 5.2.0)
+  rails (~> 5.2.1)
   redis (~> 4.0)
   rename
   response_code_matchers
@@ -513,4 +513,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.2
+   1.16.5
