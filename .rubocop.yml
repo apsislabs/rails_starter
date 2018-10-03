@@ -1,0 +1,61 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+  TargetRubyVersion: 2.5
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - 'db/migrate/*'
+    - 'db/**/*'
+
+Metrics/LineLength:
+  Exclude:
+    - 'db/migrate/*'
+  Max: 140
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 1500
+
+Metrics/BlockLength:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: true
+
+Style/BlockComments:
+  Enabled: true
+  Exclude:
+    - spec/spec_helper.rb
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Naming/PredicateName:
+  Enabled: false

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -51,7 +53,7 @@ gem 'validates'                   # => extended model validations
 gem 'pundit'
 gem 'sorcery'
 
-gem 'rack-cors'           # => CORs header manipulation for js access
+gem 'rack-cors' # => CORs header manipulation for js access
 
 # Optional
 # -------------------------------------

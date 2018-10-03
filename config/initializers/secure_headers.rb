@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if Rails.env.development?
   SecureHeaders::Configuration.default do |config|
     config.csp = config.csp.merge(
