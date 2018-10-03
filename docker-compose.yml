@@ -16,7 +16,7 @@ services:
     command: sh ./docker/start.sh
   worker:
     <<: *app_base
-    command: bundle exec sidekiq
+    command: sh ./docker/start_worker.sh
     ports: []
     depends_on:
       - web
