@@ -1,10 +1,11 @@
-version: '3'
+version: '3.1'
 # Enable `worker` & `redis` containers support asycronous workers
 # Enable `stripe` container when procesing payments
 # Enable `localstack` container for aws support
 
 services:
   web: &app_base
+    networks: [rails_starter_network]
     build: .
     ports:
       - "3000:3000"
@@ -26,19 +27,26 @@ services:
   #   depends_on:
   #     - web
   # redis:
+  #   networks: [rails_starter_network]
   #   image: redis
   #   command: redis-server --appendonly yes
   #   volumes:
   #   - ./.redis:/data
   # localstack:
+  #   networks: [rails_starter_network]
   #   image: localstack/localstack
   postgres:
+    networks: [rails_starter_network]
     image: postgres
     volumes:
       - postgres:/var/lib/postgresql/data
   # stripe:
+  #   networks: [rails_starter_network]
   #   image: jheth/stripe-mock
 
 volumes:
   bundle_cache:
   postgres:
+
+networks:
+  rails_starter_network:
