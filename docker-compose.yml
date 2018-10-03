@@ -13,6 +13,8 @@ services:
       # - redis
       # - localstack
       # - stripe
+    environment:
+      - DOCKER_CONTAINER=1
     volumes:
       - bundle_cache:/bundle
       - .:/app
