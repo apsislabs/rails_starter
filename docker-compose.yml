@@ -1,4 +1,7 @@
 version: '3'
+# Enable `worker` & `redis` containers support asycronous workers
+# Enable `stripe` container when procesing payments
+# Enable `localstack` container for aws support
 
 services:
   web: &app_base
@@ -7,32 +10,32 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-      - redis
-      - localstack
-      - stripe
+      # - redis
+      # - localstack
+      # - stripe
     volumes:
       - bundle_cache:/bundle
       - .:/app
     command: sh ./docker/start.sh
-  worker:
-    <<: *app_base
-    command: sh ./docker/start_worker.sh
-    ports: []
-    depends_on:
-      - web
-  redis:
-    image: redis
-    command: redis-server --appendonly yes
-    volumes:
-    - ./.redis:/data
-  localstack:
-    image: localstack/localstack
+  # worker:
+  #   <<: *app_base
+  #   command: sh ./docker/start_worker.sh
+  #   ports: []
+  #   depends_on:
+  #     - web
+  # redis:
+  #   image: redis
+  #   command: redis-server --appendonly yes
+  #   volumes:
+  #   - ./.redis:/data
+  # localstack:
+  #   image: localstack/localstack
   postgres:
     image: postgres
     volumes:
       - ./.postgres:/var/lib/postgresql/data
-  stripe:
-    image: jheth/stripe-mock
+  # stripe:
+  #   image: jheth/stripe-mock
 
 volumes:
   bundle_cache:

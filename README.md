@@ -58,11 +58,11 @@ There are a number of gems that need configuration to work:
 If you look in `docker-compose.yml` you'll notice that we've spun up a number of containers, not all of which may be useful for your project.
 
 1. **web**: Your core container which runs the `rails` server process.
-2. **worker**: A duplicate of your core app, but running `sidekiq` instead.
-3. **redis**: A `redis` instance for `sidekiq`.
-4. **localstack**: [`localstack`](https://github.com/localstack/localstack) is a suite of fake AWS services.
+2. **worker**: A duplicate of your core app, but running `sidekiq` instead. [Disabled by Default]
+3. **redis**: A `redis` instance for `sidekiq`. [Disabled by Default]
+4. **localstack**: [`localstack`](https://github.com/localstack/localstack) is a suite of fake AWS services. [Disabled by Default]
 5. **postgres**: Your application's database.
-6. **stripe**: An officially supported stripe mock.
+6. **stripe**: An officially supported stripe mock. [Disabled by Default]
 
 ## Default Routes
 * `/letter_opener` - View emails send from the rails application
