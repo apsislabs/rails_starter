@@ -17,7 +17,6 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'redis', '~> 4.0'
 gem 'sass-rails', '~> 5.0'
-gem 'turbolinks', '~> 5'
 gem 'tzinfo-data'
 
 # Extended Functionality
