@@ -17,6 +17,10 @@ chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
+  puts "\n== Installing githooks =="
+  system! 'rm -rf .git/hooks'
+  copy_entry '.githooks', '.git/hooks'
+
   puts "\n== Preparing database =="
   system! '(rails db:exists && rails db:migrate) || rails db:setup'
 
