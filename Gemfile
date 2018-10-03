@@ -83,6 +83,8 @@ gem 'rack-cors'           # => CORs header manipulation for js access
 # gem 'responders'            # => automated responders
 # gem 'rollbar'               # => rollbar reporting
 # gem 'safely_block'          # => safely execute blocks
+# gem 'scenic'                # => save views in schema.rb
+# gem 'scenic-mysql_adapter'  # => scenic if using mysql
 # gem 'stripe'                # => interaction with Stripe
 # gem 'wicked_pdf'            # => PDF generation
 
