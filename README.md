@@ -63,4 +63,7 @@ If you look in `docker-compose.yml` you'll notice that we've spun up a number of
 4. **localstack**: [`localstack`](https://github.com/localstack/localstack) is a suite of fake AWS services.
 5. **postgres**: Your application's database.
 6. **stripe**: An officially supported stripe mock.
-7. **mailcatcher**: For viewing emails on your local environment.
+
+## Default Routes
+* `/letter_opener` - View emails send from the rails application
+* `/sidekiq` - View active jobs and other statistics for Sidekiq

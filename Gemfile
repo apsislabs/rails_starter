@@ -105,6 +105,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'brakeman', require: false
   gem 'i18n-tasks'
+  gem 'letter_opener_web'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rack-mini-profiler'
   gem 'spring'
