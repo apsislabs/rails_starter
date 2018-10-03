@@ -40,6 +40,7 @@ gem 'simple_form'                 # => form markup generator
 gem 'slayer'                      # => a killer service layer
 gem 'slayer_rails'                # => rails bindings for slayer
 gem 'stringex'                    # => string extensions
+gem 'strong_migrations'           # => protect from dangerous migrations
 gem 'title'                       # => i18n title elements
 gem 'validates'                   # => extended model validations
 
@@ -109,7 +110,6 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'strong_migrations'
 end
 
 group :test do
