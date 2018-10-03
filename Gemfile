@@ -27,6 +27,7 @@ gem 'active_model_serializers'    # => serialized models
 gem 'activejob-traffic_control'   # => better active_jobs
 gem 'aws-sdk-s3'                  # => aws
 gem 'carrierwave'                 # => file uploads
+gem 'flutie'                      # => i18n title elements
 gem 'groupdate'                   # => group queries by date
 gem 'kaminari'                    # => active model pagination
 gem 'lograge'                     # => better logging
@@ -41,7 +42,6 @@ gem 'slayer'                      # => a killer service layer
 gem 'slayer_rails'                # => rails bindings for slayer
 gem 'stringex'                    # => string extensions
 gem 'strong_migrations'           # => protect from dangerous migrations
-gem 'title'                       # => i18n title elements
 gem 'validates'                   # => extended model validations
 
 # Auth & Authorization

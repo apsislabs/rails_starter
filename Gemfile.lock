@@ -162,6 +162,7 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
+    flutie (2.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     groupdate (4.0.1)
@@ -406,9 +407,6 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     timecop (0.9.1)
-    title (0.0.7)
-      i18n
-      rails (>= 3.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     tzinfo-data (1.2018.5)
@@ -449,6 +447,7 @@ DEPENDENCIES
   database_cleaner
   dotenv-rails
   factory_bot_rails
+  flutie
   groupdate
   i18n-tasks
   jbuilder (~> 2.5)
@@ -487,7 +486,6 @@ DEPENDENCIES
   stringex
   strong_migrations
   timecop
-  title
   tzinfo-data
   validates
   vcr
