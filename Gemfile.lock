@@ -167,6 +167,9 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     flutie (2.1.0)
+    fuubar (2.3.2)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     groupdate (4.0.1)
@@ -457,6 +460,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   flutie
+  fuubar
   groupdate
   i18n-tasks
   jbuilder (~> 2.5)

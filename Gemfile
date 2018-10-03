@@ -118,6 +118,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'fuubar'
   gem 'mocha'
   gem 'response_code_matchers'
   gem 'shoulda-matchers'
