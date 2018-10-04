@@ -37,6 +37,10 @@ Metrics/BlockLength:
 Layout/IndentationWidth:
   Enabled: true
 
+Lint/PercentStringArray:
+  Exclude:
+    - config/initializers/secure_headers.rb
+
 Style/BlockComments:
   Enabled: true
   Exclude:
