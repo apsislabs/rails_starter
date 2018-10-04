@@ -12,11 +12,24 @@ AllCops:
 Documentation:
   Enabled: false
 
+Layout/IndentationWidth:
+  Enabled: true
+
+Lint/PercentStringArray:
+  Exclude:
+    - config/initializers/secure_headers.rb
+
 Metrics/AbcSize:
   Max: 30
   Exclude:
     - 'db/migrate/*'
     - 'db/**/*'
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 1500
 
 Metrics/LineLength:
   Exclude:
@@ -27,19 +40,6 @@ Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
   Max: 20
-
-Metrics/ClassLength:
-  Max: 1500
-
-Metrics/BlockLength:
-  Enabled: false
-
-Layout/IndentationWidth:
-  Enabled: true
-
-Lint/PercentStringArray:
-  Exclude:
-    - config/initializers/secure_headers.rb
 
 Style/BlockComments:
   Enabled: true
@@ -52,14 +52,14 @@ Style/BracesAroundHashParameters:
 Style/ConditionalAssignment:
   Enabled: false
 
-Style/RedundantReturn:
-  Enabled: false
-
-Style/SymbolArray:
-  EnforcedStyle: brackets
-
 Style/EmptyMethod:
   EnforcedStyle: expanded
 
 Naming/PredicateName:
   Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
