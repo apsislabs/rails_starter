@@ -23,15 +23,15 @@ $ bin/ssh_to_container
 
 ### Renaming your app
 
-We install the [`rename`](https://github.com/morshedalam/rename) gem in the dev environment by default. To rename your rails application, run:
+Renaming your app is super simple, first clone into its own folder. Then update the following:
 
-```sh
-$ rails g rename:into {new name}
-```
+* `config/application.rb`
+  * change `RailsStarter` to `NewName`
 
 ### Changing Port
 
-By default we have set this up to use port 3000, but as every rails app uses that port you may conflict with other projects. For example to update to port 5000, change the following:
+By default we have set this up to use port 3000, but as every rails app uses that port you may conflict with other projects. To update to port 5000 for example, change the following:
+
 * `docker-compose.yml` - change `"3000:3000"` -> `"5000:3000"`
 * `.env.development` - change `APP_PORT=3000` -> `APP_PORT=5000`
 
@@ -69,6 +69,8 @@ If you look in `docker-compose.yml` you'll notice that we've spun up a number of
 4. **localstack**: [`localstack`](https://github.com/localstack/localstack) is a suite of fake AWS services. [Disabled by Default]
 5. **postgres**: Your application's database.
 6. **stripe**: An officially supported stripe mock. [Disabled by Default]
+
+To cleanup all containers, volumes and networks execute `docker-compose down -v`
 
 ## Default Routes
 * `/_dev/letter_opener` - View emails send from the rails application
