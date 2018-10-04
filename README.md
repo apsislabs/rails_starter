@@ -27,6 +27,8 @@ Renaming your app is super simple, first clone into its own folder. Then update 
 
 * `config/application.rb`
   * change `RailsStarter` to `NewName`
+* `package.json`
+  * change `STARTER_REPLACE_NAME` to `new_name`
 
 ### Changing Port
 
