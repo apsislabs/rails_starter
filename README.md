@@ -71,4 +71,4 @@ If you look in `docker-compose.yml` you'll notice that we've spun up a number of
 
 [![apsis](https://s3-us-west-2.amazonaws.com/apsiscdn/apsis.png)](https://www.apsis.io)
 
-`rails_starter` was built by Apsis Labs. We love sharing what we build! Check out our other libraries on Github, and if you like our work you can hire us to build your vision.
+`rails_starter` was built by Apsis Labs. We love sharing what we build! Check out our [other libraries on Github](https://github.com/apsislabs), and if you like our work you can [hire us](https://www.apsis.io/work-with-us/) to build your vision.
