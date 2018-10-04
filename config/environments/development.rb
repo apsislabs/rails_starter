@@ -41,7 +41,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {
     protocol: ENV.fetch('APP_PROTOCOL') { 'http' },
     host: ENV.fetch('APP_HOST') { 'localhost' },
-    port: ENV.fetch('APP_PORT') { 3000 } # 3000 internally -> 3000 on host machine
+    port: ENV.fetch('APP_PORT') { 3000 } # 3000 internally -> mapped in docker-compose to host machine
   }
 
   # Print deprecation notices to the Rails logger.

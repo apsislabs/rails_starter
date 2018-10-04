@@ -29,6 +29,12 @@ We install the [`rename`](https://github.com/morshedalam/rename) gem in the dev 
 $ rails g rename:into {new name}
 ```
 
+### Changing Port
+
+By default we have set this up to use port 3000, but as every rails app uses that port you may conflict with other projects. For example to update to port 5000, change the following:
+* `docker-compose.yml` - change `"3000:3000"` -> `"5000:3000"`
+* `.env.development` - change `APP_PORT=3000` -> `APP_PORT=5000`
+
 ### Upgrading Rails
 
 We try to keep the base repository up to date, but when you pull it's worth looking into whether you need to upgrade rails. A [guide can be found on the rails website](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html).
