@@ -71,5 +71,5 @@ If you look in `docker-compose.yml` you'll notice that we've spun up a number of
 6. **stripe**: An officially supported stripe mock. [Disabled by Default]
 
 ## Default Routes
-* `/letter_opener` - View emails send from the rails application
-* `/sidekiq` - View active jobs and other statistics for Sidekiq
+* `/_dev/letter_opener` - View emails send from the rails application
+* `/_dev/sidekiq` - View active jobs and other statistics for Sidekiq
