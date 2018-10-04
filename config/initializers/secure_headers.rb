@@ -16,15 +16,15 @@ if Rails.env.development?
     config.x_xss_protection = '1; mode=block'
     config.x_download_options = 'noopen'
     config.x_permitted_cross_domain_policies = 'none'
-    config.referrer_policy = %w(origin-when-cross-origin strict-origin-when-cross-origin)
+    config.referrer_policy = %w[origin-when-cross-origin strict-origin-when-cross-origin]
 
     config.csp = config.csp.merge(
       # directive values: these values will directly translate into source directives
-      default_src: %w('none'),
-      connect_src: %w('self'),
-      script_src: %w('self' 'unsafe-inline' 'unsafe-eval' http: https:),
-      font_src: %w(http: https:),
-      style_src: %w('self' 'unsafe-inline' http: https:),
+      default_src: %w[none],
+      connect_src: %w[self],
+      script_src: %w[self unsafe-inline unsafe-eval http: https:],
+      font_src: %w[http: https:],
+      style_src: %w[self unsafe-inline http: https:]
     )
   end
 else
