@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: rails_starter_production
+  url: <%= ENV.fetch("CABLE_REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: <%= ENV.fetch("CABLE_CHANNEL_PREFIX") { "cable_production" } %>

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+bin/run_tests
+
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "Pre-push checks failed; push aborted!"
+    exit 1
+fi
+
+echo "All pre-push checks passed! Pushing to remote"
