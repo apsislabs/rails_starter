@@ -77,3 +77,11 @@ To cleanup all containers, volumes and networks execute `docker-compose down -v`
 ## Default Routes
 * `/_dev/letter_opener` - View emails send from the rails application
 * `/_dev/sidekiq` - View active jobs and other statistics for Sidekiq
+
+---
+
+# Built by Apsis
+
+[![apsis](https://s3-us-west-2.amazonaws.com/apsiscdn/apsis.png)](https://www.apsis.io)
+
+`rails_starter` was built by Apsis Labs. We love sharing what we build! Check out our [other libraries on Github](https://github.com/apsislabs), and if you like our work you can [hire us](https://www.apsis.io/work-with-us/) to build your vision.
