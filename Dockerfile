@@ -5,6 +5,8 @@ RUN apk add --no-cache --update \
     bash \
     alpine-sdk \
     postgresql-dev \
+    # mariadb-client\ # SWITCH MYSQL: install mariadb, and remove postgresql
+    # mariadb-dev\
     nodejs
 
 RUN gem install bundler rails --no-rdoc --no-ri

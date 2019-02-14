@@ -16,6 +16,7 @@ gem 'rails', '~> 5.2.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.18'
+# gem 'mysql2', '~> 0.5.2' # Search for "SWTICH MYSQL" to toggle from Postgres to MySQL
 gem 'puma', '~> 3.7'
 gem 'redis', '~> 4.0'
 gem 'sass-rails', '~> 5.0'
