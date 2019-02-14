@@ -9,7 +9,7 @@ RUN apk add --no-cache --update \
     # mariadb-dev\
     nodejs
 
-RUN gem install bundler rails --no-rdoc --no-ri
+RUN gem install bundler:1.17.2 rails
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME

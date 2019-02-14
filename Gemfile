@@ -8,16 +8,16 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.2'
 
 # Defaults
 # -------------------------------------
 
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.3.2', require: false
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.18'
-# gem 'mysql2', '~> 0.5.2' # Search for "SWTICH MYSQL" to toggle from Postgres to MySQL
-gem 'puma', '~> 3.7'
+# gem 'mysql2', '~> 0.5.2' # SWITCH MYSQL: to toggle from Postgres to MySQL
+gem 'puma', '~> 3.12'
 gem 'redis', '~> 4.0'
 gem 'sass-rails', '~> 5.0'
 gem 'tzinfo-data'
@@ -28,7 +28,7 @@ gem 'tzinfo-data'
 gem 'aasm'                        # => state machine management
 gem 'active_model_serializers'    # => serialized models
 gem 'activejob-traffic_control'   # => better active_jobs
-gem 'aws-sdk-s3'                  # => aws
+gem 'aws-sdk-s3', '~> 1'          # => aws
 gem 'carrierwave'                 # => file uploads
 gem 'discard'                     # => soft delete support
 gem 'flutie'                      # => i18n title elements
@@ -93,6 +93,9 @@ gem 'rack-cors' # => CORs header manipulation for js access
 
 # Environment Groups
 # -------------------------------------
+group :production do
+  gem 'uglifier'
+end
 
 group :development, :test do
   gem 'bullet'
