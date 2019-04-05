@@ -69,8 +69,9 @@ If you look in `docker-compose.yml` you'll notice that we've spun up a number of
 2. **worker**: A duplicate of your core app, but running `sidekiq` instead. [Disabled by Default]
 3. **redis**: A `redis` instance for `sidekiq`. [Disabled by Default]
 4. **localstack**: [`localstack`](https://github.com/localstack/localstack) is a suite of fake AWS services. [Disabled by Default]
-5. **postgres**: Your application's database.
-6. **stripe**: An officially supported stripe mock. [Disabled by Default]
+5. **postgres**: Your application's database. search for `SWITCH MYSQL` to toggle from Postgres to MySQL
+6. **mysql**: MySQL DB, disabled by default
+7. **stripe**: An officially supported stripe mock. [Disabled by Default]
 
 To cleanup all containers, volumes and networks execute `docker-compose down -v`
 
