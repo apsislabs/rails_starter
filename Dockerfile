@@ -7,7 +7,7 @@ RUN apk add --no-cache --update \
     postgresql-dev \
     nodejs
 
-RUN gem install bundler rails --no-rdoc --no-ri
+RUN gem install bundler rails
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME
