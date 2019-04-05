@@ -1,3 +1,6 @@
 #! /bin/bash
-
-docker-compose exec web sh
+CONTAINER=$1
+if [[ -z $CONTAINER ]]; then
+  CONTAINER='web'
+fi
+docker-compose exec $CONTAINER sh
