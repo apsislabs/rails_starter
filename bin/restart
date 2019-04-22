@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+source bin/helpers/docker
+runOnDocker web
+
+echo 'Restarting Rails...'
+bundle exec rails restart
+echo 'Rails Restarted'

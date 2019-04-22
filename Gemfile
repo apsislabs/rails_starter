@@ -19,7 +19,6 @@ gem 'pg', '~> 0.18'
 # gem 'mysql2', '~> 0.5.2' # SWITCH MYSQL: to toggle from Postgres to MySQL
 gem 'puma', '~> 3.12'
 gem 'redis', '~> 4.0'
-gem 'sass-rails', '~> 5.0'
 gem 'tzinfo-data'
 
 # Extended Functionality
@@ -107,6 +106,7 @@ group :development, :test do
   gem 'rename'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
   gem 'selenium-webdriver'
 end
 
