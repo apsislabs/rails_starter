@@ -24,36 +24,39 @@ gem 'tzinfo-data'
 # Extended Functionality
 # -------------------------------------
 
-gem 'aasm'                        # => state machine management
+# gem 'aasm'                        # => state machine management
 gem 'active_model_serializers'    # => serialized models
-gem 'activejob-traffic_control'   # => better active_jobs
+# gem 'activejob-traffic_control'   # => better active_jobs
 gem 'aws-sdk-s3', '~> 1'          # => aws
-gem 'carrierwave'                 # => file uploads
+# gem 'carrierwave'                 # => file uploads
 gem 'discard'                     # => soft delete support
 gem 'flutie'                      # => i18n title elements
 gem 'groupdate'                   # => group queries by date
 gem 'kaminari'                    # => active model pagination
 gem 'lograge'                     # => better logging
+gem 'oj'                          # => improved json
+gem 'olive_branch'                # => improved api casing
 gem 'rack-attack'                 # => request throttler
+gem 'rack-cors'                   # => CORs header manipulation for js access
 gem 'retryable'                   # => safely retry blocks
 gem 'roadie-rails'                # => inline css for emails
 gem 'search_cop'                  # => active model natural language search
 gem 'secure_headers'              # => send secure headers
-gem 'sidekiq'                     # => active_job processor
-gem 'simple_form'                 # => form markup generator
-gem 'slayer'                      # => a killer service layer
-gem 'slayer_rails'                # => rails bindings for slayer
+# gem 'sidekiq'                     # => active_job processor
+# gem 'simple_form'                 # => form markup generator
 gem 'stringex'                    # => string extensions
 gem 'strong_migrations'           # => protect from dangerous migrations
 gem 'validates'                   # => extended model validations
 
+# Slayer
+gem 'slayer', '0.4.0.beta4'       # => a killer service layer
+gem 'slayer_rails', '0.4.0.beta4' # => rails bindings for slayer
+
 # Auth & Authorization
 # -------------------------------------
 
+gem 'devise'
 gem 'pundit'
-gem 'sorcery'
-
-gem 'rack-cors' # => CORs header manipulation for js access
 
 # Optional
 # -------------------------------------

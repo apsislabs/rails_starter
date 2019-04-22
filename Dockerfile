@@ -1,5 +1,4 @@
-FROM ruby:2.5.1-alpine3.7
-MAINTAINER wyatt@apsis.io
+FROM ruby:2.6-alpine
 
 RUN apk add --no-cache --update \
     bash \
@@ -9,19 +8,20 @@ RUN apk add --no-cache --update \
     # mariadb-dev\
     nodejs
 
-RUN gem install bundler:1.17.2 rails
+ENV BUNDLER_VERSION=2.0.1 \
+    BUNDLE_JOBS=5 \
+    BUNDLE_PATH=/bundle \
+    BUNDLE_BIN=/bundle/bin \
+    GEM_HOME=/bundle
+
+RUN gem install bundler:2.0.1 rails
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME
 
 COPY Gemfile Gemfile.lock $APP_HOME/
 
-ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
-    BUNDLE_JOBS=5 \
-    BUNDLE_PATH=/bundle \
-    BUNDLE_BIN=/bundle/bin \
-    GEM_HOME=/bundle
-
+ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 RUN bundle check || bundle install
