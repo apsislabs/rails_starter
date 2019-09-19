@@ -8,16 +8,16 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.0.0'
 
 # Defaults
 # -------------------------------------
 
 gem 'bootsnap', '>= 1.3.2', require: false
 gem 'jbuilder', '~> 2.5'
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.1.4'
 # gem 'mysql2', '~> 0.5.2' # SWITCH MYSQL: to toggle from Postgres to MySQL
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.1'
 gem 'redis', '~> 4.0'
 gem 'tzinfo-data'
 
@@ -42,7 +42,7 @@ gem 'retryable'                   # => safely retry blocks
 gem 'roadie-rails'                # => inline css for emails
 gem 'search_cop'                  # => active model natural language search
 gem 'secure_headers'              # => send secure headers
-# gem 'sidekiq'                     # => active_job processor
+gem 'sidekiq'                     # => active_job processor
 # gem 'simple_form'                 # => form markup generator
 gem 'stringex'                    # => string extensions
 gem 'strong_migrations'           # => protect from dangerous migrations
@@ -102,7 +102,7 @@ end
 group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 3.1.0'
+  gem 'capybara'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
