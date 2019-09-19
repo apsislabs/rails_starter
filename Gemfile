@@ -56,7 +56,12 @@ gem 'slayer_rails', '0.4.0.beta4' # => rails bindings for slayer
 # -------------------------------------
 
 gem 'devise'
-gem 'pundit'
+gem 'tiddle'
+gem 'papers_please'
+
+# Admin
+
+gem 'administrate'
 
 # Optional
 # -------------------------------------
@@ -68,7 +73,6 @@ gem 'pundit'
 # gem 'action-store'          # => simple actions for models
 # gem 'acts-as-taggable-on'   # => tagging for models
 # gem 'acts_as_tenant'        # => simple tenanting
-# gem 'administrate'          # => admin panels
 # gem 'audited'               # => audit logging
 # gem 'blazer'                # => reporting dashboard
 # gem 'boring_presenters'     # => simple presentation
@@ -102,7 +106,6 @@ end
 group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
@@ -133,6 +136,4 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'timecop'
-  gem 'vcr'
-  gem 'webmock'
 end
