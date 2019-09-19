@@ -3,11 +3,11 @@ source bin/helpers/docker
 runOnDocker web
 
 echo "== Starting rubocop =="
-bundle exec rubocop --format worst --format simple --format offenses
+bundle exec rubocop
 if [ $? -ne 0 ]; then
     echo -e "\n== Rubocop failed; push aborted! ==\n"
     echo -e "To auto-correct errors run:"
-    echo -e "\trubocop --format worst --format simple --format offenses --auto-correct"
+    echo -e "\trubocop --auto-correct"
     exit 1
 fi
 

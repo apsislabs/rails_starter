@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6.4-alpine
 
 RUN apk add --no-cache --update \
     bash \
@@ -8,13 +8,12 @@ RUN apk add --no-cache --update \
     # mariadb-dev\
     nodejs
 
-ENV BUNDLER_VERSION=2.0.1 \
-    BUNDLE_JOBS=5 \
+ENV BUNDLE_JOBS=5 \
     BUNDLE_PATH=/bundle \
     BUNDLE_BIN=/bundle/bin \
     GEM_HOME=/bundle
 
-RUN gem install bundler:2.0.1 rails
+RUN gem install bundler
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME
