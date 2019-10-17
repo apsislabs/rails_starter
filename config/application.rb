@@ -22,5 +22,7 @@ module RailsStarter
 
     config.active_job.queue_adapter = :sidekiq
     config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_NAME') { "active_job_#{Rails.env}" }
+
+    config.display_env = ENV['DISPLAY_ENV'] || Rails.env
   end
 end

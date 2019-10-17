@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
     mount Sidekiq::Web, at: '/sidekiq' if Rails.env.development?
   end
+
+  get '/status', to: 'status#index'
 end
