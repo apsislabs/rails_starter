@@ -18,10 +18,7 @@
 require 'simplecov'
 require 'factory_bot_rails'
 require 'faker'
-require 'webmock/rspec'
 require 'active_support/testing/time_helpers'
-
-WebMock.disable_net_connect!(allow_localhost: true)
 
 # Sample SimpleCov settings:
 # SimpleCov.minimum_coverage 90
