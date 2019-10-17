@@ -20,7 +20,7 @@ module RailsStarter
     config.middleware.use Rack::Attack if Rails.env.production?
     config.middleware.use Rack::Deflater
     config.middleware.delete Rack::Runtime if Rails.env.production?
-    
+
     config.active_job.queue_adapter = :sidekiq
     config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_NAME') { "active_job_#{Rails.env}" }
 
