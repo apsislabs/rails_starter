@@ -25,9 +25,9 @@ gem 'tzinfo-data'
 # -------------------------------------
 
 # gem 'aasm'                        # => state machine management
-gem 'active_model_serializers'    # => serialized models
+gem 'active_model_serializers' # => serialized models
 # gem 'activejob-traffic_control'   # => better active_jobs
-gem 'aws-sdk-s3', '~> 1'          # => aws
+gem 'aws-sdk-s3', '~> 1' # => aws
 # gem 'carrierwave'                 # => file uploads
 gem 'discard'                     # => soft delete support
 gem 'flutie'                      # => i18n title elements
@@ -56,8 +56,8 @@ gem 'slayer_rails', '0.4.0.beta4' # => rails bindings for slayer
 # -------------------------------------
 
 gem 'devise'
-gem 'tiddle'
 gem 'papers_please'
+gem 'tiddle'
 
 # Admin
 
