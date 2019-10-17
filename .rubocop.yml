@@ -1,15 +1,19 @@
-require: rubocop-performance
+require:
+  - rubocop-performance
+  - rubocop-rails
 
 Rails:
   Enabled: true
 
 AllCops:
+  UseCache: true
+  CacheRootDirectory: 'tmp/rubocop'
   Exclude:
     - 'bin/**/*'
     - 'node_modules/**/*'
     - 'db/schema.rb'
     - 'db/seeds.rb'
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
 
 Documentation:
   Enabled: false
