@@ -16,7 +16,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
-require 'capybara/rspec'
 require 'factory_bot_rails'
 require 'faker'
 require 'webmock/rspec'
