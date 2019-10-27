@@ -48,6 +48,9 @@ gem 'stringex'                    # => string extensions
 gem 'strong_migrations'           # => protect from dangerous migrations
 gem 'validates'                   # => extended model validations
 
+# Custom Configs
+gem 'simple_rails_configurator', '~> 0.2.0' # => https://bitbucket.org/apsislabs/simple_rails_configurator
+
 # Slayer
 gem 'slayer', '0.4.0.beta4'       # => a killer service layer
 gem 'slayer_rails', '0.4.0.beta4' # => rails bindings for slayer
