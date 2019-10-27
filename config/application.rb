@@ -17,10 +17,13 @@ module RailsStarter
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.middleware.use Rack::Attack
-    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+    config.middleware.use Rack::Attack if Rails.env.production?
+    config.middleware.use Rack::Deflater
+    config.middleware.delete Rack::Runtime if Rails.env.production?
 
     config.active_job.queue_adapter = :sidekiq
     config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_NAME') { "active_job_#{Rails.env}" }
+
+    config.display_env = ENV['DISPLAY_ENV'] || Rails.env
   end
 end
