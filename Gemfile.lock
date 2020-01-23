@@ -359,7 +359,7 @@ GEM
       tilt
     search_cop (1.0.9)
       treetop
-    secure_headers (6.1.1)
+    secure_headers (6.3.0)
     selectize-rails (0.12.6)
     selenium-webdriver (3.142.4)
       childprocess (>= 0.5, < 3.0)
