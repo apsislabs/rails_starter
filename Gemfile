@@ -17,7 +17,7 @@ gem 'bootsnap', '>= 1.3.2', require: false
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 1.1.4'
 # gem 'mysql2', '~> 0.5.2' # SWITCH MYSQL: to toggle from Postgres to MySQL
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'redis', '~> 4.0'
 gem 'tzinfo-data'
 
