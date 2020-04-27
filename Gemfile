@@ -43,6 +43,7 @@ gem 'roadie-rails'                # => inline css for emails
 gem 'search_cop'                  # => active model natural language search
 gem 'secure_headers'              # => send secure headers
 gem 'sidekiq'                     # => active_job processor
+gem 'silencer'                    # => silence noisy rails logging
 # gem 'simple_form'                 # => form markup generator
 gem 'stringex'                    # => string extensions
 gem 'strong_migrations'           # => protect from dangerous migrations
@@ -73,32 +74,33 @@ gem 'administrate'
 # one of these gems, please be sure to read its
 # documentation to ensure proper setup.
 
-# gem 'action-store'          # => simple actions for models
-# gem 'acts-as-taggable-on'   # => tagging for models
-# gem 'acts_as_tenant'        # => simple tenanting
-# gem 'audited'               # => audit logging
-# gem 'blazer'                # => reporting dashboard
-# gem 'boring_presenters'     # => simple presentation
-# gem 'chewy'                 # => elastic-search indexing
-# gem 'country_select'        # => translated country dropdown
-# gem 'field_test'            # => a/b testing
-# gem 'friendly_id'           # => friendly permalinks
-# gem 'globalize'             # => activerecord translations
-# gem 'mainstreet'            # => a standard address model
-# gem 'mini_magick'           # => image manipulation
-# gem 'money-rails', '~>1'    # => money manipulation
-# gem 'pg_search'             # => pg-based search
-# gem 'phi_attrs'             # => phi logging and access control
-# gem 'pretender'             # => user impersonation
-# gem 'ranked-model'          # => sorting for models
-# gem 'ransack'               # => ruby-based search
-# gem 'responders'            # => automated responders
-# gem 'rollbar'               # => rollbar reporting
-# gem 'safely_block'          # => safely execute blocks
-# gem 'scenic'                # => save views in schema.rb. Supports postgress by default and requires adapters for other dbms
-# gem 'scenic-mysql_adapter'  # => scenic if using mysql
-# gem 'stripe'                # => interaction with Stripe
-# gem 'wicked_pdf'            # => PDF generation
+# gem 'action-store'            # => simple actions for models
+# gem 'acts-as-taggable-on'     # => tagging for models
+# gem 'acts_as_tenant'          # => simple tenanting
+# gem 'audited'                 # => audit logging
+# gem 'blazer'                  # => reporting dashboard
+# gem 'boring_presenters'       # => simple presentation
+# gem 'chewy'                   # => elastic-search indexing
+# gem 'country_select'          # => translated country dropdown
+# gem 'exception_notification'  # => Email Exceptions
+# gem 'field_test'              # => a/b testing
+# gem 'friendly_id'             # => friendly permalinks
+# gem 'globalize'               # => activerecord translations
+# gem 'mainstreet'              # => a standard address model
+# gem 'mini_magick'             # => image manipulation
+# gem 'money-rails', '~>1'      # => money manipulation
+# gem 'pg_search'               # => pg-based search
+# gem 'phi_attrs'               # => phi logging and access control
+# gem 'pretender'               # => user impersonation
+# gem 'ranked-model'            # => sorting for models
+# gem 'ransack'                 # => ruby-based search
+# gem 'responders'              # => automated responders
+# gem 'rollbar'                 # => rollbar reporting
+# gem 'safely_block'            # => safely execute blocks
+# gem 'scenic'                  # => save views in schema.rb. Supports postgress by default and requires adapters for other dbms
+# gem 'scenic-mysql_adapter'    # => scenic if using mysql
+# gem 'stripe'                  # => interaction with Stripe
+# gem 'wicked_pdf'              # => PDF generation
 
 # Environment Groups
 # -------------------------------------
