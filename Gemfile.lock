@@ -372,6 +372,7 @@ GEM
       rack (>= 2.0.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
+    silencer (1.0.1)
     simple_rails_configurator (0.2.0)
     simplecov (0.17.1)
       docile (~> 1.1)
@@ -483,6 +484,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   sidekiq
+  silencer
   simple_rails_configurator (~> 0.2.0)
   simplecov
   slayer (= 0.4.0.beta4)
