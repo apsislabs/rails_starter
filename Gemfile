@@ -41,7 +41,6 @@ gem 'rack-cors'                   # => CORs header manipulation for js access
 gem 'retryable'                   # => safely retry blocks
 gem 'roadie-rails'                # => inline css for emails
 gem 'search_cop'                  # => active model natural language search
-gem 'secure_headers'              # => send secure headers
 gem 'sidekiq'                     # => active_job processor
 gem 'silencer'                    # => silence noisy rails logging
 # gem 'simple_form'                 # => form markup generator

@@ -360,7 +360,6 @@ GEM
       tilt
     search_cop (1.0.9)
       treetop
-    secure_headers (6.3.0)
     selectize-rails (0.12.6)
     selenium-webdriver (3.142.4)
       childprocess (>= 0.5, < 3.0)
@@ -480,7 +479,6 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   search_cop
-  secure_headers
   selenium-webdriver
   shoulda-matchers
   sidekiq
@@ -500,4 +498,4 @@ DEPENDENCIES
   validates
 
 BUNDLED WITH
-   2.0.2
+   2.1.4

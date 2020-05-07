@@ -21,10 +21,6 @@ Documentation:
 Layout/IndentationWidth:
   Enabled: true
 
-Lint/PercentStringArray:
-  Exclude:
-    - config/initializers/secure_headers.rb
-
 Metrics/AbcSize:
   Max: 30
   Exclude:
