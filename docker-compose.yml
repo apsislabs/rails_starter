@@ -35,6 +35,8 @@ services:
   #   image: localstack/localstack
   postgres:
     image: postgres
+    environment:
+      -  POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - postgres:/var/lib/postgresql/data
   # # SWITCH MYSQL: Disable postgres above and enable MySQL below
