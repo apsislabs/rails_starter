@@ -53,3 +53,5 @@ volumes:
   bundle_cache:
   postgres:
   # redis:
+  # # SWITCH MYSQL: uncomment mysql volume, delete postgres volume
+  # mysql:
