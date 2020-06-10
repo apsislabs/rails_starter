@@ -33,7 +33,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Max: 1500
 
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - 'db/migrate/*'
   Max: 140
@@ -47,9 +47,6 @@ Style/BlockComments:
   Enabled: true
   Exclude:
     - spec/spec_helper.rb
-
-Style/BracesAroundHashParameters:
-  Enabled: false
 
 Style/ConditionalAssignment:
   Enabled: false
