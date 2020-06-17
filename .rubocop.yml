@@ -15,7 +15,7 @@ AllCops:
     - 'db/seeds.rb'
   TargetRubyVersion: 2.6
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Layout/IndentationWidth:
@@ -33,7 +33,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Max: 1500
 
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - 'db/migrate/*'
   Max: 140
@@ -47,9 +47,6 @@ Style/BlockComments:
   Enabled: true
   Exclude:
     - spec/spec_helper.rb
-
-Style/BracesAroundHashParameters:
-  Enabled: false
 
 Style/ConditionalAssignment:
   Enabled: false
@@ -65,3 +62,30 @@ Style/RedundantReturn:
 
 Style/SymbolArray:
   EnforcedStyle: brackets
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: true
