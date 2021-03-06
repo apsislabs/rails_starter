@@ -25,5 +25,11 @@ module RailsStarter
     config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_NAME') { "active_job_#{Rails.env}" }
 
     config.display_env = ENV['DISPLAY_ENV'] || Rails.env
+
+    # SWITCH MYSQL: consider deleting this if your mysql version doesn't support uuids
+    # as a native type
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end
