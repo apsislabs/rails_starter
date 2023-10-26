@@ -1,11 +1,13 @@
-version: '3.1'
+version: '3.8'
 # Enable `worker` & `redis` containers support asycronous workers
 # Enable `stripe` container when procesing payments
 # Enable `localstack` container for aws support
 
 services:
   web: &app_base
-    build: .
+    build:
+      context: .
+      target: dev
     ports:
       - "3000:3000"
     depends_on:

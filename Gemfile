@@ -8,52 +8,52 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 7.0'
 
 # Defaults
 # -------------------------------------
 
 gem 'bootsnap', '>= 1.3.2', require: false
 gem 'jbuilder', '~> 2.5'
-gem 'pg', '~> 1.1.4'
-# gem 'mysql2', '~> 0.5.2' # SWITCH MYSQL: to toggle from Postgres to MySQL
-gem 'puma', '~> 4.3'
-gem 'redis', '~> 4.0'
+gem 'pg', '~> 1.2.3'
+# gem 'mysql2', '~> 0.5.3' # SWITCH MYSQL: to toggle from Postgres to MySQL
+gem 'puma'
+gem 'redis'
 gem 'tzinfo-data'
 
 # Extended Functionality
 # -------------------------------------
 
 # gem 'aasm'                        # => state machine management
-gem 'active_model_serializers' # => serialized models
+gem 'active_model_serializers'      # => serialized models
 # gem 'activejob-traffic_control'   # => better active_jobs
-gem 'aws-sdk-s3', '~> 1' # => aws
+gem 'aws-sdk-s3', '~> 1'            # => aws
 # gem 'carrierwave'                 # => file uploads
-gem 'discard'                     # => soft delete support
-gem 'flutie'                      # => i18n title elements
-gem 'groupdate'                   # => group queries by date
-gem 'kaminari'                    # => active model pagination
-gem 'lograge'                     # => better logging
-gem 'oj'                          # => improved json
-gem 'olive_branch'                # => improved api casing
-gem 'rack-attack'                 # => request throttler
-gem 'rack-cors'                   # => CORs header manipulation for js access
-gem 'retryable'                   # => safely retry blocks
-gem 'roadie-rails'                # => inline css for emails
-gem 'search_cop'                  # => active model natural language search
-gem 'sidekiq'                     # => active_job processor
-gem 'silencer'                    # => silence noisy rails logging
+gem 'discard'                       # => soft delete support
+gem 'flutie'                        # => i18n title elements
+gem 'groupdate'                     # => group queries by date
+gem 'kaminari'                      # => active model pagination
+gem 'lograge'                       # => better logging
+gem 'oj'                            # => improved json
+gem 'olive_branch'                  # => improved api casing
+gem 'rack-attack'                   # => request throttler
+gem 'rack-cors'                     # => CORs header manipulation for js access
+gem 'retryable'                     # => safely retry blocks
+gem 'roadie-rails'                  # => inline css for emails
+gem 'search_cop'                    # => active model natural language search
+gem 'sidekiq'                       # => active_job processor
+gem 'silencer'                      # => silence noisy rails logging
 # gem 'simple_form'                 # => form markup generator
-gem 'stringex'                    # => string extensions
-gem 'strong_migrations'           # => protect from dangerous migrations
-gem 'validates'                   # => extended model validations
+gem 'stringex'                      # => string extensions
+gem 'strong_migrations'             # => protect from dangerous migrations
+gem 'validates'                     # => extended model validations
 
 # Custom Configs
-gem 'simple_rails_configurator', '~> 0.2.0' # => https://bitbucket.org/apsislabs/simple_rails_configurator
+gem 'simple_rails_configurator'
 
 # Slayer
-gem 'slayer', '0.4.0.beta4'       # => a killer service layer
-gem 'slayer_rails', '0.4.0.beta4' # => rails bindings for slayer
+gem 'slayer', '0.5.0.beta'       # => a killer service layer
+gem 'slayer_rails', '0.5.0.beta' # => rails bindings for slayer
 
 # Auth & Authorization
 # -------------------------------------
@@ -87,7 +87,7 @@ gem 'administrate'
 # gem 'globalize'               # => activerecord translations
 # gem 'mainstreet'              # => a standard address model
 # gem 'mini_magick'             # => image manipulation
-# gem 'money-rails', '~>1'      # => money manipulation
+# gem 'money-rails',            # => money manipulation
 # gem 'pg_search'               # => pg-based search
 # gem 'phi_attrs'               # => phi logging and access control
 # gem 'pretender'               # => user impersonation
@@ -113,11 +113,14 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'prettier'
   gem 'rename'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'selenium-webdriver'
 end
 
@@ -125,7 +128,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman', require: false
-  gem 'i18n-tasks'
+  # gem 'i18n-tasks' # Disabling to silence parser warning https://github.com/glebm/i18n-tasks/issues/472
   gem 'letter_opener_web'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rack-mini-profiler'

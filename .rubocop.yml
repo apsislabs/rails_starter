@@ -1,19 +1,25 @@
 require:
+  - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails
+  - rubocop-rspec
+
+inherit_gem:
+  prettier: rubocop.yml
 
 Rails:
   Enabled: true
 
 AllCops:
   UseCache: true
+  NewCops: enable
   CacheRootDirectory: 'tmp/rubocop'
   Exclude:
     - 'bin/**/*'
     - 'node_modules/**/*'
     - 'db/schema.rb'
     - 'db/seeds.rb'
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.1
 
 Style/Documentation:
   Enabled: false
