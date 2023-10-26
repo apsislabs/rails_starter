@@ -3,4 +3,4 @@ CONTAINER=$1
 if [[ -z $CONTAINER ]]; then
   CONTAINER='web'
 fi
-docker-compose exec $CONTAINER sh
+docker-compose exec $CONTAINER bash

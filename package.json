@@ -1,5 +1,15 @@
 {
   "name": "STARTER_REPLACE_NAME",
   "private": true,
-  "dependencies": {}
+  "scripts": {
+    "prettier:ruby": "prettier --cache --write '{app,spec,config,lib}/**/*.rb'",
+    "prettier:ruby:check": "prettier --cache --check '{app,spec,config,lib}/**/*.rb'",
+    "prettier:ruby:nocache": "prettier --write '{app,spec,config,lib}/**/*.rb'",
+    "prettier:precommit": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^4.0.1",
+    "prettier": "^3.0.2"
+  }
 }
