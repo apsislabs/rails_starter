@@ -9,15 +9,13 @@ RUN apt update -qq \
     ca-certificates \
     curl \
     gnupg \
-    # libmariadb-dev \ # SWITCH MYSQL: install mariadb, and remove postgresql
-    # mariadb-client \
     postgresql-client-13 \
     postgresql-contrib-13 \
     && rm -rf /var/lib/apt/lists/*
 
 
 # Install Node. Requires curl, ca-certificates, gnupg from above
-ENV NODE_MAJOR=18
+ENV NODE_MAJOR=20
 RUN mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \

@@ -6,15 +6,6 @@ default: &default
   username: postgres
   host: postgres
   port: 5432
-  #  SWITCH MYSQL: Enable MySQL below and remove postgres above
-  # adapter: mysql2
-  # encoding: utf8
-  # database: <%= ENV.fetch("MYSQL_DATABASE") { "starter_dev" } %>
-  # username: <%= ENV.fetch("MYSQL_USERNAME") { "root" } %>
-  # password: <%= ENV.fetch("MYSQL_PASSWORD") { "mysql" } %>
-  # host: <%= ENV.fetch("MYSQL_URL") { "mysql" } %>
-  # sslca: <%= ENV.fetch("MYSQL_CERT") { nil } %>
-  # port: 3306
 
 development:
   <<: *default

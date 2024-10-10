@@ -41,19 +41,8 @@ services:
       -  POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - postgres:/var/lib/postgresql/data
-  # # SWITCH MYSQL: Disable postgres above and enable MySQL below
-  # mysql:
-  #   image: mysql:5.7
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=mysql
-  #   volumes:
-  #     - mysql:/var/lib/mysql
-  # stripe:
-  #   image: jheth/stripe-mock
 
 volumes:
   bundle_cache:
   postgres:
   # redis:
-  # # SWITCH MYSQL: uncomment mysql volume, delete postgres volume
-  # mysql:

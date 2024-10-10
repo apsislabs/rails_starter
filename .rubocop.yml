@@ -1,11 +1,9 @@
 require:
   - rubocop-factory_bot
   - rubocop-performance
-  - rubocop-rails
   - rubocop-rspec
 
-inherit_gem:
-  prettier: rubocop.yml
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 Rails:
   Enabled: true

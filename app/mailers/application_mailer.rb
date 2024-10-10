@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  include Roadie::Rails::Automatic
+  prepend_view_path "app/views/mailers"
+
   default from: "from@example.com"
   layout "mailer"
 end
