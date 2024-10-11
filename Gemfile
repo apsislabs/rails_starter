@@ -15,6 +15,7 @@ gem 'puma', ">= 5.0"
 gem 'tzinfo-data'
 gem 'image_processing'
 gem "bcrypt"
+gem "aws-sdk-s3", require: false
 
 # Assets
 # -------------------------------------
@@ -50,7 +51,6 @@ gem 'rack-attack'                   # => request throttler
 gem 'rack-cors'                     # => CORs header manipulation for js access
 gem 'retriable'                     # => safely retry blocks
 gem 'search_cop'                    # => active model natural language search
-gem 'silencer'                      # => silence noisy rails logging
 gem 'store_attribute'               # => store typed attributes in JSON
 gem 'store_model'                   # => store typed models in JSON
 gem 'stringex'                      # => string extensions

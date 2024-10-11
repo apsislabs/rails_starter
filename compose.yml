@@ -1,25 +1,25 @@
-version: '3.8'
 # Enable `worker` & `redis` containers support asycronous workers
-# Enable `stripe` container when procesing payments
-# Enable `localstack` container for aws support
+
+x-base: &app_base
+  build:
+    context: .
+    target: dev
+  ports:
+    - "3000:3000"
+  environment:
+    DOCKER_CONTAINER: 1
+  volumes:
+    - bundle_cache:/bundle
+    - .:/app
 
 services:
-  web: &app_base
-    build:
-      context: .
-      target: dev
+  web:
+    <<: *app_base
     ports:
       - "3000:3000"
     depends_on:
       - postgres
       # - redis
-      # - localstack
-      # - stripe
-    environment:
-      - DOCKER_CONTAINER=1
-    volumes:
-      - bundle_cache:/bundle
-      - .:/app
     command: sh ./docker/start.sh
   # worker:
   #   <<: *app_base
@@ -27,14 +27,27 @@ services:
   #   ports: []
   #   depends_on:
   #     - web
+  s3:
+    image: adobe/s3mock
+    ports:
+      - 3090:9090
+      - 3091:9091
+    environment:
+      initialBuckets: storage
+      retainFilesOnExit: "true"
+    volumes:
+      - ./tmp/storage/s3:/s3mockroot:delegated
+  mailhog:
+      image: mailhog/mailhog
+      ports:
+        - "1025:1025"
+        - "8025:8025"
   # redis:
   #   image: redis
   #   command: redis-server --appendonly yes
   #   volumes:
   #   # Enable the redis volume under volumes
   #   - redis:/data
-  # localstack:
-  #   image: localstack/localstack
   postgres:
     image: postgres
     environment:

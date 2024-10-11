@@ -1,11 +1,26 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  timeout: 5000
-  username: postgres
-  host: postgres
-  port: 5432
+  primary: &primary
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    timeout: 5000
+    port: 5432
+    database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>
+    username: <%= ENV.fetch("POSTGRES_USERNAME") { "postgres" } %>
+    password: <%= ENV.fetch("POSTGRES_PASSWORD") { "postgres" } %>
+    host: <%= ENV.fetch("POSTGRES_URL") { "postgres" } %>
+  queue:
+    <<: *primary
+    database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary
+    database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>_cable
+    migrations_paths: db/cable_migrate
+  cache:
+    <<: *primary
+    database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>_cable
+    migrations_paths: db/cache_migrate
 
 development:
   <<: *default
@@ -14,7 +29,8 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  <<: *primary
+  database: app_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 production:
   <<: *default
