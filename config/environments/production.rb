@@ -38,7 +38,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -68,12 +68,34 @@ Rails.application.configure do
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :solid_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
+
   # config.active_job.queue_name_prefix = "rails_starter_production"
 
+  Rails.application.routes.default_url_options = {
+    protocol: ENV.fetch("APP_PROTOCOL") { "http" },
+    host: ENV.fetch("APP_HOST") { "localhost" }
+  }
+
+  config.action_mailer.default_url_options = { protocol: ENV.fetch("APP_PROTOCOL") { "http" }, host: ENV.fetch("APP_HOST") { "localhost" } }
+
+  config.action_controller.default_url_options = {
+    protocol: ENV.fetch("APP_PROTOCOL") { "http" },
+    host: ENV.fetch("APP_HOST") { "localhost" }
+  }
+
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_HOST") { "email-smtp.us-west-2.amazonaws.com" },
+    port: ENV.fetch("SMTP_PORT") { 587 },
+    user_name: ENV.fetch("SMTP_USERNAME") { "postmaster@mg.apsis.io" },
+    password: ENV.fetch("SMTP_PASSWORD") { "password" }
+  }
+
+  config.action_mailer.logger = nil
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

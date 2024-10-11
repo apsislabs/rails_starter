@@ -1,0 +1,61 @@
+# Enable `worker` & `redis` containers support asycronous workers
+
+x-base: &app_base
+  build:
+    context: .
+    target: dev
+  ports:
+    - "3000:3000"
+  environment:
+    DOCKER_CONTAINER: 1
+  volumes:
+    - bundle_cache:/bundle
+    - .:/app
+
+services:
+  web:
+    <<: *app_base
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      # - redis
+    command: sh ./docker/start.sh
+  # worker:
+  #   <<: *app_base
+  #   command: sh ./docker/start_worker.sh
+  #   ports: []
+  #   depends_on:
+  #     - web
+  s3:
+    image: adobe/s3mock
+    ports:
+      - 3090:9090
+      - 3091:9091
+    environment:
+      initialBuckets: storage
+      retainFilesOnExit: "true"
+    volumes:
+      - ./tmp/storage/s3:/s3mockroot:delegated
+  mailhog:
+      image: mailhog/mailhog
+      ports:
+        - "1025:1025"
+        - "8025:8025"
+  # redis:
+  #   image: redis
+  #   command: redis-server --appendonly yes
+  #   volumes:
+  #   # Enable the redis volume under volumes
+  #   - redis:/data
+  postgres:
+    image: postgres
+    environment:
+      -  POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  bundle_cache:
+  postgres:
+  # redis:
