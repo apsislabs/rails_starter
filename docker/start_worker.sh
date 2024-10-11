@@ -11,4 +11,4 @@ echo "PostgreSQL is up and running"
 bundle check || bundle install
 
 # Start Sidekiq
-bundle exec sidekiq
+bin/jobs

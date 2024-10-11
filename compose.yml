@@ -1,5 +1,3 @@
-# Enable `worker` & `redis` containers support asycronous workers
-
 x-base: &app_base
   build:
     context: .
@@ -8,6 +6,11 @@ x-base: &app_base
     - "3000:3000"
   environment:
     DOCKER_CONTAINER: 1
+    POSTGRES_DATABASE: app
+    POSTGRES_USERNAME: postgres
+    POSTGRES_PASSWORD: postgres
+    POSTGRES_URL: postgres
+    DISPLAY_ENV: development
   volumes:
     - bundle_cache:/bundle
     - .:/app
@@ -19,14 +22,20 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-      # - redis
+      - s3
+      - mailhog
     command: sh ./docker/start.sh
   # worker:
   #   <<: *app_base
   #   command: sh ./docker/start_worker.sh
-  #   ports: []
   #   depends_on:
   #     - web
+  # assets:
+  #   <<: *app_base
+  #   command: bin/vite dev
+  #   depends_on:
+  #     - web
+
   s3:
     image: adobe/s3mock
     ports:
@@ -36,26 +45,22 @@ services:
       initialBuckets: storage
       retainFilesOnExit: "true"
     volumes:
-      - ./tmp/storage/s3:/s3mockroot:delegated
+      - s3:/s3mockroot:delegated
   mailhog:
-      image: mailhog/mailhog
-      ports:
-        - "1025:1025"
-        - "8025:8025"
-  # redis:
-  #   image: redis
-  #   command: redis-server --appendonly yes
-  #   volumes:
-  #   # Enable the redis volume under volumes
-  #   - redis:/data
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
   postgres:
     image: postgres
     environment:
-      -  POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
     volumes:
       - postgres:/var/lib/postgresql/data
 
 volumes:
   bundle_cache:
   postgres:
-  # redis:
+  s3:
