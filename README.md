@@ -56,7 +56,7 @@ There are a number of gems that need configuration to work:
 
 ### Enabling Assets
 
-By default, this repo comes set up to run `rails_vite`, along with React and Stimulus. This is our recommended setup for a monolith, where you plan to build the frontend of the application as part of your Rails app.
+By default, this repo comes set up to run [`vite_rails`](https://vite-ruby.netlify.app/), along with React and Stimulus. This is our recommended setup for a monolith, where you plan to build the frontend as part of your Rails app.
 
 To enable assets, you'll need to uncomment the `vite` container in `compose.yml`, along with the `vite` environment variables and volumes. This will start the asset building container along with the rest of the application, will place built assets from the `frontend` directory into `public`.
 
