@@ -152,6 +152,7 @@ GEM
       dotenv (= 3.1.4)
       railties (>= 6.1)
     drb (2.2.1)
+    dry-cli (1.1.0)
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
@@ -180,6 +181,7 @@ GEM
       temple (>= 0.8.2)
       thor
       tilt
+    high_voltage (4.0.0)
     htmlentities (4.3.4)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
@@ -299,6 +301,8 @@ GEM
       rack (>= 2.0.0)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
+    rack-proxy (0.7.7)
+      rack
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -498,6 +502,13 @@ GEM
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
+    vite_rails (3.0.17)
+      railties (>= 5.1, < 8)
+      vite_ruby (~> 3.0, >= 3.2.2)
+    vite_ruby (3.8.2)
+      dry-cli (>= 0.7, < 2)
+      rack-proxy (~> 0.6, >= 0.6.1)
+      zeitwerk (~> 2.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     webrick (1.8.2)
@@ -532,6 +543,7 @@ DEPENDENCIES
   feature_toggles
   flutie
   groupdate
+  high_voltage
   image_processing
   irb
   listen (>= 3.0.5, < 3.2)
@@ -588,6 +600,7 @@ DEPENDENCIES
   tzinfo-data
   versionist
   view_component
+  vite_rails
 
 BUNDLED WITH
    2.5.21

@@ -21,7 +21,7 @@ gem "aws-sdk-s3", require: false
 # -------------------------------------
 gem "propshaft"
 
-# gem "vite_rails"
+gem "vite_rails"
 
 # Solids
 # -------------------------------------
@@ -41,6 +41,7 @@ gem 'fast_page'                     # => faster paging
 gem 'feature_toggles'               # => feature flags
 gem 'flutie'                        # => i18n title elements
 gem 'groupdate'                     # => group queries by date
+gem 'high_voltage'                  # => static pages
 gem 'lograge'                       # => better logging
 gem 'maintenance_tasks'             # => better tasks
 gem 'oj'                            # => improved json
@@ -107,7 +108,6 @@ gem 'pretender'
 # gem 'blind_index'                 # => indexing on encrypted columns
 # gem 'chronic'                     # => date parsing
 # gem 'deep_cloneable'              # => active-record cloning
-# gem 'high_voltage'                # => static pages
 # gem 'lockbox'                     # => column-level encryption
 # gem 'mini_magick'                 # => image manipulation
 # gem 'pay'                         # => payment processing

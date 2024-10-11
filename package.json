@@ -7,9 +7,23 @@
     "prettier:ruby:nocache": "prettier --write '{app,spec,config,lib}/**/*.rb'",
     "prettier:precommit": "prettier --write --ignore-unknown"
   },
-  "dependencies": {},
   "devDependencies": {
     "@prettier/plugin-ruby": "^4.0.4",
-    "prettier": "^3.3.3"
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "prettier": "^3.3.3",
+    "stimulus-vite-helpers": "^3.1.0",
+    "vite": "^5.4.8",
+    "vite-plugin-full-reload": "^1.2.0",
+    "vite-plugin-rails": "^0.5.0",
+    "vite-plugin-ruby": "^5.1.0",
+    "vite-plugin-stimulus-hmr": "^3.0.0"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

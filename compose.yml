@@ -1,7 +1,6 @@
 x-base: &app_base
   build:
     context: .
-    target: dev
   ports:
     - "3000:3000"
   environment:
@@ -11,9 +10,12 @@ x-base: &app_base
     POSTGRES_PASSWORD: postgres
     POSTGRES_URL: postgres
     DISPLAY_ENV: development
+    # VITE_RUBY_HOST: ${VITE_HOST:-vite}
   volumes:
     - bundle_cache:/bundle
     - .:/app
+    # - vite_dev:/app/public/vite-dev
+    # - vite_test:/app/public/vite-test
 
 services:
   web:
@@ -22,35 +24,30 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-      - s3
       - mailhog
     command: sh ./docker/start.sh
+
   # worker:
   #   <<: *app_base
   #   command: sh ./docker/start_worker.sh
   #   depends_on:
   #     - web
-  # assets:
+
+  # vite:
   #   <<: *app_base
-  #   command: bin/vite dev
+  #   command: sh ./docker/start_assets.sh
   #   depends_on:
   #     - web
+  #   ports:
+  #     - "3036:3036"
 
-  s3:
-    image: adobe/s3mock
-    ports:
-      - 3090:9090
-      - 3091:9091
-    environment:
-      initialBuckets: storage
-      retainFilesOnExit: "true"
-    volumes:
-      - s3:/s3mockroot:delegated
   mailhog:
     image: mailhog/mailhog
+    entrypoint: ["/bin/sh", "-c", "MailHog &>/dev/null"]
     ports:
       - "1025:1025"
       - "8025:8025"
+
   postgres:
     image: postgres
     environment:
@@ -64,3 +61,5 @@ volumes:
   bundle_cache:
   postgres:
   s3:
+  # vite_dev:
+  # vite_test:

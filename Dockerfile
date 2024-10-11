@@ -18,7 +18,7 @@ WORKDIR $APP_HOME
 # If we need to force a gem update we'll have to `--no-cache` or add a file we can copy in
 RUN gem update --system && gem install bundler:2.3.25
 
-COPY ./server/apk-updated-date.txt .
+# COPY ./server/apk-updated-date.txt .
 RUN apk add --update --no-cache \
     alpine-sdk \
     ca-certificates \
@@ -37,19 +37,17 @@ RUN apk add --update --no-cache \
     pandoc \
     libpq-dev \
     postgresql13-dev \
-    vips-dev \
-    && rm ./apk-updated-date.txt \
-    && npm install -g pm2@4.5.6
+    vips-dev
 
-COPY ./server/Gemfile ./server/Gemfile.lock ./
+COPY ./Gemfile ./Gemfile.lock ./
 RUN bundle install && rm ./Gemfile ./Gemfile.lock
 
-COPY ./server/deploy/minimagick/policy.xml /etc/ImageMagick-6/
-COPY ./server $APP_HOME/
+# COPY ./server/deploy/minimagick/policy.xml /etc/ImageMagick-6/
+# COPY ./server $APP_HOME/
 
 # copy all font files to the font install directory, so chromium can use these fonts directly
 # this way we don't have to embed fonts in the HTML
-RUN find lib/assets/fonts -name '*.ttf' -exec ln '{}' /usr/share/fonts/ \;
+# RUN find lib/assets/fonts -name '*.ttf' -exec ln '{}' /usr/share/fonts/ \;
 
 EXPOSE 3000
 
