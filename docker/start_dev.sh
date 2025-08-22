@@ -10,13 +10,6 @@ echo "PostgreSQL is up and running"
 # Run Setup
 bin/setup
 
-# Run migrations and build assets in production
-if [ "$RAILS_ENV" = "production" ]; then
-  echo "Running production setup..."
-  bin/rails db:migrate
-  bin/rails assets:precompile
-fi
-
 # Delete the pidfile and start rails
 rm -f tmp/pids/server.pid 2>/dev/null
 bin/rails s -b 0.0.0.0

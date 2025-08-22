@@ -97,6 +97,18 @@ If you look in `compose.yml` you'll notice that we've spun up a number of contai
 
 To cleanup all containers, volumes and networks execute `docker compose down -v`
 
+## Deployment
+
+* Ensure ENV variables are set:
+  * DISPLAY_ENV=production
+  * RAILS_ENV=production
+  * SECRET_KEY_BASE
+  * SMTP_HOST
+  * SMTP_PORT
+  * SMTP_USERNAME
+  * SMTP_PASSWORD
+* Ensure SMTP
+
 ---
 
 # Built by Apsis

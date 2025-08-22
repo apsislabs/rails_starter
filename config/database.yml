@@ -6,7 +6,7 @@ default: &default
     timeout: 5000
     port: 5432
     database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>
-    username: <%= ENV.fetch("POSTGRES_USERNAME") { "postgres" } %>
+    username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
     password: <%= ENV.fetch("POSTGRES_PASSWORD") { "postgres" } %>
     host: <%= ENV.fetch("POSTGRES_URL") { "postgres" } %>
   queue:
