@@ -9,18 +9,23 @@ services:
       - vite_test:/app/public/vite-test
 
   vite:
+    extends:
+      file: compose.yml
+      service: web
     command: sh ./docker/start_assets.sh
     environment:
       RAILS_ENV: development
       VITE_RUBY_HOST: 0.0.0.0
     ports:
       - "3036:3036"
-    profiles: ["dev"]
+    volumes:
+      - .:/app
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
 
   mailhog:
     image: mailhog/mailhog
     entrypoint: ["/bin/sh", "-c", "MailHog &>/dev/null"]
-    profiles: ["dev"]
     ports:
       - "1025:1025"
       - "8025:8025"

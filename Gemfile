@@ -148,6 +148,9 @@ group :development do
   gem 'syntax_tree-haml'
   gem 'syntax_tree-rbs'
   gem 'syntax_tree'
+
+  # Temporary bugfix
+  gem "mutex_m", group: :development
 end
 
 group :test do

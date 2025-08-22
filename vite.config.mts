@@ -3,6 +3,9 @@ import react from "@vitejs/plugin-react";
 import Rails from "vite-plugin-rails";
 
 export default defineConfig({
+  server: {
+    allowedHosts: ['vite']
+  },
   plugins: [
     react(),
     Rails({

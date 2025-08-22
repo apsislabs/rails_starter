@@ -3,5 +3,6 @@
 # Bundle Check
 bundle check || bundle install
 
-# Start Sidekiq
+# Start assets
+npm install
 bin/vite dev
