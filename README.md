@@ -99,15 +99,11 @@ To cleanup all containers, volumes and networks execute `docker compose down -v`
 
 ## Deployment
 
-* Ensure ENV variables are set:
-  * DISPLAY_ENV=production
-  * RAILS_ENV=production
-  * SECRET_KEY_BASE
-  * SMTP_HOST
-  * SMTP_PORT
-  * SMTP_USERNAME
-  * SMTP_PASSWORD
-* Ensure SMTP
+This starter is set up to deploy out of the box on dokploy using a compose configuration. There are some items that need to be set up properly:
+
+1. Configure the environment variables. You can find samples in `.env.dokploy.example`
+2. Make sure you configure a domain
+3. Make sure you turn on **Enable Isolated Deployment** in the **Advanced** tab of your deployment
 
 ---
 
