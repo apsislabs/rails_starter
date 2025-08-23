@@ -14,7 +14,7 @@ WORKDIR $APP_HOME
 
 # Update Gems first...only re-do this when bundler version changes.
 # If we need to force a gem update we'll have to `--no-cache` or add a file we can copy in
-RUN gem update --system && gem install bundler:2.5.21
+RUN gem update --system && gem install bundler:2.7.1
 
 COPY ./docker/.apkcache .
 RUN apk add --update --no-cache \
@@ -23,13 +23,11 @@ RUN apk add --update --no-cache \
     ca-certificates \
     curl \
     bash \
-    fontconfig \
     graphviz \
     gcompat \
     imagemagick \
     imagemagick-jpeg \
     imagemagick-pdf \
-    msttcorefonts-installer \
     nodejs \
     npm \
     libpq-dev \
