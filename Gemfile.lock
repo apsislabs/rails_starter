@@ -570,7 +570,6 @@ DEPENDENCIES
   phony_rails
   premailer-rails
   pretender
-  prettier_print
   propshaft
   public_uid
   puma (>= 5.0)
