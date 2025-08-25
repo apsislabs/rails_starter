@@ -19,7 +19,7 @@ default: &default
     migrations_paths: db/cable_migrate
   cache:
     <<: *primary
-    database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>_cable
+    database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>_cache
     migrations_paths: db/cache_migrate
 
 development:
