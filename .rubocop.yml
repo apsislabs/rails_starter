@@ -1,95 +1,22 @@
+inherit_gem:
+  standard: config/base.yml
+
 require:
   - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rspec
 
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
-
-Rails:
-  Enabled: true
-
 AllCops:
   UseCache: true
   NewCops: enable
-  CacheRootDirectory: 'tmp/rubocop'
+  CacheRootDirectory: "tmp/rubocop"
+  SuggestExtensions: false
   Exclude:
-    - 'bin/**/*'
-    - 'node_modules/**/*'
-    - 'db/schema.rb'
-    - 'db/seeds.rb'
+    - "bin/**/*"
+    - "node_modules/**/*"
+    - "db/schema.rb"
+    - "db/seeds.rb"
+    - "db/migrate/**/*"
+    - "config/initializers/content_security_policy.rb"
+    - "spec/spec_helper.rb"
   TargetRubyVersion: 3.1
-
-Style/Documentation:
-  Enabled: false
-
-Layout/IndentationWidth:
-  Enabled: true
-
-Metrics/AbcSize:
-  Max: 30
-  Exclude:
-    - 'db/migrate/*'
-    - 'db/**/*'
-
-Metrics/BlockLength:
-  Enabled: false
-
-Metrics/ClassLength:
-  Max: 1500
-
-Layout/LineLength:
-  Exclude:
-    - 'db/migrate/*'
-  Max: 140
-
-Metrics/MethodLength:
-  Exclude:
-    - 'db/migrate/*'
-  Max: 20
-
-Style/BlockComments:
-  Enabled: true
-  Exclude:
-    - spec/spec_helper.rb
-
-Style/ConditionalAssignment:
-  Enabled: false
-
-Style/EmptyMethod:
-  EnforcedStyle: expanded
-
-Naming/PredicateName:
-  Enabled: false
-
-Style/RedundantReturn:
-  Enabled: false
-
-Style/SymbolArray:
-  EnforcedStyle: brackets
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-Lint/RaiseException:
-  Enabled: true
-Lint/StructNewOverride:
-  Enabled: true
-Style/ExponentialNotation:
-  Enabled: true
-Style/HashEachMethods:
-  Enabled: true
-Style/HashTransformKeys:
-  Enabled: true
-Style/HashTransformValues:
-  Enabled: true
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-Style/RedundantRegexpEscape:
-  Enabled: true
-Style/SlicingWithRange:
-  Enabled: true

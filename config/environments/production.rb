@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -61,7 +62,7 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
-  config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
+  config.logger = ActiveSupport::TaggedLogging.logger($stdout)
 
   # Info include generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
@@ -75,9 +76,9 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.solid_queue.connects_to = {database: {writing: :queue}}
 
-  config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.solid_queue.connects_to = {database: {writing: :queue}}
 
   # config.active_job.queue_name_prefix = "rails_starter_production"
 
@@ -86,7 +87,7 @@ Rails.application.configure do
     host: ENV.fetch("APP_HOST") { "localhost" }
   }
 
-  config.action_mailer.default_url_options = { protocol: ENV.fetch("APP_PROTOCOL") { "http" }, host: ENV.fetch("APP_HOST") { "localhost" } }
+  config.action_mailer.default_url_options = {protocol: ENV.fetch("APP_PROTOCOL") { "http" }, host: ENV.fetch("APP_HOST") { "localhost" }}
 
   config.action_controller.default_url_options = {
     protocol: ENV.fetch("APP_PROTOCOL") { "http" },
@@ -117,7 +118,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.active_record.attributes_for_inspect = [ :id ]
+  config.active_record.attributes_for_inspect = [:id]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

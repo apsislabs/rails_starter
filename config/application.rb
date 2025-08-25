@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -7,7 +8,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module App2
+module RailsStarter
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
@@ -24,5 +25,15 @@ module App2
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Connection pool and concurrency configuration
+    config.x.default_web_concurrency = Rails.env.production? ? ((Concurrent.processor_count * 2) + 1) : 0
+    config.x.web_concurrency =
+      (ENV.fetch("APP_CONCURRENCY", config.x.default_web_concurrency).presence || config.x.default_web_concurrency).to_i
+    config.x.max_threads = ENV.fetch("RAILS_MAX_THREADS", 5).to_i
+    config.x.min_threads = ENV.fetch("RAILS_MIN_THREADS", config.x.max_threads)
+
+    # pool should always be >= (Puma) * RAILS_MAX_THREADS)
+    config.x.db_connection_pool = config.x.max_threads * [config.x.web_concurrency, 1].max
   end
 end

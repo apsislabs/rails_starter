@@ -2,7 +2,7 @@ default: &default
   primary: &primary
     adapter: postgresql
     encoding: unicode
-    pool: 5
+    pool: <%= Rails.configuration.x.db_connection_pool %>
     timeout: 5000
     port: 5432
     database: <%= ENV.fetch("POSTGRES_DATABASE") { "app" } %>

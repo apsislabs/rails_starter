@@ -25,17 +25,17 @@ $ bin/ssh_to_container
 
 Renaming your app is super simple, first clone into its own folder. Then update the following:
 
-* `config/application.rb`
-  * change `RailsStarter` to `NewName`
-* `package.json`
-  * change `STARTER_REPLACE_NAME` to `new_name`
+- `config/application.rb`
+  - change `RailsStarter` to `NewName`
+- `package.json`
+  - change `STARTER_REPLACE_NAME` to `new_name`
 
 ### Changing Port
 
 By default we have set this up to use port 3000, but as every rails app uses that port you may conflict with other projects. To update to port 5000 for example, change the following:
 
-* `compose.yml` - change `"3000:3000"` -> `"5000:3000"`
-* `.env.development` - change `APP_PORT=3000` -> `APP_PORT=5000`
+- `compose.yml` - change `"3000:3000"` -> `"5000:3000"`
+- `.env.development` - change `APP_PORT=3000` -> `APP_PORT=5000`
 
 ### Upgrading Rails
 
@@ -53,6 +53,24 @@ There are a number of gems that need configuration to work:
 
 - Configure [`simple_form`](https://github.com/plataformatec/simple_form)
 - Ensure columns for [`discard`](https://github.com/jhawthorn/discard)
+
+### Code Formatting
+
+This starter uses [`standard-rb`](https://github.com/standardrb/standard) for Ruby code formatting and linting. We have moved away from prettier in favor of standard-rb conventions.
+
+To format your code, run:
+
+```bash
+bundle exec standardrb --fix
+```
+
+To check your code without fixing, run:
+
+```bash
+bundle exec standardrb
+```
+
+The configuration can be found in `.rubocop.yml`.
 
 ### Enabling Assets
 
