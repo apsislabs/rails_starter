@@ -1,6 +1,7 @@
 x-base: &app_base
   build:
     context: .
+    target: production
   environment:
     - DOCKER_CONTAINER=1
     - POSTGRES_DATABASE=${POSTGRES_DATABASE:-app}

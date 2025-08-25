@@ -1,8 +1,10 @@
 services:
   web:
+    build:
+      target: development
     command: sh ./docker/start_dev.sh
     ports:
-    - "3000:3000"
+      - "3000:3000"
     volumes:
       - .:/app
       - vite_dev:/app/public/vite-dev
@@ -12,6 +14,8 @@ services:
     extends:
       file: compose.yml
       service: web
+    build:
+      target: development
     command: sh ./docker/start_assets.sh
     environment:
       RAILS_ENV: development

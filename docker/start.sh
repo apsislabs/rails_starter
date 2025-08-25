@@ -14,7 +14,6 @@ bin/setup
 if [ "$RAILS_ENV" = "production" ]; then
   echo "Running production setup..."
   bin/rails db:migrate
-  bin/rails assets:precompile
 fi
 
 # Delete the pidfile and start rails
