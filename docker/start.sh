@@ -7,18 +7,14 @@ until curl postgres:5432 2>&1 | grep '52'; do
 done
 echo "PostgreSQL is up and running"
 
-# SWITCH MySQL: Disable Postgres above enable MySQL below
-# # Wait for MySQL
-# until nc -z -v -w30 mysql 3306
-# do
-#   echo "Waiting for MySQL..."
-#   sleep 1
-# done
-#
-# echo "MySQL is up and running"
-
 # Run Setup
 bin/setup
+
+# Run migrations and build assets in production
+if [ "$RAILS_ENV" = "production" ]; then
+  echo "Running production setup..."
+  bin/rails db:migrate
+fi
 
 # Delete the pidfile and start rails
 rm -f tmp/pids/server.pid 2>/dev/null

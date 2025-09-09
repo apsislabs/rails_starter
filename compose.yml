@@ -1,0 +1,51 @@
+x-base: &app_base
+  build:
+    context: .
+    target: production
+  environment:
+    - DOCKER_CONTAINER=1
+    - POSTGRES_DATABASE=${POSTGRES_DATABASE:-app}
+    - POSTGRES_USER=${POSTGRES_USER:-postgres}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    - POSTGRES_URL=${POSTGRES_URL:-postgres}
+    - DISPLAY_ENV=${RAILS_ENV:-development}
+    - RAILS_ENV=${RAILS_ENV:-development}
+    - VITE_RUBY_HOST=${VITE_HOST:-vite}
+    - SECRET_KEY_BASE
+    - SMTP_HOST
+    - SMTP_PORT
+    - SMTP_USERNAME
+    - SMTP_PASSWORD
+    - AWS_REGION
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+  volumes:
+    - bundle_cache:/bundle
+
+services:
+  web:
+    <<: *app_base
+    ports:
+      - "3000"
+    depends_on:
+      - postgres
+    command: sh ./docker/start.sh
+
+  # worker:
+  #   <<: *app_base
+  #   command: sh ./docker/start_worker.sh
+  #   depends_on:
+  #     - web
+
+  postgres:
+    image: postgres:16
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  bundle_cache:
+  postgres:

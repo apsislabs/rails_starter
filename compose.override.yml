@@ -1,0 +1,39 @@
+services:
+  web:
+    build:
+      target: development
+    command: sh ./docker/start_dev.sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
+
+  vite:
+    extends:
+      file: compose.yml
+      service: web
+    build:
+      target: development
+    command: sh ./docker/start_assets.sh
+    environment:
+      RAILS_ENV: development
+      VITE_RUBY_HOST: 0.0.0.0
+    ports:
+      - "3036:3036"
+    volumes:
+      - .:/app
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
+
+  mailhog:
+    image: mailhog/mailhog
+    entrypoint: ["/bin/sh", "-c", "MailHog &>/dev/null"]
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  vite_dev:
+  vite_test:

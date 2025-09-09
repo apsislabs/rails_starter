@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-1. `docker-compose up -d`
+1. `docker compose up -d`
 2. wait for it...
 3. visit `localhost:3000`
 4. rejoice!
@@ -12,7 +12,7 @@
 You can either run:
 
 ```
-$ docker-compose exec web sh
+$ docker compose exec web sh
 ```
 
 or
@@ -25,17 +25,17 @@ $ bin/ssh_to_container
 
 Renaming your app is super simple, first clone into its own folder. Then update the following:
 
-* `config/application.rb`
-  * change `RailsStarter` to `NewName`
-* `package.json`
-  * change `STARTER_REPLACE_NAME` to `new_name`
+- `config/application.rb`
+  - change `RailsStarter` to `NewName`
+- `package.json`
+  - change `STARTER_REPLACE_NAME` to `new_name`
 
 ### Changing Port
 
 By default we have set this up to use port 3000, but as every rails app uses that port you may conflict with other projects. To update to port 5000 for example, change the following:
 
-* `docker-compose.yml` - change `"3000:3000"` -> `"5000:3000"`
-* `.env.development` - change `APP_PORT=3000` -> `APP_PORT=5000`
+- `compose.yml` - change `"3000:3000"` -> `"5000:3000"`
+- `.env.development` - change `APP_PORT=3000` -> `APP_PORT=5000`
 
 ### Upgrading Rails
 
@@ -54,6 +54,48 @@ There are a number of gems that need configuration to work:
 - Configure [`simple_form`](https://github.com/plataformatec/simple_form)
 - Ensure columns for [`discard`](https://github.com/jhawthorn/discard)
 
+### Code Formatting
+
+This starter uses [`standard-rb`](https://github.com/standardrb/standard) for Ruby code formatting and linting. We have moved away from prettier in favor of standard-rb conventions.
+
+To format your code, run:
+
+```bash
+bundle exec standardrb --fix
+```
+
+To check your code without fixing, run:
+
+```bash
+bundle exec standardrb
+```
+
+The configuration can be found in `.rubocop.yml`.
+
+### Enabling Assets
+
+By default, this repo comes set up to run [`vite_rails`](https://vite-ruby.netlify.app/), along with React and Stimulus. This is our recommended setup for a monolith, where you plan to build the frontend as part of your Rails app.
+
+To enable assets, you'll need to uncomment the `vite` container in `compose.yml`, along with the `vite` environment variables and volumes. This will start the asset building container along with the rest of the application, will place built assets from the `frontend` directory into `public`.
+
+To actually _see_ these assets, you'll need to uncomment the `vite_*_tag` entries in `app/views/layouts/application.html.erb`. Once that's done, you should have hot reloading of CSS & JS, along with automatic refresh when a Rails view changes.
+
+### Disabling Assets
+
+While the assets build and inclusion is disabled by default, if you plan to use a _different_ mechanism for building your assets (a different builder, an external client, etc.), you may want to remove all the `vite` stuff we've set up for you.
+
+If that's the case, you'll want to delete all of the following:
+
+1. `vite_*_tag` entries from `app/views/layouts/application.html.erb`
+2. `config/vite.js`
+3. `vite.config.js`
+4. `bin/vite`
+5. `docker/start_assets.sh`
+6. `vite_rails` from `Gemfile`
+7. References to `vite` in `config/initializers/content_security_policy.rb`
+8. Optionally, `package.json` and `package-lock.json` & `node_modules`
+9. Optionally, the entire `frontend/` directory
+
 ### Recommended Reading
 
 - http://www.betterspecs.org/
@@ -63,21 +105,23 @@ There are a number of gems that need configuration to work:
 
 ## The Containers
 
-If you look in `docker-compose.yml` you'll notice that we've spun up a number of containers, not all of which may be useful for your project.
+If you look in `compose.yml` you'll notice that we've spun up a number of containers, not all of which may be useful for your project.
 
 1. **web**: Your core container which runs the `rails` server process.
-2. **worker**: A duplicate of your core app, but running `sidekiq` instead. [Disabled by Default]
-3. **redis**: A `redis` instance for `sidekiq`. [Disabled by Default]
-4. **localstack**: [`localstack`](https://github.com/localstack/localstack) is a suite of fake AWS services. [Disabled by Default]
-5. **postgres**: Your application's database. search for `SWITCH MYSQL` to toggle from Postgres to MySQL
-6. **mysql**: MySQL DB, disabled by default
-7. **stripe**: An officially supported stripe mock. [Disabled by Default]
+2. **worker**: A duplicate of your core app, but running `solid_queue` instead. [Disabled by Default]
+3. **vite**: A duplicate of your core app, but running `vite_rails` instead. [Disabled by Default]
+4. **postgres**: Your application's database.
+5. **mailhog**: Mailcatcher for preventing outbound emails from escaping.
 
-To cleanup all containers, volumes and networks execute `docker-compose down -v`
+To cleanup all containers, volumes and networks execute `docker compose down -v`
 
-## Default Routes
-* `/_dev/letter_opener` - View emails send from the rails application
-* `/_dev/sidekiq` - View active jobs and other statistics for Sidekiq
+## Deployment
+
+This starter is set up to deploy out of the box on dokploy using a compose configuration. There are some items that need to be set up properly:
+
+1. Configure the environment variables. You can find samples in `.env.dokploy.example`
+2. Make sure you configure a domain
+3. Make sure you turn on **Enable Isolated Deployment** in the **Advanced** tab of your deployment
 
 ---
 

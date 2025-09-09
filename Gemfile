@@ -1,70 +1,97 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
-
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
+source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0'
+gem "rails", "~> 8.0"
 
 # Defaults
 # -------------------------------------
 
-gem 'bootsnap', '>= 1.3.2', require: false
-gem 'jbuilder', '~> 2.5'
-gem 'pg', '~> 1.2.3'
-# gem 'mysql2', '~> 0.5.3' # SWITCH MYSQL: to toggle from Postgres to MySQL
-gem 'puma'
-gem 'redis'
-gem 'tzinfo-data'
+gem "bootsnap", require: false
+gem "irb", require: false # Updates default Ruby irb
+gem "pg"
+gem "puma", ">= 5.0"
+gem "tzinfo-data"
+gem "image_processing"
+gem "bcrypt"
+gem "aws-sdk-s3", require: false
+
+# Assets
+# -------------------------------------
+gem "propshaft"
+
+gem "vite_rails"
+
+# Solids
+# -------------------------------------
+
+gem "solid_queue"
+gem "solid_cache"
+gem "solid_cable"
 
 # Extended Functionality
 # -------------------------------------
 
-# gem 'aasm'                        # => state machine management
-gem 'active_model_serializers'      # => serialized models
-# gem 'activejob-traffic_control'   # => better active_jobs
-gem 'aws-sdk-s3', '~> 1'            # => aws
-# gem 'carrierwave'                 # => file uploads
-gem 'discard'                       # => soft delete support
-gem 'flutie'                        # => i18n title elements
-gem 'groupdate'                     # => group queries by date
-gem 'kaminari'                      # => active model pagination
-gem 'lograge'                       # => better logging
-gem 'oj'                            # => improved json
-gem 'olive_branch'                  # => improved api casing
-gem 'rack-attack'                   # => request throttler
-gem 'rack-cors'                     # => CORs header manipulation for js access
-gem 'retryable'                     # => safely retry blocks
-gem 'roadie-rails'                  # => inline css for emails
-gem 'search_cop'                    # => active model natural language search
-gem 'sidekiq'                       # => active_job processor
-gem 'silencer'                      # => silence noisy rails logging
-# gem 'simple_form'                 # => form markup generator
-gem 'stringex'                      # => string extensions
-gem 'strong_migrations'             # => protect from dangerous migrations
-gem 'validates'                     # => extended model validations
+gem "after_commit_everywhere"       # => after commit blocks
+gem "ar_lazy_preload"               # => lazy preloading associations
+gem "database_validations"          # => move validations to database
+gem "discard"                       # => soft delete support
+gem "fast_page"                     # => faster paging
+gem "feature_toggles"               # => feature flags
+gem "flutie"                        # => i18n title elements
+gem "groupdate"                     # => group queries by date
+gem "high_voltage"                  # => static pages
+gem "lograge"                       # => better logging
+gem "maintenance_tasks"             # => better tasks
+gem "oj"                            # => improved json
+gem "pagy"                          # => active model pagination
+gem "panko_serializer"              # => serialized models
+gem "premailer-rails"               # => inline css for emails
+gem "rack-attack"                   # => request throttler
+gem "rack-cors"                     # => CORs header manipulation for js access
+gem "retriable"                     # => safely retry blocks
+gem "search_cop"                    # => active model natural language search
+gem "store_attribute"               # => store typed attributes in JSON
+gem "store_model"                   # => store typed models in JSON
+gem "stringex"                      # => string extensions
+gem "strong_migrations"             # => protect from dangerous migrations
+gem "versionist"                    # => API versioning
+gem "view_component"                # => view components
+
+gem "silencer", require: ["silencer/rails/logger"]
+
+# IDs
+gem "public_uid"
+gem "nanoid"
+
+# Normalized Attributes
+gem "phony_rails"
+gem "name_of_person"
 
 # Custom Configs
-gem 'simple_rails_configurator'
+gem "simple_rails_configurator"
 
 # Slayer
-gem 'slayer', '0.5.0.beta'       # => a killer service layer
-gem 'slayer_rails', '0.5.0.beta' # => rails bindings for slayer
+gem "slayer", "~> 0.5"       # => a killer service layer
+gem "slayer_rails", "~> 0.5" # => rails bindings for slayer
 
 # Auth & Authorization
 # -------------------------------------
 
-gem 'devise'
-gem 'papers_please'
-gem 'tiddle'
+gem "devise"
+gem "papers_please"
+gem "pretender"
+# gem 'authtrail'
+
+# Geocoding
+# gem "geocoder"
+# gem "maxminddb"
 
 # Admin
-
-gem 'administrate'
+# -------------------------------------
+# gem 'administrate'
+# gem "administrate-field-active_storage"
 
 # Optional
 # -------------------------------------
@@ -73,75 +100,61 @@ gem 'administrate'
 # one of these gems, please be sure to read its
 # documentation to ensure proper setup.
 
-# gem 'action-store'            # => simple actions for models
-# gem 'acts-as-taggable-on'     # => tagging for models
-# gem 'acts_as_tenant'          # => simple tenanting
-# gem 'audited'                 # => audit logging
-# gem 'blazer'                  # => reporting dashboard
-# gem 'boring_presenters'       # => simple presentation
-# gem 'chewy'                   # => elastic-search indexing
-# gem 'country_select'          # => translated country dropdown
-# gem 'exception_notification'  # => Email Exceptions
-# gem 'field_test'              # => a/b testing
-# gem 'friendly_id'             # => friendly permalinks
-# gem 'globalize'               # => activerecord translations
-# gem 'mainstreet'              # => a standard address model
-# gem 'mini_magick'             # => image manipulation
-# gem 'money-rails',            # => money manipulation
-# gem 'pg_search'               # => pg-based search
-# gem 'phi_attrs'               # => phi logging and access control
-# gem 'pretender'               # => user impersonation
-# gem 'ranked-model'            # => sorting for models
-# gem 'ransack'                 # => ruby-based search
-# gem 'responders'              # => automated responders
-# gem 'rollbar'                 # => rollbar reporting
-# gem 'safely_block'            # => safely execute blocks
-# gem 'scenic'                  # => save views in schema.rb. Supports postgress by default and requires adapters for other dbms
-# gem 'scenic-mysql_adapter'    # => scenic if using mysql
-# gem 'stripe'                  # => interaction with Stripe
-# gem 'wicked_pdf'              # => PDF generation
+# gem 'active_storage_base64'       # => base64 attachments
+# gem 'active_storage_validations'  # => active storage validators
+# gem 'activerecord-import'         # => bulk import of models
+# gem 'audited'                     # => audit logging
+# gem 'blazer'                      # => reporting dashboard
+# gem 'blind_index'                 # => indexing on encrypted columns
+# gem 'chronic'                     # => date parsing
+# gem 'deep_cloneable'              # => active-record cloning
+# gem 'lockbox'                     # => column-level encryption
+# gem 'mini_magick'                 # => image manipulation
+# gem 'pay'                         # => payment processing
+# gem 'phi_attrs'                   # => phi logging and access control
+# gem 'ranked-model'                # => sorting for models
+# gem 'scenic-mysql_adapter'        # => scenic if using mysql
+# gem 'scenic'                      # => save views in schema.rb. Supports postgress by default and requires adapters for other dbms
+# gem 'simple_form'                 # => form markup generator
 
 # Environment Groups
 # -------------------------------------
-group :production do
-  gem 'uglifier'
-end
-
 group :development, :test do
-  gem 'bullet'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'prettier'
-  gem 'rename'
-  gem 'rspec-rails'
-  gem 'rubocop', require: false
-  gem 'rubocop-factory_bot', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'selenium-webdriver'
+  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  gem "dotenv-rails"
+  gem "factory_bot_instruments" # => debug factories
+  gem "factory_bot_rails"
+  gem "rspec_junit_formatter"
+  gem "rspec-rails"
+  gem "rubocop", require: false
+  gem "rubocop-factory_bot", require: false
+  gem "rubocop-i18n", require: false
+  gem "rubocop-performance", require: false
+  gem "standard", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'brakeman', require: false
-  # gem 'i18n-tasks' # Disabling to silence parser warning https://github.com/glebm/i18n-tasks/issues/472
-  gem 'letter_opener_web'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'rack-mini-profiler'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "brakeman", require: false
+  gem "database_consistency", require: false
+  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "rack-mini-profiler"
+  gem "rename"
+  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "spring"
+  gem "syntax_tree-haml"
+  gem "syntax_tree-rbs"
+  gem "syntax_tree"
+
+  # Temporary bugfix
+  gem "mutex_m", group: :development
 end
 
 group :test do
-  gem 'database_cleaner'
-  gem 'fuubar'
-  gem 'mocha'
-  gem 'response_code_matchers'
-  gem 'shoulda-matchers'
-  gem 'simplecov', require: false
-  gem 'timecop'
+  gem "database_cleaner"
+  gem "shoulda-matchers"
+  gem "parallel_tests"
+  gem "simplecov", require: false
 end
