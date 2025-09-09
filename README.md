@@ -105,13 +105,13 @@ If that's the case, you'll want to delete all of the following:
 
 ## The Containers
 
-If you look in `compose.yml` you'll notice that we've spun up a number of containers, not all of which may be useful for your project.
+If you look in `compose.yml`  and `compose.override.yml` (local) you'll notice that we've spun up a number of containers, not all of which may be useful for your project.
 
 1. **web**: Your core container which runs the `rails` server process.
-2. **worker**: A duplicate of your core app, but running `solid_queue` instead. [Disabled by Default]
-3. **vite**: A duplicate of your core app, but running `vite_rails` instead. [Disabled by Default]
+2. **worker**: A duplicate of your core app, but running `solid_queue` instead. [Disabled by Default as it runs in the puma process]
+3. **vite**: A duplicate of your core app, but running `vite_rails` instead.
 4. **postgres**: Your application's database.
-5. **mailhog**: Mailcatcher for preventing outbound emails from escaping.
+5. **mailhog**: Mail catcher for preventing outbound emails from escaping.
 
 To cleanup all containers, volumes and networks execute `docker compose down -v`
 
