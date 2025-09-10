@@ -127,11 +127,13 @@ group :development, :test do
   gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "rubocop", require: false
+  gem "rubocop-rails", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-i18n", require: false
   gem "rubocop-performance", require: false
   gem "standard", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
 end
 
 group :development do
