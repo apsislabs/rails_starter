@@ -167,6 +167,8 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     fast_page (0.1.6)
       activerecord
       activesupport
@@ -564,6 +566,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_instruments
   factory_bot_rails
+  faker
   fast_page
   feature_toggles
   flutie

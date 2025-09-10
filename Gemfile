@@ -122,6 +122,7 @@ gem "pretender"
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "dotenv-rails"
+  gem "faker"
   gem "factory_bot_instruments" # => debug factories
   gem "factory_bot_rails"
   gem "rspec_junit_formatter"
