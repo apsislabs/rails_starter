@@ -42,11 +42,13 @@ gem "feature_toggles"               # => feature flags
 gem "flutie"                        # => i18n title elements
 gem "groupdate"                     # => group queries by date
 gem "high_voltage"                  # => static pages
+gem "http_accept_language"          # => better locale headers
 gem "lograge"                       # => better logging
 gem "maintenance_tasks"             # => better tasks
 gem "oj"                            # => improved json
 gem "pagy"                          # => active model pagination
 gem "panko_serializer"              # => serialized models
+gem "phlex-rails"                   # => better views
 gem "premailer-rails"               # => inline css for emails
 gem "rack-attack"                   # => request throttler
 gem "rack-cors"                     # => CORs header manipulation for js access
@@ -57,7 +59,6 @@ gem "store_model"                   # => store typed models in JSON
 gem "stringex"                      # => string extensions
 gem "strong_migrations"             # => protect from dangerous migrations
 gem "versionist"                    # => API versioning
-gem "view_component"                # => view components
 
 gem "silencer", require: ["silencer/rails/logger"]
 
@@ -106,8 +107,8 @@ gem "pretender"
 # gem 'audited'                     # => audit logging
 # gem 'blazer'                      # => reporting dashboard
 # gem 'blind_index'                 # => indexing on encrypted columns
-# gem 'chronic'                     # => date parsing
 # gem 'deep_cloneable'              # => active-record cloning
+# gem 'chronic'                     # => date parsing
 # gem 'lockbox'                     # => column-level encryption
 # gem 'mini_magick'                 # => image manipulation
 # gem 'pay'                         # => payment processing
@@ -122,16 +123,19 @@ gem "pretender"
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "dotenv-rails"
+  gem "faker"
   gem "factory_bot_instruments" # => debug factories
   gem "factory_bot_rails"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "rubocop", require: false
+  gem "rubocop-rails", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-i18n", require: false
   gem "rubocop-performance", require: false
   gem "standard", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
 end
 
 group :development do
