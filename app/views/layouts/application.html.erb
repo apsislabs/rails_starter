@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= page_title %></title>
 
@@ -21,7 +21,9 @@
     <%= vite_typescript_tag 'application' %>
   </head>
 
-  <body>
+  <body class="<%= body_class %>">
     <%= yield %>
+
+    <%= yield :modals %>
   </body>
 </html>

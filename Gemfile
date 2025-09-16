@@ -47,6 +47,7 @@ gem "maintenance_tasks"             # => better tasks
 gem "oj"                            # => improved json
 gem "pagy"                          # => active model pagination
 gem "panko_serializer"              # => serialized models
+gem "phlex-rails"                   # => better views
 gem "premailer-rails"               # => inline css for emails
 gem "rack-attack"                   # => request throttler
 gem "rack-cors"                     # => CORs header manipulation for js access
@@ -57,7 +58,6 @@ gem "store_model"                   # => store typed models in JSON
 gem "stringex"                      # => string extensions
 gem "strong_migrations"             # => protect from dangerous migrations
 gem "versionist"                    # => API versioning
-gem "view_component"                # => view components
 
 gem "silencer", require: ["silencer/rails/logger"]
 
@@ -106,8 +106,8 @@ gem "pretender"
 # gem 'audited'                     # => audit logging
 # gem 'blazer'                      # => reporting dashboard
 # gem 'blind_index'                 # => indexing on encrypted columns
-# gem 'chronic'                     # => date parsing
 # gem 'deep_cloneable'              # => active-record cloning
+# gem 'chronic'                     # => date parsing
 # gem 'lockbox'                     # => column-level encryption
 # gem 'mini_magick'                 # => image manipulation
 # gem 'pay'                         # => payment processing
