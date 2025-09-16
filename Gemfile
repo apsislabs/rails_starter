@@ -42,6 +42,7 @@ gem "feature_toggles"               # => feature flags
 gem "flutie"                        # => i18n title elements
 gem "groupdate"                     # => group queries by date
 gem "high_voltage"                  # => static pages
+gem "http_accept_language"          # => better locale headers
 gem "lograge"                       # => better logging
 gem "maintenance_tasks"             # => better tasks
 gem "oj"                            # => improved json

@@ -30,6 +30,8 @@ module RailsStarter
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.i18n.available_locales = %w(en)
+
     # Connection pool and concurrency configuration
     config.x.default_web_concurrency = Rails.env.production? ? ((Concurrent.processor_count * 2) + 1) : 0
     config.x.web_concurrency =
