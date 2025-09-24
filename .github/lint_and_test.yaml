@@ -48,6 +48,22 @@ jobs:
               - '**/*.yaml'
             terraform:
               - 'terraform/**'
+  lint_ruby:
+    name: Run Ruby Linters
+    if: ${{ needs.changes.outputs.ruby == 'true' }}
+    needs: [changes]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+
+      - name: Rubocop
+        run: |
+          bundle exec rubocop
   lint_js:
     name: Run JS Linters
     if: ${{ needs.changes.outputs.js == 'true' }}

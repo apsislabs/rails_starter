@@ -1,4 +1,3 @@
-
 if Rails.env.development?
   require "rack-mini-profiler"
 

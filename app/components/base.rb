@@ -5,6 +5,7 @@ class Components::Base < Phlex::HTML
   include Phlex::Rails::Helpers::Routes
 
   if Rails.env.development?
+    # rubocop:disable Rails/OutputSafety
     def before_template
       comment { "<#{self.class.name}>".html_safe }
       super
@@ -14,5 +15,6 @@ class Components::Base < Phlex::HTML
       super
       comment { "</#{self.class.name}>".html_safe }
     end
+    # rubocop:enable Rails/OutputSafety
   end
 end

@@ -4,11 +4,10 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def parent_layout(layout)
-    @view_flow.set(:layout, output_buffer)
+    @view_flow.set(:layout, output_buffer)  # rubocop:todo Rails/HelperInstanceVariable
     output = render(template: layout)
     self.output_buffer = ActionView::OutputBuffer.new(output)
   end
-
 
   def active_link_to(name = nil, options = nil, html_options = nil, &block)
     active_class = html_options[:active] || "active"
