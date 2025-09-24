@@ -17,6 +17,8 @@ module RailsStarter
       g.orm :active_record, primary_key_type: :uuid
     end
 
+    config.display_env = ENV.fetch("DISPLAY_ENV", "production")
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
