@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, path: 'auth', skip: [:registrations, :sessions]
+  devise_for :users, path: "auth", skip: [:registrations, :sessions]
 
   devise_scope :user do
-    get    '/login',  to: 'devise/sessions#new',     as: :new_user_session
-    post   '/login',  to: 'devise/sessions#create',  as: :user_session
-    delete '/logout', to: 'devise/sessions#destroy', as: :destroy_user_session
+    get "/login", to: "devise/sessions#new", as: :new_user_session
+    post "/login", to: "devise/sessions#create", as: :user_session
+    delete "/logout", to: "devise/sessions#destroy", as: :destroy_user_session
 
-    get    '/signup', to: 'devise/registrations#new', as: :new_user_registration
-    post   '/signup', to: 'devise/registrations#create', as: :user_registration
+    get "/signup", to: "devise/registrations#new", as: :new_user_registration
+    post "/signup", to: "devise/registrations#create", as: :user_registration
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

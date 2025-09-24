@@ -17,6 +17,8 @@ module RailsStarter
       g.orm :active_record, primary_key_type: :uuid
     end
 
+    config.display_env = ENV.fetch("DISPLAY_ENV", "production")
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
@@ -30,7 +32,7 @@ module RailsStarter
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.i18n.available_locales = %w(en)
+    config.i18n.available_locales = %w[en]
 
     # Connection pool and concurrency configuration
     config.x.default_web_concurrency = Rails.env.production? ? ((Concurrent.processor_count * 2) + 1) : 0

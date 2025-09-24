@@ -9,8 +9,8 @@ require "cgi"
 # Extracted here for Ruby 3 compatibility with the URI library.
 # Source: https://github.com/dball/data_uri
 class DataUri
-  COMPONENT     = %i[scheme opaque].freeze
-  MIME_TYPE_RE  = %r{\A([-\w.+]+/[-\w.+]*)}
+  COMPONENT = %i[scheme opaque].freeze
+  MIME_TYPE_RE = %r{\A([-\w.+]+/[-\w.+]*)}
   MIME_PARAM_RE = /\A;([-\w.+]+)=([^;,]+)/
 
   attr_reader :content_type, :data, :mime_params
@@ -26,13 +26,13 @@ class DataUri
 
   def self.build(arg)
     data, content_type = case arg
-                         when IO
-                           [arg, nil]
-                         when Hash
-                           [arg[:data], arg[:content_type]]
-                         else
-                           raise "Invalid build argument: #{arg.inspect}"
-                         end
+    when IO
+      [arg, nil]
+    when Hash
+      [arg[:data], arg[:content_type]]
+    else
+      raise "Invalid build argument: #{arg.inspect}"
+    end
 
     raise "Missing data for DataUri.build" unless data
 

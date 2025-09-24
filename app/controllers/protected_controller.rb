@@ -9,7 +9,8 @@ class ProtectedController < ApplicationController
   private
 
   def check_setup!
-    return if true
-    redirect_to root_path
+    return
+    # TODO: This is unreachable. Need to fix.
+    redirect_to root_path # rubocop:todo Lint/UnreachableCode
   end
 end

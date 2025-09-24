@@ -5,6 +5,7 @@ module Discardable
 
   included do
     include Discard::Model
+
     default_scope -> { kept }
   end
 end

@@ -8,9 +8,7 @@ module PublicUid
         @prefix = prefix
       end
 
-      def generate
-        Tokenator.generate
-      end
+      delegate :generate, to: :Tokenator
     end
   end
 end
