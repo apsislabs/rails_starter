@@ -1,0 +1,50 @@
+#!/bin/bash
+
+ex=0
+
+if ! command -v terraform &> /dev/null
+then
+  echo "Terraform not found in your path. Please run:"
+  if [ "$(uname)" == "Darwin" ]; then
+    echo "$ brew install terraform"
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "$ apt-get install terraform"
+  fi
+  ex=1
+fi
+
+if ! command -v tflint &> /dev/null
+then
+  echo "TFLint not found in your path. Please run:"
+  if [ "$(uname)" == "Darwin" ]; then
+    echo "$ brew install tflint"
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "$ curl -L "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip && rm tflint.zip"
+  fi
+  ex=1
+fi
+
+if ! command -v tfsec &> /dev/null
+then
+  echo "Trivy not found in your path. Please run:"
+  if [ "$(uname)" == "Darwin" ]; then
+    echo "$ brew install trivy"
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "$ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.64.0-17-g482d38397"
+  fi
+  ex=1
+fi
+
+if [ $ex -eq 1 ]
+then
+  exit 1
+fi
+
+echo "Running Terraform Formatter (check)"
+terraform fmt -check -recursive terraform
+
+echo "Running Terraform Linter"
+tflint --recursive --chdir terraform
+
+echo "Running Terraform Security Check"
+trivy config ./terraform --ignorefile ./terraform/.trivyignore

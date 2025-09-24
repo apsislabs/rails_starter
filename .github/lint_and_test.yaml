@@ -1,0 +1,93 @@
+name: Lint and Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: test-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    outputs:
+      ruby: ${{ steps.filter.outputs.ruby }}
+      js: ${{ steps.filter.outputs.js }}
+      terraform: ${{ steps.filter.outputs.terraform }}
+    steps:
+      - uses: actions/checkout@v5
+      # For pull requests it's not necessary to checkout the code, for main it is
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            ruby:
+              - 'app/**'
+              - 'config/**'
+              - 'lib/**'
+              - 'db/**'
+              - 'spec/**'
+              - 'vendor/**'
+              - 'Gemfile'
+              - 'Gemfile.lock'
+            js:
+              - 'frontend/**'
+              - 'package.json'
+              - 'package-lock.json'
+            terraform:
+              - 'terraform/**'
+  terraform_format:
+    name: Run Terraform Formatting
+    if: ${{ needs.changes.outputs.terraform == 'true' }}
+    needs: [changes]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+      - name: Run terraform fmt
+        working-directory: terraform
+        run: terraform fmt -check -recursive .
+  terraform_tflint:
+    name: Run Terraform Linting
+    if: ${{ needs.changes.outputs.terraform == 'true' }}
+    needs: [changes]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup TFLint
+        with:
+          tflint_version: v0.44.1
+      - name: Show version
+        run: tflint --version
+      - name: Init TFLint
+        run: tflint --init
+        env:
+          # https://github.com/terraform-linters/tflint/blob/master/docs/user-guide/plugins.md#avoiding-rate-limiting
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Run TFLint
+        working-directory: terraform
+        run: tflint --recursive -f compact
+  terraform_trivy:
+    name: Run Terraform Security
+    if: ${{ needs.changes.outputs.terraform == 'true' }}
+    needs: [changes]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "config"
+          scan-ref: "./terraform"
+          trivy-config: "./terraform/trivy.yaml"
+          trivyignores: "./terraform/.trivyignore"
