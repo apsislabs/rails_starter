@@ -12,7 +12,6 @@ amazon:
   endpoint: <%= ENV.fetch("S3_URL") { "" } %>
   region: <%= ENV.fetch("AWS_REGION") { "" } %>
   bucket: <%= ENV.fetch("AWS_BUCKET_NAME") { "" } %>
-
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS

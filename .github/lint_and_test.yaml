@@ -43,8 +43,28 @@ jobs:
               - 'frontend/**'
               - 'package.json'
               - 'package-lock.json'
+              - '**/*.html'
+              - '**/*.yml'
+              - '**/*.yaml'
             terraform:
               - 'terraform/**'
+  lint_js:
+    name: Run JS Linters
+    if: ${{ needs.changes.outputs.js == 'true' }}
+    needs: [changes]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+      - name: Install
+        run: |
+          npm ci
+      - name: Prettier
+        run: |
+          npm run prettier:check
   terraform_format:
     name: Run Terraform Formatting
     if: ${{ needs.changes.outputs.terraform == 'true' }}

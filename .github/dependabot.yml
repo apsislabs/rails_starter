@@ -13,14 +13,14 @@ updates:
       production-dependencies:
         dependency-type: "production"
         update-types:
-        - "minor"
-        - "patch"
+          - "minor"
+          - "patch"
       development-dependencies:
         applies-to: version-updates
         dependency-type: development
         update-types:
-        - "minor"
-        - "patch"
+          - "minor"
+          - "patch"
       react-dom:
         patterns:
           - "react-dom"

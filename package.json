@@ -2,9 +2,9 @@
   "name": "STARTER_REPLACE_NAME",
   "private": true,
   "scripts": {
-    "prettier:ruby": "prettier --cache --write '{app,spec,config,lib}/**/*.rb'",
-    "prettier:ruby:check": "prettier --cache --check '{app,spec,config,lib}/**/*.rb'",
-    "prettier:ruby:nocache": "prettier --write '{app,spec,config,lib}/**/*.rb'",
+    "prettier": "prettier --cache --write '**/*.{ts,js,tsx,jsx,css,scss,html,yml,yaml,json}'",
+    "prettier:check": "prettier --cache --check '**/*.{ts,js,tsx,jsx,css,scss,html,yml,yaml,json}'",
+    "prettier:nocache": "prettier --write '**/*.{ts,js,tsx,jsx,css,scss,html,yml,yaml,json}'",
     "prettier:precommit": "prettier --write --ignore-unknown"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
 module.exports = {
   printWidth: 140,
-  plugins: ["@prettier/plugin-ruby"]
+  plugins: ["@prettier/plugin-ruby"],
 };
