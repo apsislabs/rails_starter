@@ -56,7 +56,6 @@ gem "retriable"                     # => safely retry blocks
 gem "search_cop"                    # => active model natural language search
 gem "store_attribute"               # => store typed attributes in JSON
 gem "store_model"                   # => store typed models in JSON
-gem "stringex"                      # => string extensions
 gem "strong_migrations"             # => protect from dangerous migrations
 gem "versionist"                    # => API versioning
 

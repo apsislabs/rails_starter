@@ -495,7 +495,6 @@ GEM
       activerecord (>= 6.1)
     store_model (4.1.0)
       activerecord (>= 7.0)
-    stringex (2.8.6)
     stringio (3.1.7)
     strong_migrations (2.5.0)
       activerecord (>= 7.1)
@@ -628,7 +627,6 @@ DEPENDENCIES
   standard
   store_attribute
   store_model
-  stringex
   strong_migrations
   syntax_tree
   syntax_tree-haml
@@ -638,4 +636,4 @@ DEPENDENCIES
   vite_rails
 
 BUNDLED WITH
-   2.5.21
+   2.7.2
