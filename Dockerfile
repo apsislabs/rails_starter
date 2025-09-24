@@ -89,4 +89,4 @@ RUN addgroup -g 1001 -S rails && \
 USER rails
 
 EXPOSE 3000
-CMD ["bin/rails", "s", "-b", "0.0.0.0", "-e", "production"]
+CMD ["docker/start.sh"]
