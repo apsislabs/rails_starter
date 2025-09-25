@@ -1,3 +1,2 @@
 # Add any filters to globally ignore from security checks
 # https://trivy.dev/latest/docs/configuration/filtering/#trivyignore
-AVD-AZU-0017 # optional expiration date on secrets
