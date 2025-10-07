@@ -90,7 +90,7 @@ gem "pretender"
 
 # Admin
 # -------------------------------------
-# gem 'administrate'
+gem 'administrate', '1.0.0.beta3'
 # gem "administrate-field-active_storage"
 
 # Optional
