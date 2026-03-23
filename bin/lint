@@ -30,7 +30,9 @@ then
   if [ "$(uname)" == "Darwin" ]; then
     echo "$ brew install trivy"
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    echo "$ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.64.0-17-g482d38397"
+    echo "See https://trivy.dev/docs/latest/getting-started/installation/ for latest install"
+    # 6fb20c8edd70745d6b34bff0387b53b03c8a760a == v0.69.3
+    echo "$ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/6fb20c8edd70745d6b34bff0387b53b03c8a760a/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.69.3"
   fi
   ex=1
 fi
