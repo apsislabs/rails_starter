@@ -174,7 +174,7 @@ GEM
       activesupport
     feature_toggles (1.2.1)
     ffi (1.17.0)
-    flutie (2.2.0)
+    flutie (2.2.1)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
