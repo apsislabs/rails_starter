@@ -21,4 +21,4 @@ AllCops:
     - "db/migrate/**/*"
     - "config/initializers/content_security_policy.rb"
     - "spec/spec_helper.rb"
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.4
