@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include Pagy::Frontend
+  include Pagy::Method
 
   def parent_layout(layout)
     @view_flow.set(:layout, output_buffer)  # rubocop:todo Rails/HelperInstanceVariable

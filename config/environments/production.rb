@@ -78,8 +78,6 @@ Rails.application.configure do
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = {database: {writing: :queue}}
 
-  config.solid_queue.connects_to = {database: {writing: :queue}}
-
   # config.active_job.queue_name_prefix = "rails_starter_production"
 
   Rails.application.routes.default_url_options = {
@@ -98,7 +96,9 @@ Rails.application.configure do
     address: ENV.fetch("SMTP_HOST") { "email-smtp.us-west-2.amazonaws.com" },
     port: ENV.fetch("SMTP_PORT") { 587 },
     user_name: ENV.fetch("SMTP_USERNAME") { "postmaster@mg.apsis.io" },
-    password: ENV.fetch("SMTP_PASSWORD") { "password" }
+    password: ENV.fetch("SMTP_PASSWORD") { "password" },
+    authentication: :login,
+    enable_starttls_auto: true
   }
 
   config.action_mailer.logger = nil

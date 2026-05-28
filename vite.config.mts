@@ -14,7 +14,8 @@ export default defineConfig({
         DISPLAY_ENV: "development",
       },
       fullReload: {
-        additionalPaths: [],
+        additionalPaths: ["config/routes.rb", "app/views/**/*"],
+        delay: 300,
       },
     }),
   ],

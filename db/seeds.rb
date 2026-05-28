@@ -1,39 +1,59 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# frozen_string_literal: true
+
+# This file should ensure the existence of records required to run the application
+# in every environment. Keep it idempotent.
 #
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Load with:
+#   bin/rails db:seed
 
-require 'faker'
-require 'factory_bot_rails'
-include FactoryBot::Syntax::Methods
+class Seeder
+  DEFAULT_USERS = [
+    {
+      email: "admin@apsis.io",
+      password: "admin",
+      first_name: "Admin",
+      last_name: "Apsis"
+    }
+  ].freeze
 
-def seed
-  logger.info "Seeding database..."
+  def self.run
+    new.run
+  end
 
-  logger.info "Seeding users..."
-  seed_user("admin@apsis.io", 'admin', 'Admin', 'Apsis')
+  def run
+    logger.info "Seeding database..."
 
-  logger.info "Done"
+    logger.info "Seeding users..."
+    DEFAULT_USERS.each do |attributes|
+      seed_user(**attributes)
+    end
+
+    logger.info "Done"
+  end
+
+  private
+
+  def seed_user(email:, password:, first_name:, last_name:)
+    existing = User.find_by(email:)
+    return existing.account if existing
+
+    account = Account.new(first_name:, last_name:)
+    account.save!(validate: false)
+
+    User.create!(
+      account:,
+      email:,
+      password:,
+      password_confirmation: password,
+      confirmed_at: Time.current
+    )
+  end
+
+  def logger
+    @logger ||= ActiveSupport::TaggedLogging
+      .new(Logger.new($stdout))
+      .tagged("SEEDS")
+  end
 end
 
-def seed_user(email, pw, first_name, last_name)
-  existing = User.find_by(email: email)
-  return existing.account if existing
-
-  account = Account.new({first_name: , last_name:})
-  account.save(validate: false)
-
-  user = User.new({ account: account, email: email, password: pw, confirmed_at: Time.zone.now })
-  user.save(validate: false)
-end
-
-def logger
-  @logger ||= ActiveSupport::TaggedLogging.new(Logger.new(STDOUT)).tagged("SEEDS")
-end
-
-seed()
+Seeder.run

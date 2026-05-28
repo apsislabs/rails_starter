@@ -8,6 +8,7 @@ module PubliclyIdentifiable
   included do
     def self.publicly_identify(prefix: nil)
       include PublicUid::ModelConcern
+      extend FriendlyId
 
       generate_public_uid generator: PublicUid::Generators::TokenGenerator.new(prefix: prefix ? "#{prefix}_" : nil)
 
@@ -15,12 +16,11 @@ module PubliclyIdentifiable
       before_validation :ensure_public_uid!, if: -> { public_uid.blank? }
 
       validates :public_uid, presence: true
-    end
+      friendly_id :public_uid
 
-    # Reset to use the default ID as our routing param
-    # because Friendly ID does some nonsense
-    def to_param
-      id.to_s
+      define_method :to_param do
+        public_uid.to_s
+      end
     end
 
     protected

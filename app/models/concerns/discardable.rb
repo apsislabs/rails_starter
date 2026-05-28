@@ -7,5 +7,7 @@ module Discardable
     include Discard::Model
 
     default_scope -> { kept }
+
+    alias_method :discarded, :discarded?
   end
 end

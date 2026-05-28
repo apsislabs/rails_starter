@@ -15,23 +15,42 @@ module ParamsHelper
     end
 
     def date_param(key, default: nil)
-      JsonDateParser.parse_date(params[key]).presence || default
+      Timeliness.parse(params[key], :date).presence || default
     end
 
     def datetime_param(key, default: nil)
-      JsonDateParser.parse_datetime(params[key]).presence || default
+      Timeliness.parse(params[key], :datetime).presence || default
+    end
+
+    def time_param(key, default: nil)
+      Timeliness.parse(params[key], :time).presence || default
     end
 
     def page_param
-      params[Pagy::DEFAULT[:page_param]].presence || 1
+      params[:page].presence || 1
     end
 
     def per_param
-      params[Pagy::DEFAULT[:limit_param]].presence || Pagy::DEFAULT[:limit]
+      params[:per].presence || 10
+    end
+
+    def sort_param
+      params[:sort]
+    end
+
+    def sort_dir_param
+      case params[:dir]&.to_s&.downcase
+      when "asc" then :asc
+      when "desc" then :desc
+      end
     end
 
     def search_param
       params[:q].presence || params[:search].presence
+    end
+
+    def for_param
+      params[:for].presence
     end
 
     def file_from_data_uri(base64)
@@ -49,8 +68,8 @@ module ParamsHelper
       @locale_param ||= params[:locale] || I18n.default_locale
     end
 
-    def disposition
-      params[:disposition]
+    def disposition_param
+      params[:disposition].presence || :inline
     end
   end
 end
