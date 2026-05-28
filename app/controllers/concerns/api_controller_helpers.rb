@@ -13,7 +13,15 @@ module ApiControllerHelpers
     rescue_from PapersPlease::AccessDenied, with: :rescue_403
     prepend_before_action :set_default_response_format
 
-    protected
+    def render_success(data:, meta: nil, status: :ok, data_key: :data)
+      render json: format_success(data:, meta:, status:, data_key:), status:
+    end
+
+    def format_success(data: {}, meta: nil, status: :ok, data_key: :data)
+      {:success => true, :status => status, data_key.to_sym => data, :meta => meta}
+    end
+
+    private
 
     def set_default_response_format
       request.format = :json if request.format.blank?

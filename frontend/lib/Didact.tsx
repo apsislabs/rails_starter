@@ -13,11 +13,13 @@ const identifierForGlobKey = (key: string): string | undefined => {
 // this will parse the import path key into a valid name,
 // and then use the default export from the module as the
 // react component.
-export const registerApps = (app: Didact, glob: Record<string, any>) => {
+export const registerApps = (app: Didact, glob: Record<string, unknown>) => {
   const definitions = Object.entries(glob)
     .map(([path, componentModule]) => {
       const name = identifierForGlobKey(path);
-      const component = (componentModule as any).default ?? componentModule;
+      const component =
+        (componentModule as { default?: React.ElementType }).default ??
+        componentModule;
 
       if (name && typeof component === "function") {
         return { name, component };
@@ -29,8 +31,8 @@ export const registerApps = (app: Didact, glob: Record<string, any>) => {
 };
 
 export class Didact {
-  cache: Map<Element, Root> = new Map();
-  componentLibrary: Map<string, any> = new Map();
+  private cache: Map<Element, Root> = new Map();
+  private componentLibrary: Map<string, unknown> = new Map();
 
   static init() {
     return new Didact();
@@ -47,44 +49,53 @@ export class Didact {
     apps.forEach((app) => this.register(app.component, app.name));
   }
 
-  register(component: any, name: string) {
+  register(component: unknown, name: string) {
     this.componentLibrary.set(name, component);
   }
 
   render() {
-    [...this.componentLibrary].map(([appName, appComponent]) => {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          mutation.addedNodes.forEach((node) => {
-            if (node instanceof Element) {
-              this.mount(appName, node, appComponent);
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof Element) {
+            for (const [name, comp] of this.componentLibrary) {
+              try {
+                this.mount(name, node, comp as React.ElementType);
+              } catch (e) {
+                console.error(`[didact] error mounting "${name}"`, e);
+              }
             }
-          });
+          }
+        });
 
-          mutation.removedNodes.forEach((node) => {
-            if (node instanceof Element) {
-              this.unmount(appName, node);
+        mutation.removedNodes.forEach((node) => {
+          if (node instanceof Element) {
+            for (const [name] of this.componentLibrary) {
+              this.unmount(name, node);
             }
-          });
+          }
         });
       });
-
-      observer.observe(document, {
-        childList: true,
-        subtree: true,
-      });
-
-      document.addEventListener("unload", () => {
-        observer.disconnect();
-        this.unmountAll();
-      });
-
-      this.mount(appName, document.body, appComponent);
     });
+
+    observer.observe(document, { childList: true, subtree: true });
+
+    document.addEventListener("pagehide", () => {
+      observer.disconnect();
+      this.unmountAll();
+    });
+
+    for (const [name, comp] of this.componentLibrary) {
+      this.mount(name, document.body, comp as React.ElementType);
+    }
   }
 
   getAppNodes(appName: string, el: Element) {
-    return el.querySelectorAll(`[data-app='${appName}']`);
+    const descendants = [
+      ...el.querySelectorAll(`[data-app='${appName}']`),
+    ];
+    if (el.matches(`[data-app='${appName}']`)) descendants.unshift(el);
+    return descendants;
   }
 
   mount(appName: string, el: Element, Component: React.ElementType) {
@@ -92,15 +103,29 @@ export class Didact {
 
     appNodes.forEach((n) => {
       if (!this.cache.has(n)) {
+        const props: Record<string, string> = {};
+        for (let i = 0; i < n.attributes.length; i++) {
+          const attr = n.attributes[i];
+          if (attr.name.startsWith("data-") && attr.name !== "data-app") {
+            const propName = attr.name
+              .slice(5)
+              .replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+            props[propName] = attr.value;
+          }
+        }
+
         const root = createRoot(n);
-
-        root.render(
-          <StrictMode>
-            <Component />
-          </StrictMode>,
-        );
-
-        this.cache.set(n, root);
+        try {
+          root.render(
+            <StrictMode>
+              <Component {...props} />
+            </StrictMode>,
+          );
+          this.cache.set(n, root);
+        } catch (e) {
+          root.unmount();
+          throw e;
+        }
       }
     });
   }
@@ -110,21 +135,30 @@ export class Didact {
 
     appNodes.forEach((n) => {
       if (this.cache.has(n)) {
-        this.cache.get(n)?.unmount();
-        this.cache.delete(n);
+        try {
+          this.cache.get(n)?.unmount();
+        } finally {
+          this.cache.delete(n);
+        }
       }
     });
   }
 
   unmountAll() {
-    for (const [node, root] of this.cache) {
-      root.unmount();
-      this.cache.delete(node);
+    try {
+      for (const root of this.cache.values()) {
+        try {
+          root.unmount();
+        } catch (e) {
+          console.error("[didact] error unmounting root", e);
+        }
+      }
+    } finally {
+      this.cache.clear();
     }
   }
 }
 
-// Utility function for awaiting dom ready event
 function domReady() {
   return new Promise<void>((resolve) => {
     if (document.readyState == "loading") {

@@ -1,5 +1,7 @@
 # Multi-stage build for better caching and smaller images
-FROM public.ecr.aws/docker/library/ruby:3.4-alpine3.22 AS base
+FROM node:24-alpine AS node
+
+FROM public.ecr.aws/docker/library/ruby:4.0-alpine3.22 AS base
 
 ENV APP_HOME="/app"
 ENV BUNDLE_BIN="/bundle/bin"
@@ -27,16 +29,21 @@ RUN apk add --update --no-cache \
     imagemagick-jpeg \
     imagemagick-pdf \
     msttcorefonts-installer \
-    nodejs \
-    npm \
     libpq-dev \
     postgresql16-dev \
+    postgresql16-client \
     vips-dev \
     yaml-dev \
     && rm -rf /var/cache/apk/*
 
 # Gems and bundler - only changes when versions change
-RUN gem update --system && gem install bundler:2.5.21
+RUN gem update --system && gem install bundler:2.7.2
+
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/share /usr/local/share
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
 
 # Development stage
 FROM base AS development
@@ -78,8 +85,8 @@ COPY ./docker/confs/minimagick-policy.xml /etc/ImageMagick-6/
 # Copy application code
 COPY . $APP_HOME/
 
-# Precompile assets if needed
-RUN bundle exec rails assets:precompile
+# Precompile assets
+RUN SECRET_KEY_BASE=abc RAILS_ENV=production bundle exec rails assets:precompile
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S rails && \

@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module RailsStarter
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

@@ -5,20 +5,30 @@
     "prettier": "prettier --cache --write '**/*.{ts,js,tsx,jsx,css,scss,html,yml,yaml,json}'",
     "prettier:check": "prettier --cache --check '**/*.{ts,js,tsx,jsx,css,scss,html,yml,yaml,json}'",
     "prettier:nocache": "prettier --write '**/*.{ts,js,tsx,jsx,css,scss,html,yml,yaml,json}'",
-    "prettier:precommit": "prettier --write --ignore-unknown"
+    "prettier:precommit": "prettier --write --ignore-unknown",
+    "lint": "eslint frontend",
+    "test": "vitest run",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@prettier/plugin-ruby": "^4.0.4",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^5.0.1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-import": "^2.32.0",
     "prettier": "^3.6.2",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "stimulus-vite-helpers": "^3.1.0",
-    "vite": "^7.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0",
+    "vite": "^8.0.14",
     "vite-plugin-full-reload": "^1.2.0",
     "vite-plugin-rails": "^0.5.0",
-    "vite-plugin-ruby": "^5.1.1",
-    "vite-plugin-stimulus-hmr": "^3.0.0"
+    "vite-plugin-ruby": "^5.2.2",
+    "vite-plugin-stimulus-hmr": "^3.0.0",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",

@@ -110,4 +110,7 @@ Rails.application.configure do
 
   # BetterErrors
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+
+  # Allow requests from any host (needed for Docker-based dev environments)
+  config.hosts.clear
 end

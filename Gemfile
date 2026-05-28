@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 8.0"
+gem "rails", "~> 8.1"
 
 # Defaults
 # -------------------------------------
@@ -57,6 +57,8 @@ gem "search_cop"                    # => active model natural language search
 gem "store_attribute"               # => store typed attributes in JSON
 gem "store_model"                   # => store typed models in JSON
 gem "strong_migrations"             # => protect from dangerous migrations
+gem "typical_situation"             # => typical controller setup
+gem "typical_sort"                  # => typical controller sorting
 gem "versionist"                    # => API versioning
 
 gem "silencer", require: ["silencer/rails/logger"]
@@ -64,10 +66,12 @@ gem "silencer", require: ["silencer/rails/logger"]
 # IDs
 gem "public_uid"
 gem "nanoid"
+gem "friendly_id"
 
 # Normalized Attributes
 gem "phony_rails"
 gem "name_of_person"
+gem "timeliness"
 
 # Custom Configs
 gem "simple_rails_configurator"
