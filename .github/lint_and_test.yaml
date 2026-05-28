@@ -121,7 +121,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: trivy
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: "config"
           scan-ref: "./terraform"
