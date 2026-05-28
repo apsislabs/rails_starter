@@ -17,9 +17,7 @@ export const registerApps = (app: Didact, glob: Record<string, unknown>) => {
   const definitions = Object.entries(glob)
     .map(([path, componentModule]) => {
       const name = identifierForGlobKey(path);
-      const component =
-        (componentModule as { default?: React.ElementType }).default ??
-        componentModule;
+      const component = (componentModule as { default?: React.ElementType }).default ?? componentModule;
 
       if (name && typeof component === "function") {
         return { name, component };
@@ -91,9 +89,7 @@ export class Didact {
   }
 
   getAppNodes(appName: string, el: Element) {
-    const descendants = [
-      ...el.querySelectorAll(`[data-app='${appName}']`),
-    ];
+    const descendants = [...el.querySelectorAll(`[data-app='${appName}']`)];
     if (el.matches(`[data-app='${appName}']`)) descendants.unshift(el);
     return descendants;
   }
@@ -107,9 +103,7 @@ export class Didact {
         for (let i = 0; i < n.attributes.length; i++) {
           const attr = n.attributes[i];
           if (attr.name.startsWith("data-") && attr.name !== "data-app") {
-            const propName = attr.name
-              .slice(5)
-              .replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+            const propName = attr.name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
             props[propName] = attr.value;
           }
         }
