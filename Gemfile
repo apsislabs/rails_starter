@@ -146,7 +146,7 @@ group :development do
   gem "binding_of_caller"
   gem "brakeman", require: false
   gem "database_consistency", require: false
-  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "listen", ">= 3.0.5", "< 3.11"
   gem "rack-mini-profiler"
   gem "rename"
   gem "spring-watcher-listen", "~> 2.0.0"
