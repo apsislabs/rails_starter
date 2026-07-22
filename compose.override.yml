@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - bundle_cache:/bundle
       - vite_dev:/app/public/vite-dev
       - vite_test:/app/public/vite-test
 
@@ -24,6 +25,7 @@ services:
       - "3036:3036"
     volumes:
       - .:/app
+      - bundle_cache:/bundle
       - vite_dev:/app/public/vite-dev
       - vite_test:/app/public/vite-test
 
@@ -34,5 +36,6 @@ services:
       - "8025:8025"
 
 volumes:
+  bundle_cache:
   vite_dev:
   vite_test:
