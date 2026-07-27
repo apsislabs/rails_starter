@@ -9,7 +9,7 @@ x-base: &app_base
     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
     - POSTGRES_URL=${POSTGRES_URL:-postgres}
     - DISPLAY_ENV=${DISPLAY_ENV:-${RAILS_ENV:-development}}
-    - RAILS_ENV=${RAILS_ENV:-development}
+    - RAILS_ENV
     - VITE_RUBY_HOST=${VITE_HOST:-vite}
     - SECRET_KEY_BASE
     - APP_PROTOCOL
