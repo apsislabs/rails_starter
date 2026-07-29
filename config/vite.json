@@ -1,7 +1,7 @@
 {
   "all": {
     "sourceCodeDir": "frontend",
-    "watchAdditionalPaths": [],
+    "watchAdditionalPaths": ["app/components/**/*", "app/views/**/*"],
     "host": "0.0.0.0"
   },
   "development": {

@@ -160,6 +160,7 @@ GEM
       railties (>= 6.1)
     drb (2.2.3)
     dry-cli (1.4.1)
+    dry-initializer (3.2.0)
     erb (6.0.4)
     erubi (1.13.1)
     et-orbi (1.4.0)
@@ -180,6 +181,7 @@ GEM
     feature_toggles (1.2.1)
     ffi (1.17.4)
     ffi (1.17.4-aarch64-linux-musl)
+    ffi (1.17.4-arm64-darwin)
     flutie (2.2.1)
     friendly_id (5.7.0)
       activerecord (>= 4.0.0)
@@ -261,6 +263,8 @@ GEM
     nio4r (2.7.5)
     nokogiri (1.19.3-aarch64-linux-musl)
       racc (~> 1.4)
+    nokogiri (1.19.3-arm64-darwin)
+      racc (~> 1.4)
     oj (3.17.1)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
@@ -283,6 +287,7 @@ GEM
       racc
     pg (1.6.3)
     pg (1.6.3-aarch64-linux-musl)
+    pg (1.6.3-arm64-darwin)
     phlex (2.4.1)
       refract (~> 1.0)
       zeitwerk (~> 2.7)
@@ -472,6 +477,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
+    sin_lru_redux (2.5.2)
     slayer (0.5.4)
       virtus (~> 2.0)
     slayer_rails (0.5.4)
@@ -527,6 +533,8 @@ GEM
       prettier_print
       rbs
       syntax_tree (>= 2.0.1)
+    tailwind_merge (1.5.2)
+      sin_lru_redux (~> 2.5)
     temple (0.10.4)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
@@ -580,6 +588,7 @@ GEM
 
 PLATFORMS
   aarch64-linux-musl
+  arm64-darwin-20
 
 DEPENDENCIES
   after_commit_everywhere
@@ -597,6 +606,7 @@ DEPENDENCIES
   devise
   discard
   dotenv-rails
+  dry-initializer (~> 3.2)
   factory_bot_instruments
   factory_bot_rails
   faker
@@ -662,6 +672,7 @@ DEPENDENCIES
   syntax_tree
   syntax_tree-haml
   syntax_tree-rbs
+  tailwind_merge
   timeliness
   typical_situation
   typical_sort

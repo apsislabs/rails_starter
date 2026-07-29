@@ -1,3 +1,5 @@
+import "./application.css";
+
 import { Application } from "@hotwired/stimulus";
 import { initDidact } from "../apps/init";
 import { initStimulus } from "../controllers/init";

@@ -14,6 +14,8 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@prettier/plugin-ruby": "^4.0.4",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
@@ -35,7 +37,11 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.23",
+    "@stimulus-components/dialog": "^1.0.1",
+    "@stimulus-components/dropdown": "^3.0.0",
+    "@tailwindcss/vite": "^4.3.3",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "tailwindcss": "^4.3.3"
   }
 }
