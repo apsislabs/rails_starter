@@ -1,9 +1,7 @@
 import "./application.css";
 
 import { Application } from "@hotwired/stimulus";
-// @rails/ujs exposes a default export through its ESM build.
-// eslint-disable-next-line import-x/default
-import Rails from "@rails/ujs";
+import Rails from "@rails/ujs/app/assets/javascripts/rails-ujs.esm.js";
 import { initDidact } from "../apps/init";
 import { initStimulus } from "../controllers/init";
 import { Didact } from "../lib/Didact";
