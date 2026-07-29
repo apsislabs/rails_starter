@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+source bin/helpers/docker
+runOnDocker web
+
+npx lint-staged

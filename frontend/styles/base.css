@@ -1,0 +1,887 @@
+/*
+ * base.css — Tailwind CSS v4 classless base theme.
+ *
+ * Usage:
+ *   @import "./base.css";
+ *
+ * Theming — override per theme (hover/active/subtle/border shades are derived):
+ *   --theme-background / --theme-foreground
+ *   --theme-surface / --theme-surface-muted
+ *   --theme-muted-foreground
+ *   --theme-border / --theme-border-strong
+ *   --theme-primary / --theme-success / --theme-danger / --theme-warning / --theme-info
+ *   --theme-on-primary / --theme-on-danger / --theme-on-warning
+ *   --theme-mix (shade-derivation direction: black for light, white for dark)
+ *   --font-sans
+ *
+ * Dark mode: <html data-theme="dark">, or automatic via prefers-color-scheme
+ * unless data-theme="light" is set.
+ *
+ * Layout on <main> (space-separable):
+ *   <main data-layout="narrow">        max-w-2xl, for prose
+ *   <main data-layout="fluid">         full width, for apps
+ *   <main data-layout="fluid flush">   full width, no padding
+ * Containers: <div data-container>, data-container="narrow" | "fluid"
+ *
+ * Buttons: <button> is neutral; data-variant="primary" | "ghost" | "danger"
+ *          (input[type="submit"] defaults to primary)
+ *          <a role="button"> renders as a button, variants included.
+ *          Sizes: data-size="sm" | "lg" (default is medium).
+ * Cards:   <section data-card> with optional <header> and <footer> children.
+ * Asides:  <aside> inside main renders as a muted callout;
+ *          <aside role="alert"> renders as a status alert.
+ * Alerts:  <aside role="alert">, data-variant="success" | "danger" | "warning"
+ *
+ * Semantic utilities are also generated: bg-primary, text-danger,
+ * border-warning-border, bg-success-subtle, etc.
+ */
+
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --color-background: var(--theme-background);
+  --color-foreground: var(--theme-foreground);
+
+  --color-surface: var(--theme-surface);
+  --color-surface-muted: var(--theme-surface-muted);
+  --color-muted-foreground: var(--theme-muted-foreground);
+
+  --color-border: var(--theme-border);
+  --color-border-strong: var(--theme-border-strong);
+
+  --color-primary: var(--theme-primary);
+  --color-primary-hover: color-mix(in oklab, var(--theme-primary) 88%, var(--theme-mix));
+  --color-primary-active: color-mix(in oklab, var(--theme-primary) 78%, var(--theme-mix));
+  --color-primary-subtle: color-mix(in oklab, var(--theme-primary) 10%, var(--theme-background));
+  --color-primary-border: color-mix(in oklab, var(--theme-primary) 30%, var(--theme-background));
+  --color-primary-foreground: var(--theme-on-primary);
+
+  --color-success: var(--theme-success);
+  --color-success-subtle: color-mix(in oklab, var(--theme-success) 10%, var(--theme-background));
+  --color-success-border: color-mix(in oklab, var(--theme-success) 30%, var(--theme-background));
+
+  --color-danger: var(--theme-danger);
+  --color-danger-hover: color-mix(in oklab, var(--theme-danger) 88%, var(--theme-mix));
+  --color-danger-active: color-mix(in oklab, var(--theme-danger) 78%, var(--theme-mix));
+  --color-danger-subtle: color-mix(in oklab, var(--theme-danger) 10%, var(--theme-background));
+  --color-danger-border: color-mix(in oklab, var(--theme-danger) 30%, var(--theme-background));
+  --color-danger-foreground: var(--theme-on-danger);
+
+  --color-warning: var(--theme-warning);
+  --color-warning-subtle: color-mix(in oklab, var(--theme-warning) 12%, var(--theme-background));
+  --color-warning-border: color-mix(in oklab, var(--theme-warning) 35%, var(--theme-background));
+  --color-warning-foreground: var(--theme-on-warning);
+
+  --color-info: var(--theme-info);
+  --color-info-subtle: color-mix(in oklab, var(--theme-info) 10%, var(--theme-background));
+  --color-info-border: color-mix(in oklab, var(--theme-info) 30%, var(--theme-background));
+
+  --radius-control: 0.375rem;
+  --radius-container: 0.5rem;
+}
+
+/* Shared control look, exposed as real utilities (not just @apply inside
+   base.css) so components that compose a control — rather than rendering a
+   plain <input> — can reuse the same classes instead of hand-copying them
+   and drifting out of sync. Participates in the variant system, so e.g.
+   `focus-within:control-ring` works like any built-in utility. */
+@utility control-surface {
+  @apply rounded-control border border-border-strong bg-surface;
+}
+
+@utility control-ring {
+  @apply border-primary outline-none shadow-sm ring-2 ring-primary/20;
+}
+
+:root {
+  color-scheme: light;
+  --theme-mix: black;
+
+  --theme-background: var(--color-white);
+  --theme-foreground: var(--color-slate-900);
+
+  --theme-surface: var(--color-white);
+  --theme-surface-muted: var(--color-slate-100);
+  --theme-muted-foreground: var(--color-slate-600);
+
+  --theme-border: var(--color-slate-200);
+  --theme-border-strong: var(--color-slate-300);
+
+  --theme-primary: var(--color-blue-600);
+  --theme-success: var(--color-emerald-600);
+  --theme-danger: var(--color-red-600);
+  --theme-warning: var(--color-amber-600);
+  --theme-info: var(--color-sky-600);
+
+  --theme-on-primary: var(--color-white);
+  --theme-on-danger: var(--color-white);
+  --theme-on-warning: var(--color-amber-950);
+}
+
+@layer base {
+  /* Selectors below are intentionally plain (not :where()-wrapped), or use
+     :is()/:not()/:has() only where grouping or negation is needed.
+     :where()'s zero specificity doesn't buy overridability here — a consumer
+     overriding with a Tailwind utility class always wins regardless of
+     specificity, because @layer utilities is ordered after @layer base.
+     What zero specificity *did* cost us: Tailwind's own preflight and
+     @tailwindcss/forms reset many of these same properties (button/input
+     background, heading font-size/weight, list-style, link color, etc.)
+     using real element selectors in this same base layer, so a
+     :where()-wrapped rule silently lost to them every time. Plain selectors
+     fix that while staying just as overridable in practice. */
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --theme-mix: white;
+
+    --theme-background: var(--color-slate-950);
+    --theme-foreground: var(--color-slate-100);
+
+    --theme-surface: var(--color-slate-900);
+    --theme-surface-muted: var(--color-slate-800);
+    --theme-muted-foreground: var(--color-slate-400);
+
+    --theme-border: var(--color-slate-800);
+    --theme-border-strong: var(--color-slate-700);
+
+    --theme-primary: var(--color-blue-500);
+    --theme-success: var(--color-emerald-500);
+    --theme-danger: var(--color-red-500);
+    --theme-warning: var(--color-amber-400);
+    --theme-info: var(--color-sky-500);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --theme-mix: white;
+
+      --theme-background: var(--color-slate-950);
+      --theme-foreground: var(--color-slate-100);
+
+      --theme-surface: var(--color-slate-900);
+      --theme-surface-muted: var(--color-slate-800);
+      --theme-muted-foreground: var(--color-slate-400);
+
+      --theme-border: var(--color-slate-800);
+      --theme-border-strong: var(--color-slate-700);
+
+      --theme-primary: var(--color-blue-500);
+      --theme-success: var(--color-emerald-500);
+      --theme-danger: var(--color-red-500);
+      --theme-warning: var(--color-amber-400);
+      --theme-info: var(--color-sky-500);
+    }
+  }
+
+  /* Document and page layout */
+
+  html {
+    @apply scroll-smooth bg-background text-foreground;
+    scrollbar-gutter: stable;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply flex min-h-screen flex-col bg-background font-sans text-foreground antialiased;
+  }
+
+  :is(body > main, [data-container]) {
+    @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+  }
+
+  body > main {
+    @apply flex-1 py-8;
+  }
+
+  :is(body > main[data-layout~="narrow"], [data-container="narrow"]) {
+    @apply max-w-2xl;
+  }
+
+  :is(body > main[data-layout~="fluid"], [data-container="fluid"]) {
+    @apply max-w-none;
+  }
+
+  body > main[data-layout~="flush"] {
+    @apply p-0 sm:p-0 lg:p-0;
+  }
+
+  /* Header/footer content aligns with the default main column. */
+  :is(body > header, body > footer) {
+    @apply border-border px-4 sm:px-6 lg:px-8;
+  }
+
+  body > header {
+    @apply border-b py-4;
+  }
+
+  body > footer {
+    @apply mt-12 border-t py-8 text-sm text-muted-foreground;
+  }
+
+  :is(body > header, body > footer) > * {
+    @apply mx-auto max-w-5xl;
+  }
+
+  /* Navigation
+     <nav data-variant="navbar | menu | breadcrumb | pagination | tabs">
+       <ul><li><a href="…">…</a></li></ul>
+     </nav> */
+
+  nav {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  nav > ul {
+    @apply m-0 flex list-none items-center gap-4 p-0;
+  }
+
+  nav a {
+    @apply no-underline;
+  }
+
+  nav li {
+    @apply m-0;
+  }
+
+  header nav a {
+    @apply font-medium text-muted-foreground;
+  }
+
+  header nav a:hover {
+    @apply text-foreground;
+  }
+
+  nav[data-variant="navbar"] {
+    @apply hidden md:flex;
+  }
+
+  nav[data-variant="menu"] {
+    @apply block;
+  }
+
+  nav[data-variant="menu"] > ul {
+    @apply flex-col items-stretch gap-1;
+  }
+
+  nav[data-variant="menu"] a {
+    @apply block rounded-control px-3 py-2 text-sm text-muted-foreground;
+  }
+
+  nav[data-variant="menu"] a:hover,
+  nav[data-variant="menu"] a[aria-current="page"] {
+    @apply bg-surface-muted text-foreground;
+  }
+
+  nav[data-variant="breadcrumb"] {
+    @apply justify-start;
+  }
+
+  nav[data-variant="breadcrumb"] > ul {
+    @apply flex-wrap gap-2 text-sm;
+  }
+
+  nav[data-variant="breadcrumb"] li {
+    @apply flex items-center gap-2 text-muted-foreground;
+  }
+
+  nav[data-variant="breadcrumb"] li + li::before {
+    content: "/";
+    @apply text-muted-foreground;
+  }
+
+  nav[data-variant="breadcrumb"] [aria-current="page"] {
+    @apply text-foreground;
+  }
+
+  nav[data-variant="pagination"] {
+    @apply justify-start;
+  }
+
+  nav[data-variant="pagination"] > ul {
+    @apply gap-1;
+  }
+
+  nav[data-variant="pagination"] a {
+    @apply inline-flex size-9 items-center justify-center rounded-control text-sm;
+  }
+
+  nav[data-variant="pagination"] a:hover {
+    @apply bg-surface-muted;
+  }
+
+  nav[data-variant="pagination"] a[aria-current="page"] {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  nav[data-variant="tabs"] {
+    @apply block;
+  }
+
+  nav[data-variant="tabs"] > ul {
+    @apply gap-4 border-b border-border;
+  }
+
+  nav[data-variant="tabs"] button {
+    @apply -mb-px rounded-none border-x-0 border-t-0 border-b-2 border-transparent bg-transparent px-1 pb-2 text-sm font-medium text-muted-foreground shadow-none;
+  }
+
+  nav[data-variant="tabs"] button:hover {
+    @apply border-border text-foreground;
+  }
+
+  nav[data-variant="tabs"] button[aria-selected="true"] {
+    @apply border-primary text-foreground;
+  }
+
+  [role="menu"] [role="menuitem"] {
+    @apply block rounded-control px-3 py-1.5 text-sm text-foreground no-underline;
+  }
+
+  [role="menu"] [role="menuitem"]:hover {
+    @apply bg-surface-muted text-foreground;
+  }
+
+  [role="menu"] [role="menuitem"][data-variant="danger"] {
+    @apply text-danger;
+  }
+
+  [role="menu"] [role="menuitem"][data-variant="danger"]:hover {
+    @apply bg-danger-subtle text-danger;
+  }
+
+  /* Typography */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-balance font-semibold tracking-tight text-foreground;
+  }
+
+  h1 {
+    @apply mb-6 text-4xl leading-tight;
+  }
+
+  h2 {
+    @apply mb-4 mt-10 text-3xl leading-tight;
+  }
+
+  h3 {
+    @apply mb-3 mt-8 text-2xl leading-snug;
+  }
+
+  h4 {
+    @apply mb-2 mt-6 text-xl leading-snug;
+  }
+
+  h5,
+  h6 {
+    @apply mb-2 mt-5 text-lg leading-snug;
+  }
+
+  p {
+    @apply my-4 leading-7;
+  }
+
+  small {
+    @apply text-sm text-muted-foreground;
+  }
+
+  strong,
+  b {
+    @apply font-semibold;
+  }
+
+  mark {
+    @apply rounded-sm bg-warning-subtle px-1 text-warning-foreground;
+  }
+
+  a {
+    @apply font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors;
+  }
+
+  a:hover {
+    @apply text-primary-hover decoration-primary/70;
+  }
+
+  a:focus-visible {
+    @apply rounded-sm outline-none ring-2 ring-primary/40 ring-offset-2 ring-offset-background;
+  }
+
+  :is(ul, ol) {
+    @apply my-4 space-y-1 pl-6;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply leading-7;
+  }
+
+  :is(li > ul, li > ol) {
+    @apply my-1;
+  }
+
+  blockquote {
+    @apply my-6 border-l-4 border-primary-border pl-4 italic text-muted-foreground;
+  }
+
+  blockquote p {
+    @apply my-2;
+  }
+
+  hr {
+    @apply my-8 border-0 border-t border-border;
+  }
+
+  :is(img, video, canvas, svg) {
+    @apply max-w-full;
+  }
+
+  figure {
+    @apply my-6;
+  }
+
+  figcaption {
+    @apply mt-2 text-center text-sm text-muted-foreground;
+  }
+
+  /* Code
+     Plain selectors: preflight's `code, kbd, samp, pre { font-size: 1em }`
+     has real specificity and otherwise wins over a :where()-wrapped size. */
+
+  code,
+  kbd,
+  samp {
+    @apply font-mono text-sm;
+  }
+
+  :not(pre) > code {
+    @apply rounded bg-surface-muted px-1.5 py-0.5 text-foreground;
+  }
+
+  kbd {
+    @apply rounded border border-border-strong px-1.5 py-0.5 text-xs;
+  }
+
+  pre {
+    @apply my-6 overflow-x-auto rounded-container border border-border bg-surface-muted p-4 text-sm leading-6 text-foreground;
+  }
+
+  pre code {
+    @apply bg-transparent p-0 text-inherit;
+  }
+
+  /* Tables */
+
+  table {
+    @apply my-6 w-full border-collapse text-left text-sm;
+  }
+
+  caption {
+    @apply mb-3 text-left text-sm font-medium text-muted-foreground;
+  }
+
+  thead {
+    @apply border-b-2 border-border-strong;
+  }
+
+  tbody {
+    @apply divide-y divide-border;
+  }
+
+  tbody > tr {
+    @apply hover:bg-surface-muted/25;
+  }
+
+  th {
+    @apply bg-surface-muted px-3 py-2 font-semibold text-foreground;
+  }
+
+  td {
+    @apply px-3 py-2 align-top;
+  }
+
+  /* Forms */
+
+  form {
+    @apply space-y-5;
+  }
+
+  fieldset {
+    @apply rounded-container border border-border p-4;
+  }
+
+  fieldset:disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+  legend {
+    @apply px-2 font-semibold text-foreground;
+  }
+
+  label {
+    @apply block text-sm font-medium text-foreground;
+  }
+
+  /* Also matches a composed control (e.g. UI::InputGroup) that wraps its
+     input/textarea/select rather than exposing it as label's direct sibling.
+     mt-2 matches UI::FormField's space-y-2, so label-to-control spacing is
+     identical whether the control is plain HTML or component-composed. */
+  label + input,
+  label + textarea,
+  label + select,
+  label + :has(input, textarea, select) {
+    @apply mt-2;
+  }
+
+  label[for],
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"]) {
+    @apply cursor-pointer;
+  }
+
+  /* Text-like controls share one visual: size, border, radius, focus.
+     @tailwindcss/forms ships its own hardcoded border/radius reset at
+     equal-or-greater specificity than a :where()-wrapped rule, so :is()
+     is used here (not :where()) to inherit enough specificity to win. */
+  :is(
+    input:not(
+      [type="button"],
+      [type="checkbox"],
+      [type="color"],
+      [type="file"],
+      [type="hidden"],
+      [type="image"],
+      [type="radio"],
+      [type="range"],
+      [type="reset"],
+      [type="submit"]
+    ),
+    textarea,
+    select
+  ) {
+    @apply control-surface block w-full px-3 py-2 text-base leading-6 text-foreground sm:text-sm;
+  }
+
+  :is(
+    input:not(
+      [type="button"],
+      [type="checkbox"],
+      [type="color"],
+      [type="file"],
+      [type="hidden"],
+      [type="image"],
+      [type="radio"],
+      [type="range"],
+      [type="reset"],
+      [type="submit"]
+    ),
+    textarea,
+    select
+  ):focus {
+    @apply control-ring;
+  }
+
+  :is(input, textarea, select)[aria-invalid="true"] {
+    @apply border-danger ring-2 ring-danger/20;
+  }
+
+  textarea {
+    @apply min-h-24;
+  }
+
+  select {
+    @apply pr-10;
+  }
+
+  :is(input, textarea)::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  :is(input, textarea, select, button):disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  input[readonly],
+  textarea[readonly] {
+    @apply bg-surface-muted;
+  }
+
+  input + small,
+  textarea + small,
+  select + small {
+    @apply mt-1 block;
+  }
+
+  :is(input[type="checkbox"], input[type="radio"], input[type="range"], progress) {
+    @apply text-primary accent-primary;
+  }
+
+  :is(input[type="checkbox"]) {
+    @apply rounded-sm cursor-pointer;
+  }
+
+  input[type="file"] {
+    @apply block w-full text-sm text-muted-foreground file:mr-3 file:cursor-pointer file:rounded-control file:border-0 file:bg-surface-muted file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-foreground;
+  }
+
+  /* Buttons — neutral by default; primary / ghost / danger via data-variant.
+     Variants only set the custom properties.
+
+     Plain element selectors carry enough specificity to beat Tailwind
+     preflight's `button, input, select, textarea { background-color:
+     transparent; color: inherit }`. */
+  button,
+  a[role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    --btn-bg: var(--color-surface);
+    --btn-bg-hover: var(--color-surface-muted);
+    --btn-bg-active: var(--color-border);
+    --btn-fg: var(--color-foreground);
+    --btn-border: var(--color-border-strong);
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-control border px-4 py-2 text-sm font-medium no-underline shadow-sm transition-colors;
+    background-color: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-fg);
+  }
+
+  :is(button, a[role="button"], input[type="button"], input[type="submit"], input[type="reset"]):hover {
+    background-color: var(--btn-bg-hover);
+    color: var(--btn-fg);
+  }
+
+  :is(button, a[role="button"], input[type="button"], input[type="submit"], input[type="reset"]):active {
+    background-color: var(--btn-bg-active);
+  }
+
+  :is(button, a[role="button"], input[type="button"], input[type="submit"], input[type="reset"]):focus-visible {
+    @apply outline-none ring-2 ring-primary/40 ring-offset-2 ring-offset-background;
+  }
+
+  :is(button, a[role="button"])[data-variant="primary"],
+  input[type="submit"] {
+    --btn-bg: var(--color-primary);
+    --btn-bg-hover: var(--color-primary-hover);
+    --btn-bg-active: var(--color-primary-active);
+    --btn-fg: var(--color-primary-foreground);
+    --btn-border: transparent;
+  }
+
+  :is(button, a[role="button"])[data-variant="ghost"] {
+    --btn-bg: transparent;
+    --btn-bg-hover: var(--color-surface-muted);
+    --btn-bg-active: var(--color-border);
+    --btn-fg: var(--color-foreground);
+    --btn-border: transparent;
+    @apply shadow-none;
+  }
+
+  :is(button, a[role="button"])[data-variant="danger"] {
+    --btn-bg: var(--color-danger);
+    --btn-bg-hover: var(--color-danger-hover);
+    --btn-bg-active: var(--color-danger-active);
+    --btn-fg: var(--color-danger-foreground);
+    --btn-border: transparent;
+  }
+
+  :is(button, a[role="button"])[data-size="sm"] {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  :is(button, a[role="button"])[data-size="lg"] {
+    @apply px-5 py-2.5 text-base;
+  }
+
+  /* Alerts — info by default; success / danger / warning via data-variant. */
+
+  [role="alert"] {
+    --alert-bg: var(--color-info-subtle);
+    --alert-border: var(--color-info-border);
+    --alert-fg: var(--color-info);
+    @apply my-4 rounded-container border p-4 text-sm;
+    background-color: var(--alert-bg);
+    border-color: var(--alert-border);
+    color: var(--alert-fg);
+  }
+
+  [role="alert"] > :first-child {
+    @apply mt-0;
+  }
+
+  [role="alert"] > :last-child {
+    @apply mb-0;
+  }
+
+  [role="alert"][data-variant="success"] {
+    --alert-bg: var(--color-success-subtle);
+    --alert-border: var(--color-success-border);
+    --alert-fg: var(--color-success);
+  }
+
+  [role="alert"][data-variant="danger"] {
+    --alert-bg: var(--color-danger-subtle);
+    --alert-border: var(--color-danger-border);
+    --alert-fg: var(--color-danger);
+  }
+
+  [role="alert"][data-variant="warning"] {
+    --alert-bg: var(--color-warning-subtle);
+    --alert-border: var(--color-warning-border);
+    --alert-fg: var(--color-warning-foreground);
+  }
+
+  /* Asides — tangential callouts. Scoped to main so app-shell
+     sidebars (body > aside) stay unstyled. */
+
+  main aside:not([role="alert"]) {
+    @apply my-4 rounded-container bg-surface-muted p-4 text-sm text-muted-foreground;
+  }
+
+  main aside:not([role="alert"]) > :first-child {
+    @apply mt-0;
+  }
+
+  main aside:not([role="alert"]) > :last-child {
+    @apply mb-0;
+  }
+
+  /* Cards
+     <section data-card>
+       <header>Title</header>
+       ...
+       <footer>Actions</footer>
+     </section> */
+
+  [data-card] {
+    @apply my-4 rounded-container border border-border bg-surface shadow-sm;
+  }
+
+  [data-card] > * {
+    @apply px-5 py-3;
+  }
+
+  [data-card] > :first-child {
+    @apply rounded-t-container;
+  }
+
+  [data-card] > :last-child {
+    @apply rounded-b-container;
+  }
+
+  [data-card] > header {
+    @apply border-b border-border px-5 py-3 font-semibold text-foreground;
+  }
+
+  [data-card] > header h2 {
+    @apply m-0 text-base;
+  }
+
+  [data-card] > header p {
+    @apply m-0 text-sm font-normal text-muted-foreground;
+  }
+
+  [data-card] > footer {
+    @apply flex items-center gap-2 border-t border-border bg-surface-muted px-5 py-3;
+  }
+
+  /* Disclosure and dialog */
+
+  details {
+    @apply my-4 rounded-container border border-border bg-surface p-4;
+  }
+
+  summary {
+    @apply cursor-pointer font-medium text-foreground;
+  }
+
+  details[open] summary {
+    @apply mb-3;
+  }
+
+  dialog {
+    @apply m-auto max-h-[90vh] max-w-lg rounded-container border border-border bg-surface p-6 text-foreground shadow-xl;
+  }
+
+  dialog::backdrop {
+    background-color: color-mix(in oklab, var(--theme-foreground) 50%, transparent);
+  }
+
+  dialog > header {
+    @apply -mx-6 -mt-6 mb-4 flex items-center justify-between gap-4 border-b border-border px-6 py-4;
+  }
+
+  dialog > header h2 {
+    @apply m-0 text-lg;
+  }
+
+  dialog > footer {
+    @apply -mx-6 -mb-6 mt-4 flex items-center justify-end gap-2 border-t border-border bg-surface-muted px-6 py-4;
+  }
+
+  dialog[data-variant="drawer"] {
+    @apply m-0 ml-auto h-full max-h-none w-full max-w-md rounded-none border-0 border-l border-border;
+  }
+
+  [popover][data-anchored-popover] {
+    @apply max-w-sm rounded-container border border-border bg-surface p-4 text-sm shadow-lg;
+    inset: auto;
+    margin: 0.5rem 0 0;
+    position-area: bottom;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+
+  /* Progress */
+
+  progress {
+    @apply h-2 w-full overflow-hidden rounded-full bg-surface-muted;
+  }
+
+  progress::-webkit-progress-bar {
+    @apply bg-surface-muted;
+  }
+
+  progress::-webkit-progress-value {
+    @apply bg-primary;
+  }
+
+  progress::-moz-progress-bar {
+    @apply bg-primary;
+  }
+
+  /* Selection and focus */
+
+  ::selection {
+    @apply bg-primary/20;
+  }
+
+  :focus-visible {
+    @apply outline-primary;
+  }
+}

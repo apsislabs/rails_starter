@@ -1,0 +1,332 @@
+<% content_for :title, "UI Kit" %>
+
+<main class="space-y-16">
+  <header>
+    <h1>UI component kit</h1>
+  </header>
+
+  <section aria-labelledby="base-typography">
+    <h2 id="base-typography">Base typography</h2>
+    <div class="grid gap-8 md:grid-cols-2">
+      <div>
+        <h3>Lists and quotations</h3>
+        <ul>
+          <li>Unordered lists retain their markers.</li>
+          <li>Nested content has a comfortable rhythm.</li>
+        </ul>
+        <ol>
+          <li>Semantic HTML first.</li>
+          <li>Utilities only when composition needs them.</li>
+        </ol>
+        <blockquote>
+          <p>Good primitives should leave plain HTML better than they found it.</p>
+          <cite>Component kit principle</cite>
+        </blockquote>
+      </div>
+      <div>
+        <h3>Code and disclosure</h3>
+        <pre><code>render UI::Button.new { "Save" }</code></pre>
+        <details>
+          <summary>What does the base layer cover?</summary>
+          <p>Typography, forms, buttons, tables, alerts, dialogs, focus states, and semantic theme tokens.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="rich-content">
+    <h2 id="rich-content">Rich content</h2>
+    <article class="prose max-w-none">
+      <h3>Typography plugin opt-in</h3>
+      <p>The <code>prose</code> class handles long-form content while the base layer remains deliberately small.</p>
+      <ul>
+        <li>Use classless defaults for application HTML.</li>
+        <li>Use <code>prose</code> where rich content needs a tuned reading experience.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="base-forms" aria-labelledby="base-forms-heading">
+    <h2 id="base-forms-heading">Plain HTML forms</h2>
+    <form class="max-w-3xl">
+      <div class="grid gap-5 md:grid-cols-2">
+        <div>
+          <label for="base-email">Email address</label>
+          <input id="base-email" type="email" placeholder="you@example.com">
+          <small>Used only for account updates.</small>
+        </div>
+        <div>
+          <label for="base-role">Role</label>
+          <select id="base-role">
+            <option>Administrator</option>
+            <option>Editor</option>
+            <option>Viewer</option>
+          </select>
+        </div>
+        <div>
+          <label for="base-note">A note</label>
+          <textarea id="base-note" placeholder="Write a short note…"></textarea>
+        </div>
+        <div>
+          <label for="base-invalid">Invalid input</label>
+          <input id="base-invalid" aria-invalid="true" value="not an email">
+          <small class="text-danger">Enter a valid email address.</small>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Plan</legend>
+        <label class="flex items-center gap-2"><input type="radio" name="base-plan" checked> Starter</label>
+        <label class="flex items-center gap-2"><input type="radio" name="base-plan"> Team</label>
+      </fieldset>
+
+      <label class="flex items-center gap-2"><input type="checkbox"> I agree to the terms</label>
+      <div class="flex flex-wrap gap-3">
+        <button type="button" data-variant="primary">Primary action</button>
+        <button type="button">Secondary</button>
+        <button type="button" data-variant="ghost">Ghost</button>
+        <button type="button" data-variant="danger">Danger</button>
+        <button type="button" disabled>Disabled</button>
+      </div>
+    </form>
+  </section>
+
+  <section aria-labelledby="base-content">
+    <h2 id="base-content">Content and feedback</h2>
+    <div class="space-y-4">
+      <aside role="alert">A plain <code>role="alert"</code> is styled as an informational notice.</aside>
+      <aside role="alert" data-variant="success">Saved successfully.</aside>
+      <aside role="alert" data-variant="warning">Your trial ends in three days.</aside>
+      <aside role="alert" data-variant="danger">We could not save your changes.</aside>
+    </div>
+    <table>
+      <caption>Plain HTML table</caption>
+      <thead><tr><th scope="col">Name</th><th scope="col">Role</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+        <tr><td>Alex Morgan</td><td>Editor</td><td>Active</td></tr>
+        <tr><td>Jordan Lee</td><td>Viewer</td><td>Invited</td></tr>
+      </tbody>
+    </table>
+    <label for="base-progress">Upload progress</label>
+    <progress id="base-progress" value="64" max="100">64%</progress>
+  </section>
+
+  <section aria-labelledby="component-layer">
+    <h2 id="component-layer">Component layer</h2>
+    <div class="space-y-6">
+      <div>
+        <h3>Primitives</h3>
+        <%= render UI::Stack.new(direction: :horizontal, align: :center, wrap: true) do %>
+          <%= render UI::Button.new(variant: :primary) { "Primary" } %>
+          <%= render UI::Button.new { "Secondary" } %>
+          <%= render UI::Badge.new(variant: :success) { "Ready" } %>
+          <%= render UI::Avatar.new(initials: "WK") %>
+          <%= render UI::Spinner.new %>
+          <%= render UI::Separator.new(orientation: :vertical, class: "h-6") %>
+        <% end %>
+      </div>
+
+      <div>
+        <h3>Forms</h3>
+        <div class="grid max-w-3xl gap-6 md:grid-cols-2">
+          <%= render UI::FormField.new(label: "Component email", for_id: "component-email", required: true, help_text: "Rendered with UI::FormField.") do %>
+            <%= render UI::Input.new(id: "component-email", type: :email, placeholder: "you@example.com") %>
+          <% end %>
+          <div>
+            <%= render UI::Label.new(for_id: "component-search") { "Composed input group" } %>
+            <%= render UI::InputGroup.new(prefix: "@", suffix: ".com") do %>
+              <%= render UI::Input.new(id: "component-search", type: :search, placeholder: "handle") %>
+            <% end %>
+          </div>
+          <%= render UI::FormField.new(label: "Role", for_id: "component-role", help_text: "Rendered with UI::Select.") do %>
+            <%= render UI::Select.new(id: "component-role", options: [["Administrator", "admin"], ["Editor", "editor"], ["Viewer", "viewer"]]) %>
+          <% end %>
+          <%= render UI::FormField.new(label: "Bio", for_id: "component-bio") do %>
+            <%= render UI::Textarea.new(id: "component-bio", placeholder: "A short bio…") %>
+          <% end %>
+        </div>
+
+        <div class="mt-5 max-w-3xl space-y-5">
+          <%= render UI::RadioGroup.new(label: "Plan") do %>
+            <label class="flex items-center gap-2"><input type="radio" name="component-plan" checked> Starter</label>
+            <label class="flex items-center gap-2"><input type="radio" name="component-plan"> Team</label>
+          <% end %>
+          <label class="flex items-center gap-2">
+            <%= render UI::Checkbox.new(id: "component-terms", name: "terms") %>
+            I agree to the terms
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <h3>Feedback</h3>
+        <%= render UI::Alert.new(variant: :info) { "The component alert delegates its semantic color treatment to base.css." } %>
+        <div class="mt-4 grid gap-6 md:grid-cols-2">
+          <div class="space-y-3">
+            <%= render UI::Progress.new(value: 72, label: "Storage used") %>
+            <%= render UI::Progress.new(label: "Syncing") %>
+          </div>
+          <%= render UI::Skeleton.new(lines: 3) %>
+        </div>
+        <%= render UI::EmptyState.new do |empty| %>
+          <% empty.title { "No results found" } %>
+          <% empty.description { "Try adjusting your filters or search terms." } %>
+          <% empty.actions { render UI::Button.new(variant: :primary, size: :sm) { "Clear filters" } } %>
+        <% end %>
+      </div>
+
+      <div>
+        <h3>Data</h3>
+        <%= render UI::Table.new do |t| %>
+          <% t.header do %>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Role</th>
+              <th scope="col">Status</th>
+            </tr>
+          <% end %>
+          <% t.body do %>
+            <tr>
+              <td>Alex Morgan</td>
+              <td>Editor</td>
+              <td><%= render UI::Badge.new(variant: :success) { "Active" } %></td>
+            </tr>
+            <tr>
+              <td>Jordan Lee</td>
+              <td>Viewer</td>
+              <td><%= render UI::Badge.new(variant: :warning) { "Invited" } %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <div class="grid gap-6 md:grid-cols-2">
+          <%= render UI::List.new do %>
+            <li class="py-2">Unordered items keep a divider rhythm.</li>
+            <li class="py-2">Each row is still just an &lt;li&gt;.</li>
+          <% end %>
+          <%= render UI::DescriptionList.new(items: [["Plan", "Team"], ["Renews", "Aug 12, 2026"], ["Seats", "8 of 10 used"]]) %>
+        </div>
+      </div>
+
+      <div>
+        <h3>Layout</h3>
+
+        <div class="grid gap-x-8 gap-y-10 lg:grid-cols-2">
+          <section aria-labelledby="layout-card" class="min-w-0">
+            <h4 id="layout-card">Card</h4>
+            <div class="rounded-container bg-surface-muted p-4 sm:p-6">
+              <%= render UI::Card.new(class: "my-0") do |card| %>
+                <% card.title { "Review campaign" } %>
+                <% card.subtitle { "3 items are ready for approval" } %>
+                <% card.body { render UI::Text.new { "Check the audience, schedule, and creative before publishing." } } %>
+                <% card.footer do %>
+                  <%= render UI::Button.new(variant: :ghost, size: :sm) { "Not now" } %>
+                  <%= render UI::Button.new(variant: :primary, size: :sm) { "Review" } %>
+                <% end %>
+              <% end %>
+            </div>
+          </section>
+
+          <section aria-labelledby="layout-stack" class="min-w-0">
+            <h4 id="layout-stack">Stack</h4>
+            <div class="space-y-5 rounded-container bg-surface-muted p-4 sm:p-6">
+              <%= render UI::Stack.new(gap: 2) do %>
+                <% ["Audience", "Schedule", "Creative"].each do |label| %>
+                  <div class="rounded-control border border-border bg-surface px-3 py-2 text-sm"><%= label %></div>
+                <% end %>
+              <% end %>
+              <%= render UI::Stack.new(direction: :horizontal, gap: 2, align: :center, wrap: true) do %>
+                <%= render UI::Badge.new { "Draft" } %>
+                <%= render UI::Badge.new(variant: :success) { "Approved" } %>
+                <%= render UI::Badge.new(variant: :warning) { "Needs review" } %>
+              <% end %>
+            </div>
+          </section>
+
+          <section aria-labelledby="layout-container" class="min-w-0 lg:col-span-2">
+            <h4 id="layout-container">Container</h4>
+            <%= render UI::Container.new(size: :narrow, class: "rounded-control border border-dashed border-border-strong bg-surface py-4 text-center text-sm text-muted-foreground") { "Narrow" } %>
+          </section>
+        </div>
+      </div>
+
+      <div>
+        <h3>Navigation</h3>
+        <%= render UI::Breadcrumb.new(items: [{ label: "Home", href: "#" }, { label: "Settings", href: "#" }, { label: "Profile" }]) %>
+
+        <%= render UI::Tabs.new(items: [
+          { id: "overview", label: "Overview", content: "Tabs render their panels via data-controller=\"tabs\"." },
+          { id: "activity", label: "Activity", content: "Selecting a tab updates aria-selected and hides the other panels." },
+          { id: "settings", label: "Settings", content: "Keyboard arrows/Home/End move focus between tabs." }
+        ]) %>
+
+        <%= render UI::Pagination.new(current: 2, total: 5, url_for: ->(page) { "#page-#{page}" }) %>
+
+        <div class="space-y-6">
+          <div class="max-w-xs">
+            <%= render UI::Menu.new(items: [{ label: "Dashboard", href: "#", current: true }, { label: "Billing", href: "#" }, { label: "Team", href: "#" }]) %>
+          </div>
+
+          <%= render UI::Navbar.new do |navbar| %>
+            <% navbar.brand { "Acme" } %>
+            <% navbar.navigation do %>
+              <li><%= render UI::Link.new(href: "#") { "Dashboard" } %></li>
+              <li><%= render UI::Link.new(href: "#") { "Billing" } %></li>
+            <% end %>
+            <% navbar.actions { render UI::Button.new(variant: :primary, size: :sm) { "Sign out" } } %>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <h3>Overlays</h3>
+        <%= render UI::Stack.new(direction: :horizontal, align: :center, wrap: true) do %>
+          <%= render UI::Modal.new do |modal| %>
+            <% modal.trigger { "Open dialog" } %>
+            <% modal.title { "Preview dialog" } %>
+            <% modal.body { render UI::Text.new { "The native dialog gets its baseline treatment from base.css; the component supplies behavior." } } %>
+            <% modal.footer do %>
+              <%= render UI::Button.new(variant: :ghost, size: :sm, data: { action: "modal#close" }) { "Cancel" } %>
+              <%= render UI::Button.new(variant: :primary, size: :sm) { "Confirm" } %>
+            <% end %>
+          <% end %>
+
+          <%= render UI::Drawer.new do |drawer| %>
+            <% drawer.trigger { "Open drawer" } %>
+            <% drawer.title { "Preview drawer" } %>
+            <% drawer.body { render UI::Text.new { "Drawer reuses Modal's title/body/footer slots and close button, anchored to the right edge instead of centered." } } %>
+            <% drawer.footer { render UI::Button.new(variant: :primary, size: :sm, data: { action: "modal#close" }) { "Done" } } %>
+          <% end %>
+
+          <%= render UI::Dropdown.new do |dropdown| %>
+            <% dropdown.trigger { "Options" } %>
+            <% dropdown.menu do %>
+              <a href="#" role="menuitem">Edit</a>
+              <a href="#" role="menuitem">Duplicate</a>
+              <a href="#" role="menuitem" data-variant="danger">Delete</a>
+            <% end %>
+          <% end %>
+
+          <%= render UI::Popover.new(id: "component-popover") do |popover| %>
+            <% popover.trigger { "More info" } %>
+            <% popover.content { "Popovers use the native Popover API — no Stimulus controller required." } %>
+          <% end %>
+
+          <%= render UI::Tooltip.new(text: "Copies the value to your clipboard") do %>
+            <%= render UI::Button.new(variant: :ghost, size: :sm) { "Copy" } %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div>
+        <h3>Typography</h3>
+        <%= render UI::Heading.new(level: 4) { "UI::Heading renders any level" } %>
+        <p>
+          <%= render UI::Link.new(href: "#") { "An internal link" } %> and
+          <%= render UI::Link.new(href: "https://example.com") { "an external link" } %> get consistent styling;
+          external links automatically get <%= render UI::Code.new { 'target="_blank"' } %>.
+        </p>
+        <%= render UI::Code.new(block: true) { 'render UI::Code.new(block: true) { "..." }' } %>
+      </div>
+    </div>
+  </section>
+</main>

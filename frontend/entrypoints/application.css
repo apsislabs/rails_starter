@@ -1,2 +1,5 @@
-body {
-}
+@import "@/styles/base.css";
+
+/* Phlex renders utility classes from Ruby outside Vite's frontend root. */
+@source "../../app/components";
+@source "../../app/views";

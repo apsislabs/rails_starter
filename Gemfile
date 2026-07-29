@@ -37,6 +37,7 @@ gem "after_commit_everywhere"       # => after commit blocks
 gem "ar_lazy_preload"               # => lazy preloading associations
 gem "database_validations"          # => move validations to database
 gem "discard"                       # => soft delete support
+gem "dry-initializer", "~> 3.2"     # => declarative object initialization
 gem "fast_page"                     # => faster paging
 gem "feature_toggles"               # => feature flags
 gem "flutie"                        # => i18n title elements
@@ -57,6 +58,7 @@ gem "search_cop"                    # => active model natural language search
 gem "store_attribute"               # => store typed attributes in JSON
 gem "store_model"                   # => store typed models in JSON
 gem "strong_migrations"             # => protect from dangerous migrations
+gem "tailwind_merge"
 gem "typical_situation"             # => typical controller setup
 gem "typical_sort"                  # => typical controller sorting
 gem "versionist"                    # => API versioning
