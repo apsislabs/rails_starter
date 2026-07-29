@@ -12,10 +12,10 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "== Starting migrations for test environment =="
-bin/rails db:migrate RAILS_ENV=test
+RAILS_ENV=test bin/rails db:migrate
 
 echo "== Starting unit tests =="
-rspec
+RAILS_ENV=test bundle exec rspec
 if [ $? -ne 0 ]; then
     echo -e "\n== RSpec failed; push aborted! ==\n"
     exit 1

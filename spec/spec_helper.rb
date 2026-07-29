@@ -15,16 +15,25 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require "simplecov"
+require "active_support/testing/time_helpers"
+require "database_cleaner/active_record"
+require "debug"
 require "factory_bot_rails"
 require "faker"
-require "active_support/testing/time_helpers"
+require "shoulda/matchers"
+require "simplecov"
+require "slayer/rspec"
 
 # Sample SimpleCov settings:
 # SimpleCov.minimum_coverage 90
 # SimpleCov.maximum_coverage_drop 15
 
 RSpec.configure do |config|
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.include FactoryBot::Syntax::Methods
+
+  config.example_status_persistence_file_path = "tmp/examples.txt"
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -97,9 +106,30 @@ RSpec.configure do |config|
   #   #     --seed 1234
   #   config.order = :random
   #
-  #   # Seed global randomization in this process using the `--seed` CLI option.
-  #   # Setting this allows you to use `--seed` to deterministically reproduce
-  #   # test failures related to randomization by passing the same `--seed` value
-  #   # as the one that triggered the failure.
-  #   Kernel.srand config.seed
+  # Seed global randomization in this process using the `--seed` CLI option.
+  # Setting this allows you to use `--seed` to deterministically reproduce
+  # test failures related to randomization by passing the same `--seed` value
+  # as the one that triggered the failure.
+  Kernel.srand config.seed
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+  config.after do |t|
+    # Clear the auth header after each request
+    header "Authorization", nil if t.metadata[:type] == :acceptance
+
+    # Reset all the current attributes after each spec
+    # Current.reset_all
+  end
 end
+
+RSpec::Matchers.define_negated_matcher :not_change, :change

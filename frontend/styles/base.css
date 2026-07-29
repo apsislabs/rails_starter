@@ -780,7 +780,7 @@
      </section> */
 
   [data-card] {
-    @apply my-4 rounded-container border border-border bg-surface shadow-sm
+    @apply my-4 rounded-container border border-border bg-surface shadow-sm;
   }
 
   [data-card] > * {

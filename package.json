@@ -9,7 +9,8 @@
     "prettier:precommit": "prettier --write --ignore-unknown",
     "lint": "eslint frontend",
     "test": "vitest run",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -22,6 +23,8 @@
     "eslint": "^10.4.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.2.0",
     "prettier": "^3.8.3",
     "prettier-plugin-organize-imports": "^4.3.0",
     "stimulus-vite-helpers": "^3.1.0",
@@ -43,5 +46,12 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "tailwindcss": "^4.3.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.rb": "bin/fmt"
   }
 }

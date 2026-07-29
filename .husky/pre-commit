@@ -1,0 +1,5 @@
+bin/lint_staged
+
+if git diff --cached --name-only | grep -qE '\.(ts|tsx|js|jsx)$'; then
+  bin/check_frontend
+fi
