@@ -17,11 +17,8 @@
  * Dark mode: <html data-theme="dark">, or automatic via prefers-color-scheme
  * unless data-theme="light" is set.
  *
- * Layout on <main> (space-separable):
- *   <main data-layout="narrow">        max-w-2xl, for prose
- *   <main data-layout="fluid">         full width, for apps
- *   <main data-layout="fluid flush">   full width, no padding
  * Containers: <div data-container>, data-container="narrow" | "fluid"
+ * Surrounding page layout and vertical rhythm belong to application styles.
  *
  * Buttons: <button> is neutral; data-variant="primary" | "ghost" | "danger"
  *          (input[type="submit"] defaults to primary)
@@ -177,7 +174,7 @@
     }
   }
 
-  /* Document and page layout */
+  /* Document defaults */
 
   html {
     @apply scroll-smooth bg-background text-foreground;
@@ -198,44 +195,19 @@
   }
 
   body {
-    @apply flex min-h-screen flex-col bg-background font-sans text-foreground antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
   }
 
-  :is(body > main, [data-container]) {
+  [data-container] {
     @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
   }
 
-  body > main {
-    @apply flex-1 py-8;
-  }
-
-  :is(body > main[data-layout~="narrow"], [data-container="narrow"]) {
+  [data-container="narrow"] {
     @apply max-w-2xl;
   }
 
-  :is(body > main[data-layout~="fluid"], [data-container="fluid"]) {
+  [data-container="fluid"] {
     @apply max-w-none;
-  }
-
-  body > main[data-layout~="flush"] {
-    @apply p-0 sm:p-0 lg:p-0;
-  }
-
-  /* Header/footer content aligns with the default main column. */
-  :is(body > header, body > footer) {
-    @apply border-border px-4 sm:px-6 lg:px-8;
-  }
-
-  body > header {
-    @apply border-b py-4;
-  }
-
-  body > footer {
-    @apply mt-12 border-t py-8 text-sm text-muted-foreground;
-  }
-
-  :is(body > header, body > footer) > * {
-    @apply mx-auto max-w-5xl;
   }
 
   /* Navigation
@@ -248,15 +220,11 @@
   }
 
   nav > ul {
-    @apply m-0 flex list-none items-center gap-4 p-0;
+    @apply flex list-none items-center gap-4 p-0;
   }
 
   nav a {
     @apply no-underline;
-  }
-
-  nav li {
-    @apply m-0;
   }
 
   header nav a {
@@ -377,28 +345,28 @@
   }
 
   h1 {
-    @apply mb-6 text-4xl leading-tight;
+    @apply text-4xl leading-tight;
   }
 
   h2 {
-    @apply mb-4 mt-10 text-3xl leading-tight;
+    @apply text-3xl leading-tight;
   }
 
   h3 {
-    @apply mb-3 mt-8 text-2xl leading-snug;
+    @apply text-2xl leading-snug;
   }
 
   h4 {
-    @apply mb-2 mt-6 text-xl leading-snug;
+    @apply text-xl leading-snug;
   }
 
   h5,
   h6 {
-    @apply mb-2 mt-5 text-lg leading-snug;
+    @apply text-lg leading-snug;
   }
 
   p {
-    @apply my-4 leading-7;
+    @apply leading-7;
   }
 
   small {
@@ -427,7 +395,7 @@
   }
 
   :is(ul, ol) {
-    @apply my-4 space-y-1 pl-6;
+    @apply pl-6;
   }
 
   ul {
@@ -442,32 +410,20 @@
     @apply leading-7;
   }
 
-  :is(li > ul, li > ol) {
-    @apply my-1;
-  }
-
   blockquote {
-    @apply my-6 border-l-4 border-primary-border pl-4 italic text-muted-foreground;
-  }
-
-  blockquote p {
-    @apply my-2;
+    @apply border-l-4 border-primary-border pl-4 italic text-muted-foreground;
   }
 
   hr {
-    @apply my-8 border-0 border-t border-border;
+    @apply border-0 border-t border-border;
   }
 
   :is(img, video, canvas, svg) {
     @apply max-w-full;
   }
 
-  figure {
-    @apply my-6;
-  }
-
   figcaption {
-    @apply mt-2 text-center text-sm text-muted-foreground;
+    @apply text-center text-sm text-muted-foreground;
   }
 
   /* Code
@@ -489,7 +445,7 @@
   }
 
   pre {
-    @apply my-6 overflow-x-auto rounded-container border border-border bg-surface-muted p-4 text-sm leading-6 text-foreground;
+    @apply overflow-x-auto rounded-container border border-border bg-surface-muted p-4 text-sm leading-6 text-foreground;
   }
 
   pre code {
@@ -499,11 +455,11 @@
   /* Tables */
 
   table {
-    @apply my-6 w-full border-collapse text-left text-sm;
+    @apply w-full border-collapse text-left text-sm;
   }
 
   caption {
-    @apply mb-3 text-left text-sm font-medium text-muted-foreground;
+    @apply text-left text-sm font-medium text-muted-foreground;
   }
 
   thead {
@@ -528,10 +484,6 @@
 
   /* Forms */
 
-  form {
-    @apply space-y-5;
-  }
-
   fieldset {
     @apply rounded-container border border-border p-4;
   }
@@ -546,17 +498,6 @@
 
   label {
     @apply block text-sm font-medium text-foreground;
-  }
-
-  /* Also matches a composed control (e.g. UI::InputGroup) that wraps its
-     input/textarea/select rather than exposing it as label's direct sibling.
-     mt-2 matches UI::FormField's space-y-2, so label-to-control spacing is
-     identical whether the control is plain HTML or component-composed. */
-  label + input,
-  label + textarea,
-  label + select,
-  label + :has(input, textarea, select) {
-    @apply mt-2;
   }
 
   label[for],
@@ -725,18 +666,10 @@
     --alert-bg: var(--color-info-subtle);
     --alert-border: var(--color-info-border);
     --alert-fg: var(--color-info);
-    @apply my-4 rounded-container border p-4 text-sm;
+    @apply rounded-container border p-4 text-sm;
     background-color: var(--alert-bg);
     border-color: var(--alert-border);
     color: var(--alert-fg);
-  }
-
-  [role="alert"] > :first-child {
-    @apply mt-0;
-  }
-
-  [role="alert"] > :last-child {
-    @apply mb-0;
   }
 
   [role="alert"][data-variant="success"] {
@@ -761,15 +694,7 @@
      sidebars (body > aside) stay unstyled. */
 
   main aside:not([role="alert"]) {
-    @apply my-4 rounded-container bg-surface-muted p-4 text-sm text-muted-foreground;
-  }
-
-  main aside:not([role="alert"]) > :first-child {
-    @apply mt-0;
-  }
-
-  main aside:not([role="alert"]) > :last-child {
-    @apply mb-0;
+    @apply rounded-container bg-surface-muted p-4 text-sm text-muted-foreground;
   }
 
   /* Cards
@@ -780,7 +705,7 @@
      </section> */
 
   [data-card] {
-    @apply my-4 rounded-container border border-border bg-surface shadow-sm;
+    @apply rounded-container border border-border bg-surface shadow-sm;
   }
 
   [data-card] > * {
@@ -800,11 +725,11 @@
   }
 
   [data-card] > header h2 {
-    @apply m-0 text-base;
+    @apply text-base;
   }
 
   [data-card] > header p {
-    @apply m-0 text-sm font-normal text-muted-foreground;
+    @apply text-sm font-normal text-muted-foreground;
   }
 
   [data-card] > footer {
@@ -814,7 +739,7 @@
   /* Disclosure and dialog */
 
   details {
-    @apply my-4 rounded-container border border-border bg-surface p-4;
+    @apply rounded-container border border-border bg-surface p-4;
   }
 
   summary {
