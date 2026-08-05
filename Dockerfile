@@ -30,8 +30,8 @@ RUN apk add --update --no-cache \
     imagemagick-pdf \
     msttcorefonts-installer \
     libpq-dev \
-    postgresql16-dev \
-    postgresql16-client \
+    postgresql18-dev \
+    postgresql18-client \
     vips-dev \
     yaml-dev \
     && rm -rf /var/cache/apk/*
