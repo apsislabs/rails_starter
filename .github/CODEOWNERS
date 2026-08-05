@@ -1,0 +1,16 @@
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# for more info on how this file works.
+
+# Default owners for everything in the repo
+* @wkirby @egreer @ncallaway
+
+# Ruby dependencies
+Gemfile @wkirby @egreer
+Gemfile.lock @wkirby @egreer
+
+# GitHub Actions / workflows
+.github/workflows/ @egreer
+
+# JS dependencies
+package.json @wkirby
+package-lock.json @wkirby

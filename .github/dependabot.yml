@@ -44,3 +44,7 @@ updates:
     schedule:
       # Check for updates to GitHub Actions
       interval: "monthly"
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
