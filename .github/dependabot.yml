@@ -9,6 +9,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       production-dependencies:
         dependency-type: "production"
@@ -34,6 +36,8 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       rubocop:
         patterns:
@@ -44,6 +48,8 @@ updates:
     schedule:
       # Check for updates to GitHub Actions
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       github-actions-dependencies:
         patterns:
