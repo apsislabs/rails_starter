@@ -2,7 +2,11 @@
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require "spec_helper"
-ENV["RAILS_ENV"] ||= "test"
+# Force the test environment so specs always run against the test database.
+# Using `||=` here would honor a RAILS_ENV inherited from the shell, and a
+# leaked `RAILS_ENV=development` would point `maintain_test_schema!` and the
+# transactional fixtures below at the development database, wiping real data.
+ENV["RAILS_ENV"] = "test"
 require File.expand_path("../config/environment", __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production? # rubocop:disable Rails/Exit
