@@ -181,6 +181,7 @@ GEM
     ffi (1.17.4)
     ffi (1.17.4-aarch64-linux-musl)
     ffi (1.17.4-x86_64-linux-gnu)
+    ffi (1.17.4-x86_64-linux-musl)
     flutie (2.2.1)
     friendly_id (5.7.0)
       activerecord (>= 4.0.0)
@@ -265,6 +266,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.4-x86_64-linux-gnu)
       racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-linux-musl)
+      racc (~> 1.4)
     oj (3.17.3)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
@@ -288,6 +291,7 @@ GEM
     pg (1.6.3)
     pg (1.6.3-aarch64-linux-musl)
     pg (1.6.3-x86_64-linux)
+    pg (1.6.3-x86_64-linux-musl)
     phlex (2.4.1)
       refract (~> 1.0)
       zeitwerk (~> 2.7)
@@ -584,6 +588,7 @@ GEM
 PLATFORMS
   aarch64-linux-musl
   x86_64-linux
+  x86_64-linux-musl
 
 DEPENDENCIES
   after_commit_everywhere
