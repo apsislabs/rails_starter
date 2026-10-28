@@ -13,20 +13,22 @@ on:
 concurrency:
   group: test-${{ github.ref_name }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   changes:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-      contents: read
     outputs:
       ruby: ${{ steps.filter.outputs.ruby }}
       js: ${{ steps.filter.outputs.js }}
       terraform: ${{ steps.filter.outputs.terraform }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       # For pull requests it's not necessary to checkout the code, for main it is
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4
         id: filter
         with:
           filters: |
@@ -54,11 +56,11 @@ jobs:
     needs: [changes]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.4"
+          ruby-version: "4"
           bundler-cache: true
 
       - name: Rubocop
@@ -70,8 +72,8 @@ jobs:
     needs: [changes]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version-file: ".nvmrc"
           cache: "npm"
@@ -87,8 +89,8 @@ jobs:
     needs: [changes]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
       - name: Run terraform fmt
         working-directory: terraform
         run: terraform fmt -check -recursive .
@@ -98,11 +100,9 @@ jobs:
     needs: [changes]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: terraform-linters/setup-tflint@v4
+      - uses: actions/checkout@v7
+      - uses: terraform-linters/setup-tflint@v6
         name: Setup TFLint
-        with:
-          tflint_version: v0.44.1
       - name: Show version
         run: tflint --version
       - name: Init TFLint
@@ -119,9 +119,9 @@ jobs:
     needs: [changes]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: trivy
-        uses: aquasecurity/trivy-action@v0.35.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "config"
           scan-ref: "./terraform"
