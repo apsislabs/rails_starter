@@ -14,6 +14,7 @@ gem "pg"
 gem "puma", ">= 5.0"
 gem "tzinfo-data"
 gem "image_processing"
+gem "ruby-vips", "~> 2.0"
 gem "bcrypt"
 gem "aws-sdk-s3", require: false
 
