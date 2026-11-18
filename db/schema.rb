@@ -67,6 +67,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_16_162139) do
     t.datetime "locked_at"
     t.string "public_uid"
     t.datetime "remember_created_at"
+    t.string "remember_token"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
