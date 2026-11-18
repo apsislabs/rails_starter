@@ -4,7 +4,7 @@
 runOnDocker() {
   if [[ $DOCKER_CONTAINER -ne 1 ]]; then
     echo "On Host. Executing command on container"
-    docker-compose exec -T $1 $0
+    docker compose exec -T $1 $0
     exit $?
   fi
 }
